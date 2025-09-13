@@ -51,13 +51,14 @@ export class YTMusic implements LyricProvider {
 
     const synced = syncedLines?.length && syncedLines[0]?.cueRange
       ? syncedLines.map((it) => ({
-        time: this.millisToTime(parseInt(it.cueRange.startTimeMilliseconds)),
-        timeInMs: parseInt(it.cueRange.startTimeMilliseconds),
-        duration: parseInt(it.cueRange.endTimeMilliseconds) -
-          parseInt(it.cueRange.startTimeMilliseconds),
-        text: it.lyricLine.trim() === '♪' ? '' : it.lyricLine.trim(),
-        status: 'upcoming' as const,
-      }))
+          time: this.millisToTime(parseInt(it.cueRange.startTimeMilliseconds)),
+          timeInMs: parseInt(it.cueRange.startTimeMilliseconds),
+          duration:
+            parseInt(it.cueRange.endTimeMilliseconds) -
+            parseInt(it.cueRange.startTimeMilliseconds),
+          text: it.lyricLine.trim() === '♪' ? '' : it.lyricLine.trim(),
+          status: 'upcoming' as const,
+        }))
       : undefined;
 
     const plain = !synced
@@ -66,9 +67,9 @@ export class YTMusic implements LyricProvider {
         : contents?.messageRenderer
         ? contents?.messageRenderer?.text?.runs?.map((it) => it.text).join('\n')
         : contents?.sectionListRenderer?.contents?.[0]
-          ?.musicDescriptionShelfRenderer?.description?.runs?.map((it) =>
-            it.text
-          )?.join('\n')
+          ?.musicDescriptionShelfRenderer?.description?.runs
+          ?.map((it) => it.text)
+          ?.join('\n')
       : undefined;
 
     if (typeof plain === 'string' && plain === 'Lyrics not available') {
@@ -83,6 +84,23 @@ export class YTMusic implements LyricProvider {
         timeInMs: 0,
         status: 'upcoming' as const,
       });
+    }
+
+    // ensure a final empty line exists
+    if (synced?.length) {
+      const last = synced[synced.length - 1];
+      const lastEnd = parseInt(last.timeInMs.toString()) + last.duration;
+
+      // youtube sometimes omits trailing silence, add our own
+      if (last.text !== '') {
+        synced.push({
+          duration: 0,
+          text: '',
+          time: this.millisToTime(lastEnd),
+          timeInMs: lastEnd,
+          status: 'upcoming' as const,
+        });
+      }
     }
 
     return {
