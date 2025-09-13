@@ -27,9 +27,7 @@
   --lyrics-padding: 0;
 
   /* Typography */
-  --lyrics-font-family: Satoshi, Avenir, -apple-system, BlinkMacSystemFont,
-    Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Open Sans, Helvetica Neue,
-    sans-serif;
+  --lyrics-font-family: "Satoshi", sans-serif !important;
   --lyrics-font-size: clamp(1.4rem, 1.1vmax, 3rem);
   --lyrics-line-height: var(--ytmusic-body-line-height);
   --lyrics-width: 100%;
@@ -137,6 +135,11 @@
   transition: opacity var(--lyrics-opacity-transition);
 }
 
+.text-lyrics .placeholder {
+  opacity: var(--lyrics-inactive-opacity);
+  transition: opacity var(--lyrics-opacity-transition);
+}
+
 .current .text-lyrics {
   font-weight: var(--lyrics-active-font-weight) !important;
   scale: var(--lyrics-active-scale);
@@ -146,6 +149,21 @@
 .current .text-lyrics > span > span {
   opacity: var(--lyrics-active-opacity);
   animation: var(--lyrics-animations);
+}
+
+.synced-line.final-empty .text-lyrics {
+  color: transparent;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  height: 1em;
+  display: block;
+}
+
+.synced-line.no-padding .text-lyrics {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  height: 0.3em;
+  overflow: hidden;
 }
 
 .lyrics-renderer {
@@ -230,6 +248,24 @@ div:has(> .lyrics-picker) {
 
     backdrop-filter: blur(5px);
   }
+}
+
+.fade {
+  opacity: 0;
+  transition: var(--lyrics-opacity-transition) ease-in-out;
+}
+
+.fade.show {
+  opacity: var(--lyrics-active-opacity);
+}
+
+.fade.dim {
+  opacity: var(--lyrics-inactive-opacity);
+}
+
+.fade,
+.placeholder {
+  animation-name: none;
 }
 
 /* Animations */
