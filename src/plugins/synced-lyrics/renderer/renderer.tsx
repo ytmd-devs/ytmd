@@ -10,7 +10,7 @@ import { type VirtualizerHandle, VList } from 'virtua/solid';
 
 import { LyricsPicker } from './components/LyricsPicker';
 
-import { selectors } from './utils';
+import { selectors, getSeekTime, SFont } from './utils';
 
 import {
   ErrorDisplay,
@@ -34,6 +34,27 @@ createEffect(() => {
 
   // Set the line effect
   switch (config()?.lineEffect) {
+    case 'enhanced':
+      root.style.setProperty('--lyrics-font-size', '3rem');
+      root.style.setProperty('--lyrics-line-height', '1.333');
+      root.style.setProperty('--lyrics-width', '100%');
+      root.style.setProperty('--lyrics-padding', '12.5px');
+
+      root.style.setProperty(
+        '--lyrics-animations',
+        'lyrics-glow var(--lyrics-glow-duration) forwards, lyrics-wobble var(--lyrics-wobble-duration) forwards',
+      );
+
+      root.style.setProperty('--lyrics-inactive-font-weight', '700');
+      root.style.setProperty('--lyrics-inactive-opacity', '0.33');
+      root.style.setProperty('--lyrics-inactive-scale', '0.95');
+      root.style.setProperty('--lyrics-inactive-offset', '0');
+
+      root.style.setProperty('--lyrics-active-font-weight', '700');
+      root.style.setProperty('--lyrics-active-opacity', '1');
+      root.style.setProperty('--lyrics-active-scale', '1');
+      root.style.setProperty('--lyrics-active-offset', '0');
+      break;
     case 'fancy':
       root.style.setProperty('--lyrics-font-size', '3rem');
       root.style.setProperty('--lyrics-line-height', '1.333');
@@ -174,6 +195,7 @@ export const LyricsRenderer = () => {
   };
 
   onMount(() => {
+    SFont();
     const vList = document.querySelector<HTMLElement>('.synced-lyrics-vlist');
 
     tab.addEventListener('mousemove', mousemoveListener);
@@ -190,6 +212,9 @@ export const LyricsRenderer = () => {
   const [children, setChildren] = createSignal<LyricsRendererChild[]>([
     { kind: 'LoadingKaomoji' },
   ]);
+  const [firstEmptyIndex, setFirstEmptyIndex] = createSignal<number | null>(
+    null,
+  );
 
   createEffect(() => {
     const current = currentLyrics();
@@ -210,20 +235,36 @@ export const LyricsRenderer = () => {
       }
 
       if (data?.lines) {
-        return data.lines.map((line) => ({
+        const lines = data.lines;
+        const firstEmpty = lines.findIndex((l) => !l.text?.trim());
+        setFirstEmptyIndex(firstEmpty === -1 ? null : firstEmpty);
+
+        return lines.map((line) => ({
           kind: 'SyncedLine' as const,
           line,
         }));
       }
 
       if (data?.lyrics) {
-        const lines = data.lyrics.split('\n').filter((line) => line.trim());
+        const rawLines = data.lyrics.split('\n');
+
+        // Preserve a single trailing empty line if provided by the provider
+        const hasTrailingEmpty =
+          rawLines.length > 0 && rawLines[rawLines.length - 1].trim() === '';
+
+        const lines = rawLines.filter((line, idx) => {
+          if (line.trim()) return true;
+          // keep only the final empty line (for padding) if it exists
+          return hasTrailingEmpty && idx === rawLines.length - 1;
+        });
+
         return lines.map((line) => ({
           kind: 'PlainLine' as const,
           line,
         }));
       }
 
+      setFirstEmptyIndex(null);
       return [{ kind: 'NotFoundKaomoji' }];
     });
   });
@@ -232,23 +273,37 @@ export const LyricsRenderer = () => {
     ('previous' | 'current' | 'upcoming')[]
   >([]);
   createEffect(() => {
-    const time = currentTime();
+    const precise = config()?.preciseTiming ?? false;
     const data = currentLyrics()?.data;
+    const currentTimeMs = currentTime();
 
-    if (!data || !data.lines) return setStatuses([]);
+    if (!data || !data.lines) {
+      setStatuses([]);
+      return;
+    }
 
     const previous = untrack(statuses);
+
     const current = data.lines.map((line) => {
-      if (line.timeInMs >= time) return 'upcoming';
-      if (time - line.timeInMs >= line.duration) return 'previous';
+      const startTimeMs = getSeekTime(line.timeInMs, precise) * 1000;
+      const endTimeMs =
+        getSeekTime(line.timeInMs + line.duration, precise) * 1000;
+
+      if (currentTimeMs < startTimeMs) return 'upcoming';
+      if (currentTimeMs >= endTimeMs) return 'previous';
       return 'current';
     });
 
-    if (previous.length !== current.length) return setStatuses(current);
-    if (previous.every((status, idx) => status === current[idx])) return;
+    if (previous.length !== current.length) {
+      setStatuses(current);
+      return;
+    }
+
+    if (previous.every((status, idx) => status === current[idx])) {
+      return;
+    }
 
     setStatuses(current);
-    return;
   });
 
   const [currentIndex, setCurrentIndex] = createSignal(0);
@@ -302,6 +357,11 @@ export const LyricsRenderer = () => {
                 <SyncedLine
                   {...props}
                   index={idx()}
+                  isFinalLine={idx() === children().length}
+                  isFirstEmptyLine={
+                    firstEmptyIndex() !== null &&
+                    idx() - 1 === firstEmptyIndex()
+                  }
                   scroller={scroller()!}
                   status={statuses()[idx() - 1]}
                 />
