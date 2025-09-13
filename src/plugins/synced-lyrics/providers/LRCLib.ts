@@ -157,21 +157,66 @@ export class LRCLib implements LyricProvider {
 
     const raw = closestResult.syncedLyrics;
     const plain = closestResult.plainLyrics;
-    if (!raw && !plain) {
-      return null;
+
+    if (raw) {
+      // Prefer synced
+      const parsed = LRC.parse(raw).lines.map((l) => ({
+        ...l,
+        status: 'upcoming' as const,
+      }));
+
+      // If the final parsed line is not empty, append a computed empty line
+      if (parsed.length > 0) {
+        const last = parsed[parsed.length - 1];
+        const lastIsEmpty = !last.text || !last.text.trim();
+        if (lastIsEmpty) {
+          // last line already empty, don't append another
+        } else {
+          // If duration is infinity (no following line), treat end as start for midpoint calculation
+          const lastEndCandidate = Number.isFinite(last.duration)
+            ? last.timeInMs + last.duration
+            : last.timeInMs;
+          const songEnd = songDuration * 1000;
+
+          if (lastEndCandidate < songEnd) {
+            const midpoint = Math.floor((lastEndCandidate + songEnd) / 2);
+
+            // update last duration to end at midpoint
+            last.duration = midpoint - last.timeInMs;
+
+            const minutes = Math.floor(midpoint / 60000);
+            const seconds = Math.floor((midpoint % 60000) / 1000);
+            const centiseconds = Math.floor((midpoint % 1000) / 10);
+            const timeStr = `${minutes.toString().padStart(2, '0')}:${seconds
+              .toString()
+              .padStart(2, '0')}.${centiseconds.toString().padStart(2, '0')}`;
+
+            parsed.push({
+              timeInMs: midpoint,
+              time: timeStr,
+              duration: songEnd - midpoint,
+              text: '',
+              status: 'upcoming' as const,
+            });
+          }
+        }
+      }
+
+      return {
+        title: closestResult.trackName,
+        artists: closestResult.artistName.split(/[&,]/g),
+        lines: parsed,
+      };
+    } else if (plain) {
+      // Fallback to plain if no synced
+      return {
+        title: closestResult.trackName,
+        artists: closestResult.artistName.split(/[&,]/g),
+        lyrics: plain,
+      };
     }
 
-    return {
-      title: closestResult.trackName,
-      artists: closestResult.artistName.split(/[&,]/g),
-      lines: raw
-        ? LRC.parse(raw).lines.map((l) => ({
-            ...l,
-            status: 'upcoming' as const,
-          }))
-        : undefined,
-      lyrics: plain,
-    };
+    return null;
   }
 }
 
