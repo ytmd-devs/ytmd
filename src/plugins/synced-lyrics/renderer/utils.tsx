@@ -213,3 +213,16 @@ export const romanize = async (line: string) => {
 
   return line;
 };
+
+// timeInMs to seek time in seconds (precise or rounded to nearest second for preciseTiming)
+export const getSeekTime = (timeInMs: number, precise: boolean) =>
+  precise ? timeInMs / 1000 : Math.round(timeInMs / 1000);
+
+export const SFont = () => {
+  if (document.getElementById('satoshi-font-link')) return;
+  const link = document.createElement('link');
+  link.id = 'satoshi-font-link';
+  link.rel = 'stylesheet';
+  link.href = 'https://api.fontshare.com/v2/css?f[]=satoshi@1&display=swap';
+  document.head.appendChild(link);
+};
