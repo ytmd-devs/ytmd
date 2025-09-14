@@ -15,6 +15,7 @@ import * as z from 'zod';
 
 import {
   type ProviderName,
+  ProviderNames,
   providerNames,
   ProviderNameSchema,
   type ProviderState,
@@ -47,7 +48,9 @@ const shouldSwitchProvider = (providerData: ProviderState) => {
 const providerBias = (p: ProviderName) =>
   (lyricsStore.lyrics[p].state === 'done' ? 1 : -1) +
   (lyricsStore.lyrics[p].data?.lines?.length ? 2 : -1) +
-  (lyricsStore.lyrics[p].data?.lines?.length && p === 'YTMusic' ? 1 : 0) +
+  (lyricsStore.lyrics[p].data?.lines?.length && p === ProviderNames.YTMusic
+    ? 1
+    : 0) +
   (lyricsStore.lyrics[p].data?.lyrics ? 1 : -1);
 
 const pickBestProvider = () => {
