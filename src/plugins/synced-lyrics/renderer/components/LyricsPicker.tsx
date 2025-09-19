@@ -22,7 +22,7 @@ import {
 } from '../../providers';
 import { currentLyrics, lyricsStore, setLyricsStore } from '../store';
 import { _ytAPI } from '../index';
-import { config } from '../renderer';
+import { config, requestFastScroll } from '../renderer';
 
 import type { YtIcons } from '@/types/icons';
 import type { PlayerAPIEvents } from '@/types/player-api-events';
@@ -141,6 +141,7 @@ export const LyricsPicker = (props: {
     if (!hasManuallySwitchedProvider()) {
       const starred = starredProvider();
       if (starred !== null) {
+        requestFastScroll(2500);
         setLyricsStore('provider', starred);
         return;
       }
@@ -155,6 +156,7 @@ export const LyricsPicker = (props: {
         force ||
         providerBias(lyricsStore.provider) < providerBias(provider)
       ) {
+        requestFastScroll(2500);
         setLyricsStore('provider', provider);
       }
     }
@@ -162,6 +164,7 @@ export const LyricsPicker = (props: {
 
   const next = () => {
     setHasManuallySwitchedProvider(true);
+    requestFastScroll(2500);
     setLyricsStore('provider', (prevProvider) => {
       const idx = providerNames.indexOf(prevProvider);
       return providerNames[(idx + 1) % providerNames.length];
@@ -170,6 +173,7 @@ export const LyricsPicker = (props: {
 
   const previous = () => {
     setHasManuallySwitchedProvider(true);
+    requestFastScroll(2500);
     setLyricsStore('provider', (prevProvider) => {
       const idx = providerNames.indexOf(prevProvider);
       return providerNames[
@@ -231,7 +235,7 @@ export const LyricsPicker = (props: {
               <div
                 class="lyrics-picker-item"
                 style={{
-                  transform: `translateX(${providerIdx() * -100 - 5}%)`,
+                  transform: `translateX(calc(${providerIdx()} * -100% - 5%))`,
                 }}
                 tabindex="-1"
               >
@@ -311,7 +315,11 @@ export const LyricsPicker = (props: {
             {(_, idx) => (
               <li
                 class="lyrics-picker-dot"
-                onClick={() => setLyricsStore('provider', providerNames[idx()])}
+                onClick={() => {
+                  setHasManuallySwitchedProvider(true);
+                  requestFastScroll(2500);
+                  setLyricsStore('provider', providerNames[idx()]);
+                }}
                 style={{
                   background: idx() === providerIdx() ? 'white' : 'black',
                 }}
