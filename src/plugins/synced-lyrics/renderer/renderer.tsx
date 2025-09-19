@@ -381,6 +381,13 @@ export const LyricsRenderer = () => {
     setCurrentIndex(index);
   });
 
+  // when lyrics tab becomes visible again, open a short fast-scroll window
+  createEffect(() => {
+    if (isVisible()) {
+      requestFastScroll(1500);
+    }
+  });
+
   // scroll effect
   createEffect(() => {
     const visible = isVisible();
@@ -572,7 +579,31 @@ export const LyricsRenderer = () => {
     const idx = currentIndex();
     const lineEffect = config()?.lineEffect;
 
-    if (!data || !data.lines || idx < 0) return;
+    if (!data || !data.lines) return;
+
+    // robust fallback if no line is detected as "current" yet
+    let effIdx = idx;
+    if (effIdx < 0) {
+      const lines = data.lines;
+      const containing = lines.findIndex((l) => {
+        const start = l.timeInMs;
+        const end = l.timeInMs + l.duration;
+        return currentTimeMs >= start && currentTimeMs < end;
+      });
+      if (containing !== -1) {
+        effIdx = containing;
+      } else {
+        let lastBefore = 0;
+        for (let j = lines.length - 1; j >= 0; j--) {
+          if (lines[j].timeInMs <= currentTimeMs) {
+            lastBefore = j;
+            break;
+          }
+        }
+        effIdx = lastBefore;
+      }
+    }
+
     const jumped =
       prevTimeForScroll >= 0 &&
       Math.abs(currentTimeMs - prevTimeForScroll) > 400;
@@ -583,7 +614,7 @@ export const LyricsRenderer = () => {
     ) {
       const timeDelta = Math.abs(currentTimeMs - prevTimeForScroll);
       const lineDelta =
-        prevIndexForFast >= 0 ? Math.abs(idx - prevIndexForFast) : 0;
+        prevIndexForFast >= 0 ? Math.abs(effIdx - prevIndexForFast) : 0;
       if (timeDelta > 1500 || lineDelta >= 5) {
         requestFastScroll(1500);
       }
@@ -591,12 +622,12 @@ export const LyricsRenderer = () => {
     prevTimeForScroll = currentTimeMs;
 
     const scrollOffset = scroller()?.scrollOffset ?? 0;
-    if (idx === 0 && currentTimeMs > 2000 && !jumped && scrollOffset <= 1) {
+    if (effIdx === 0 && currentTimeMs > 2000 && !jumped && scrollOffset <= 1) {
       return;
     }
 
     if (lineEffect === 'enhanced') {
-      const nextIdx = Math.min(idx + 1, data.lines.length - 1);
+      const nextIdx = Math.min(effIdx + 1, data.lines.length - 1);
       const nextLine = data.lines[nextIdx];
 
       if (nextLine) {
@@ -606,14 +637,14 @@ export const LyricsRenderer = () => {
 
         if (timeUntilNextLine <= leadInTimeMs) {
           setScrollTargetIndex(nextIdx);
-          prevIndexForFast = idx;
+          prevIndexForFast = effIdx;
           return;
         }
       }
     }
 
-    prevIndexForFast = idx;
-    setScrollTargetIndex(idx);
+    prevIndexForFast = effIdx;
+    setScrollTargetIndex(effIdx);
   });
 
   return (
