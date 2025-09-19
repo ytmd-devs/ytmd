@@ -105,12 +105,11 @@ const EmptyLine = (props: SyncedLineProps) => {
 
   return (
     <div
-      class={`synced-line ${props.status} ${isFinalEmpty() ? 'final-empty' : ''} ${shouldRemovePadding() ? 'no-padding' : ''}`}
-      onClick={() =>
-        _ytAPI?.seekTo(
-          getSeekTime(props.line.timeInMs, config()?.preciseTiming ?? false),
-        )
-      }
+      class={`synced-emptyline ${props.status} ${isFinalEmpty() ? 'final-empty' : ''} ${shouldRemovePadding() ? 'no-padding' : ''}`}
+      onClick={() => {
+        const precise = config()?.preciseTiming ?? false;
+        _ytAPI?.seekTo(getSeekTime(props.line.timeInMs, precise));
+      }}
     >
       <div class="description ytmusic-description-shelf-renderer" dir="auto">
         <yt-formatted-string
