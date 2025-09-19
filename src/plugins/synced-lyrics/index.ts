@@ -21,7 +21,7 @@ export default createPlugin({
     showTimeCodes: false,
     defaultTextString: '•••',
     lineEffect: 'enhanced',
-    showEmptyLineSymbols: false,
+    showEmptyLineSymbols: true,
     romanization: true,
   } satisfies SyncedLyricsPluginConfig as SyncedLyricsPluginConfig,
 
