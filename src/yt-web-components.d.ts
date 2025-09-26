@@ -1,5 +1,6 @@
 import type { Icons } from '@/types/icons';
 import type { ComponentProps } from 'solid-js';
+import { type IntrinsicElements as MDUIElements } from 'mdui/jsx.en';
 
 declare module 'solid-js' {
   namespace JSX {
@@ -37,7 +38,7 @@ declare module 'solid-js' {
       key?: string;
     }
 
-    interface IntrinsicElements {
+    interface IntrinsicElements extends MDUIElements {
       'center': ComponentProps<'div'>;
       'ytmd-trans': ComponentProps<'span'> & YtmdTransProps;
       'yt-formatted-string': ComponentProps<'span'> & YtFormattedStringProps;
