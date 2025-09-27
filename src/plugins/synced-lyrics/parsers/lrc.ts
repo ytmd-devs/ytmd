@@ -17,7 +17,7 @@ interface LRC {
 
 const tagRegex = /^\[(?<tag>\w+):\s*(?<value>.+?)\s*\]$/;
 // prettier-ignore
-const lyricRegex = /^\[(?<minutes>\d+):(?<seconds>\d+)\.(?<milliseconds>\d+)\](?<text>.+)$/;
+const lyricRegex = /^\[(?<minutes>\d+):(?<seconds>\d+)\.(?<milliseconds>\d{1,3})\](?<text>.*)$/;
 
 export const LRC = {
   parse: (text: string): LRC => {
@@ -50,13 +50,18 @@ export const LRC = {
       }
 
       const { minutes, seconds, milliseconds, text } = lyric;
-      const timeInMs =
-        parseInt(minutes) * 60 * 1000 +
-        parseInt(seconds) * 1000 +
-        parseInt(milliseconds);
+
+      // Normalize: take first 2 digits, pad if only 1 digit
+      const ms2 = milliseconds.padEnd(2, '0').slice(0, 2);
+
+      // Convert to ms (xx → xx0)
+      const minutesMs = parseInt(minutes) * 60 * 1000;
+      const secondsMs = parseInt(seconds) * 1000;
+      const centisMs = parseInt(ms2) * 10;
+      const timeInMs = minutesMs + secondsMs + centisMs;
 
       const currentLine: LRCLine = {
-        time: `${minutes}:${seconds}:${milliseconds}`,
+        time: `${minutes.padStart(2, '0')}:${seconds.padStart(2, '0')}.${ms2}`,
         timeInMs,
         text: text.trim(),
         duration: Infinity,
@@ -82,6 +87,33 @@ export const LRC = {
         duration: first.timeInMs,
         text: '',
       });
+    }
+
+    // Merge consecutive empty lines into a single empty line
+    {
+      const merged: LRCLine[] = [];
+      for (const line of lrc.lines) {
+        const isEmpty = !line.text || !line.text.trim();
+        if (isEmpty && merged.length > 0) {
+          const prev = merged[merged.length - 1];
+          const prevEmpty = !prev.text || !prev.text.trim();
+          if (prevEmpty) {
+            const prevEnd = Number.isFinite(prev.duration)
+              ? prev.timeInMs + prev.duration
+              : Infinity;
+            const thisEnd = Number.isFinite(line.duration)
+              ? line.timeInMs + line.duration
+              : Infinity;
+            const newEnd = Math.max(prevEnd, thisEnd);
+            prev.duration = Number.isFinite(newEnd)
+              ? newEnd - prev.timeInMs
+              : Infinity;
+            continue;
+          }
+        }
+        merged.push(line);
+      }
+      lrc.lines = merged;
     }
 
     return lrc;
