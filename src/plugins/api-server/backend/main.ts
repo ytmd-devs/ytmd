@@ -5,6 +5,8 @@ import { swaggerUI } from '@hono/swagger-ui';
 import { serve } from '@hono/node-server';
 import { createNodeWebSocket } from '@hono/node-ws';
 
+import { Jwt } from 'hono/utils/jwt';
+
 import { registerCallback } from '@/providers/song-info';
 import { createBackend } from '@/utils';
 
@@ -88,6 +90,39 @@ export const backend = createBackend<BackendType, APIServerConfig>({
       const config = await backendCtx.getConfig();
 
       if (config.authStrategy !== AuthStrategy.NONE) {
+        if (ctx.req.header('upgrade') === 'websocket') {
+          const req = ctx.req;
+          const protocols = req.header('sec-websocket-protocol');
+          const wsProtocols = protocols
+            ? protocols
+                .split(',')
+                .map((s) => s.trim())
+                .filter((s) => s.length > 0)
+            : [];
+          if (!wsProtocols.includes('access_token')) {
+            ctx.status(401);
+            return;
+          } else {
+            const accessTokenIndex = wsProtocols.indexOf('access_token');
+            const token =
+              accessTokenIndex + 1 < wsProtocols.length
+                ? wsProtocols[accessTokenIndex + 1]
+                : undefined;
+            if (!token) {
+              ctx.status(401);
+              return;
+            }
+            try {
+              const payload = await Jwt.verify(token, config.secret);
+              ctx.set('jwtPayload', payload);
+              return next();
+            } catch (e) {
+              console.error(e);
+              ctx.status(401);
+              return ctx.body('Unauthorized');
+            }
+          }
+        }
         return await jwt({
           secret: config.secret,
         })(ctx, next);
