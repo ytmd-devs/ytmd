@@ -422,6 +422,7 @@
       }
     },
     "custom-output-device": {
+      "description": "Atur perangkat media keluaran khusus untuk lagu-lagu",
       "menu": {
         "device-selector": "Pilih Perangkat"
       },
@@ -756,6 +757,7 @@
         "listenbrainz": {
           "token": "Masukkan token pengguna ListenBrainz"
         },
+        "scrobble-alternative-artist": "Pindah ke artis lain",
         "scrobble-alternative-title": "Gunakan judul alternatif",
         "scrobble-other-media": "Scrobble media lain"
       },
@@ -841,6 +843,14 @@
           "label": "Buat liriknya tersinkronisasi dengan sempurna",
           "tooltip": "Hitung hingga milidetik tampilan baris berikutnya (dapat berdampak kecil pada kinerja)"
         },
+        "preferred-provider": {
+          "label": "Penyedia Pilihan",
+          "none": {
+            "label": "Tidak ada",
+            "tooltip": "Tidak ada penyedia pilihan"
+          },
+          "tooltip": "Pilih penyedia bawaan untuk dipakai"
+        },
         "romanization": {
           "label": "Romanize Liriknya",
           "tooltip": "Apabila lirik berada dalam bahasa berbeda, cobalah untuk menampilkan versi latinnya."
@@ -872,6 +882,27 @@
     "touchbar": {
       "description": "Tambahkan widget TouchBar untuk pengguna macOS",
       "name": "TouchBar"
+    },
+    "transparent-player": {
+      "description": "Buat jendela aplikasi transparan",
+      "menu": {
+        "opacity": {
+          "label": "Opasitas",
+          "submenu": {
+            "percent": "{{opacity}}%"
+          }
+        },
+        "type": {
+          "label": "Tipe",
+          "submenu": {
+            "acrylic": "Akrilik",
+            "mica": "Mika",
+            "none": "TIdak ada",
+            "tabbed": "Tabulasi"
+          }
+        }
+      },
+      "name": "Pemutar Transparan"
     },
     "tuna-obs": {
       "description": "Integrasi dengan plugin Tuna OBS",

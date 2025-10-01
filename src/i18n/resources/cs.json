@@ -757,6 +757,7 @@
         "listenbrainz": {
           "token": "Vložte Listenbrainz user token"
         },
+        "scrobble-alternative-artist": "Použij alternativní umělce",
         "scrobble-alternative-title": "Používat alternativní názvy",
         "scrobble-other-media": "Scrobble jiné média"
       },
@@ -895,7 +896,9 @@
           "label": "Typ",
           "submenu": {
             "acrylic": "Akryl",
-            "none": "Žádné"
+            "mica": "Mica",
+            "none": "Žádné",
+            "tabbed": "Záložkovaný"
           }
         }
       },
