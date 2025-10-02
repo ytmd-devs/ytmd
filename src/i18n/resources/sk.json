@@ -1,0 +1,214 @@
+{
+  "common": {
+    "console": {
+      "plugins": {
+        "execute-failed": "Nepodarilo sa spustiť plugin {{pluginName}}:{{contextName}}",
+        "executed-at-ms": "Plugin {{pluginName}}::{{contextName}} spustený za {{ms}}ms",
+        "initialize-failed": "Zlyhalo spustenie \"{{pluginName}}\" pluginu",
+        "load-all": "Načítavanie všetkých pluginov",
+        "load-failed": "Načítanie \"{{pluginName}}\" pluginu zlyhalo",
+        "loaded": "Plugin \"{{pluginName}}\" sa načítal",
+        "unload-failed": "Zlyhalo vypnutie \"{{pluginName}}\" pluginu",
+        "unloaded": "Plugin \"{{pluginName}}\" bol vypnutý"
+      }
+    }
+  },
+  "language": {
+    "code": "sk",
+    "local-name": "Slovenčina",
+    "name": "Slovak"
+  },
+  "main": {
+    "console": {
+      "did-finish-load": {
+        "dev-tools": "Načítanie dokončené. DevTools otvorené"
+      },
+      "i18n": {
+        "loaded": "i18n načítaný"
+      },
+      "second-instance": {
+        "receive-command": "Prijatý príkaz skrze protokol \"{{command}}\""
+      },
+      "theme": {
+        "css-file-not-found": "CSS súbor \"{{cssFile}}\" neexistuje, ignorované"
+      },
+      "unresponsive": {
+        "details": "Aplikácia nereaguje\n{{error}}"
+      },
+      "when-ready": {
+        "clearing-cache-after-20s": "Čistenie medzipamäte aplikácie"
+      },
+      "window": {
+        "tried-to-render-offscreen": "Okno sa pokúšalo vykresliť na pozadí, windowSize={{windowSize}}, displaySize={{displaySize}}, position={{position}}"
+      }
+    },
+    "dialog": {
+      "hide-menu-enabled": {
+        "detail": "Menu je skryté, stlačte \"Alt\" na zobrazenie (alebo \"Escape\" keď používate Aplikačné menu)",
+        "message": "Skryté menu je zapnuté",
+        "title": "Skryté menu zapnuté"
+      },
+      "need-to-restart": {
+        "buttons": {
+          "later": "Neskôr",
+          "restart-now": "Reštartovať teraz"
+        },
+        "detail": "\"{{pluginName}}\" plugin potrebuje reštart aby sa spustil",
+        "message": "\"{{pluginName}}\" sa potrebuje reštartovať",
+        "title": "Reštart potrebný"
+      },
+      "unresponsive": {
+        "buttons": {
+          "quit": "Skončiť",
+          "relaunch": "Spustiť znova",
+          "wait": "Počkajte"
+        },
+        "detail": "Ospravedlňujeme sa za nepríjemnosti! prosím vyberte, čo robiť:",
+        "message": "Aplikácia nereaguje",
+        "title": "Okno nereaguje"
+      },
+      "update-available": {
+        "buttons": {
+          "disable": "Vypnúť aktualizácie",
+          "download": "Sťiahnuť",
+          "ok": "OK"
+        },
+        "detail": "Nová verzia je k dispozícii a je možné ju stiahnuť na {{downloadLink}}",
+        "message": "Nová verzia je k dispozícii",
+        "title": "Aktualizácia je k dispozícii"
+      }
+    },
+    "menu": {
+      "about": "O nás",
+      "navigation": {
+        "label": "Navigovať",
+        "submenu": {
+          "copy-current-url": "Skopírovať aktuálnu URL",
+          "go-back": "Späť",
+          "go-forward": "Dopredu",
+          "quit": "Skončiť",
+          "restart": "Reštartovať Aplikáciu"
+        }
+      },
+      "options": {
+        "label": "Možnosti",
+        "submenu": {
+          "advanced-options": {
+            "label": "Rozšírené možnosti",
+            "submenu": {
+              "auto-reset-app-cache": "Vymazať vyrovnávaciu pamäť, pri štarte",
+              "disable-hardware-acceleration": "Vypnúť hardvérovú akceleráciu",
+              "edit-config-json": "Upraviť config.json",
+              "override-user-agent": "Prepísať User-Agent",
+              "restart-on-config-changes": "Reštartovať pri zmene configu",
+              "set-proxy": {
+                "label": "Nastavtiť proxy",
+                "prompt": {
+                  "label": "Zadajte Proxy adresu: (nechajte prázdne pre vypnutie)",
+                  "placeholder": "Príklad: SOCKS5://127.0.0.1:9999",
+                  "title": "Nastavtiť proxy"
+                }
+              },
+              "toggle-dev-tools": "Prepnúť DevTools"
+            }
+          },
+          "always-on-top": "Vždy na vrchu",
+          "auto-update": "Automatická aktualizácia",
+          "hide-menu": {
+            "dialog": {
+              "message": "Menu bude skryté pri ďalšom štarte, použite [Alt] na ukázanie (alebo [`] ak používate aplikačné menu)",
+              "title": "Skryté menu Zapnuté"
+            },
+            "label": "Skryť menu"
+          },
+          "language": {
+            "dialog": {
+              "message": "Jazyk sa zmení po reštarte",
+              "title": "Jazyk sa zmenil"
+            },
+            "label": "Jazyk",
+            "submenu": {
+              "to-help-translate": "Chcete pomôcť preložiť? Kliknite sem"
+            }
+          },
+          "resume-on-start": "Pokračovať od poslednej piesne, pri spustení aplikácie",
+          "single-instance-lock": "Zámok jedného spustenia",
+          "start-at-login": "Spustiť pri štarte",
+          "starting-page": {
+            "label": "Spúšťacia stránka",
+            "unset": "Nevybrať"
+          },
+          "tray": {
+            "label": "Panel oznámení",
+            "submenu": {
+              "disabled": "Vypnuý",
+              "enabled-and-hide-app": "Zapnutý , a skryť okno aplikácie",
+              "enabled-and-show-app": "Spustené a ukáž aplikáciu",
+              "play-pause-on-click": "Prehrať/Pozastaviť na stlačenie"
+            }
+          },
+          "visual-tweaks": {
+            "label": "Vizuálne úpravy",
+            "submenu": {
+              "custom-window-title": {
+                "label": "Vlastný názov okna",
+                "prompt": {
+                  "label": "Napíšte vlastný názov okna: (nechajte prázdne pre vypnutie)",
+                  "placeholder": "Napríklad: YouTube Music"
+                }
+              },
+              "like-buttons": {
+                "default": "Základný",
+                "force-show": "Vynútiť zobrazenie",
+                "hide": "Skryť",
+                "label": "Like tlačítko"
+              },
+              "remove-upgrade-button": "Odstrániť tlačidlo povýšiť",
+              "theme": {
+                "dialog": {
+                  "button": {
+                    "cancel": "Zrušiť",
+                    "remove": "Odstrániť"
+                  },
+                  "remove-theme": "Ste si istý že chcete odstrániť tento vlastný štýl?",
+                  "remove-theme-message": "Toto odstráni vlastný štýl"
+                },
+                "label": "Štýl",
+                "submenu": {
+                  "import-css-file": "Nahrať vlasný CSS súbor",
+                  "no-theme": "Žiadny štýl"
+                }
+              }
+            }
+          }
+        }
+      },
+      "plugins": {
+        "enabled": "Zapnuté",
+        "new": "NOVÝ"
+      },
+      "view": {
+        "submenu": {
+          "force-reload": "Natvrdo obnoviť",
+          "reload": "Obnoviť",
+          "reset-zoom": "Ozajstná veľkosť",
+          "toggle-fullscreen": "Prepnúť režim Celej Obrazovky",
+          "zoom-in": "Priblížiť",
+          "zoom-out": "Oddialiť"
+        }
+      }
+    },
+    "tray": {
+      "next": "Ďalšie",
+      "play-pause": "Prehrať/Pozastaviť",
+      "previous": "Predcházdajúce",
+      "quit": "Skončiť",
+      "restart": "Reštartovať aplikáciu",
+      "show": "Zobraziť okno",
+      "tooltip": {
+        "default": "YouTube Hudba",
+        "with-song-info": "Youtube Hudba: {{artist}} - {{title}}"
+      }
+    }
+  }
+}

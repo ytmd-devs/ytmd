@@ -421,6 +421,19 @@
         }
       }
     },
+    "custom-output-device": {
+      "description": "Skonfiguruj niestandardowe wyjście audio dla odtwarzanych utworów",
+      "menu": {
+        "device-selector": "Wybierz urządzenie"
+      },
+      "name": "Niestandardowe wyjście audio",
+      "prompt": {
+        "device-selector": {
+          "label": "Wybierz wyjście audio które ma być użyte",
+          "title": "Wybierz wyjście audio"
+        }
+      }
+    },
     "disable-autoplay": {
       "description": "Wyłącza automatyczne odtwarzanie utworów",
       "menu": {
@@ -444,7 +457,15 @@
         "hide-duration-left": "Ukryj pozostały czas trwania",
         "hide-github-button": "Ukryj przycisk do GitHub",
         "play-on-youtube-music": "Odtwórz w YouTube Music",
-        "set-inactivity-timeout": "Ustaw limit czasu bezczynności"
+        "set-inactivity-timeout": "Ustaw limit czasu bezczynności",
+        "set-status-display-type": {
+          "label": "Opis statusu",
+          "submenu": {
+            "artist": "Słucha {artist}",
+            "title": "Słucha {song title}",
+            "youtube-music": "Słucha YouTube Music"
+          }
+        }
       },
       "name": "Discord Rich Presence",
       "prompt": {
@@ -736,6 +757,7 @@
         "listenbrainz": {
           "token": "Podaj token użytkownika ListenBrainz"
         },
+        "scrobble-alternative-artist": "Urzyj alternatywnych artytów",
         "scrobble-alternative-title": "Użyj alternatywnych tytułów",
         "scrobble-other-media": "Scrobbluj pozostałe multimedia"
       },
@@ -821,6 +843,14 @@
           "label": "Zsynchronizuj tekst utworu do perfekcji",
           "tooltip": "Wylicz czas wyświetlania następnej linijki co do milisekundy (może mieć mały wpływ na wydajność systemu)"
         },
+        "preferred-provider": {
+          "label": "Preferowane Źródło",
+          "none": {
+            "label": "Żaden",
+            "tooltip": "Brak preferowanego źródła"
+          },
+          "tooltip": "Wybierz domyślne źródło"
+        },
         "romanization": {
           "label": "Romanizacja utworów",
           "tooltip": "Jeżeli tekst piosenki nie jest w alfabecie łacińskim, poddaje ją romanizacji, czyli przedstawia mowy za pomocą owych liter."
@@ -852,6 +882,27 @@
     "touchbar": {
       "description": "Dodaje widżet do paska dotykowego dla użytkowników systemu macOS",
       "name": "Pasek dotykowy"
+    },
+    "transparent-player": {
+      "description": "Sprawia, że okno aplikacji jest przeźroczyste",
+      "menu": {
+        "opacity": {
+          "label": "Nieprzezroczystość",
+          "submenu": {
+            "percent": "{{opacity}}%"
+          }
+        },
+        "type": {
+          "label": "Typ",
+          "submenu": {
+            "acrylic": "Akryl",
+            "mica": "Mika",
+            "none": "Brak",
+            "tabbed": "Zakładkowy"
+          }
+        }
+      },
+      "name": "Przeźroczysty odtwarzacz"
     },
     "tuna-obs": {
       "description": "Integracja z wtyczką OBS Tuna",

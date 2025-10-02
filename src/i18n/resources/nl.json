@@ -189,12 +189,12 @@
         "new": "NIEUW"
       },
       "view": {
-        "label": "Weergeven",
+        "label": "Bekijken",
         "submenu": {
           "force-reload": "Forceer Herladen",
           "reload": "Herladen",
           "reset-zoom": "Ware Grootte",
-          "toggle-fullscreen": "Volledig Scherm Wisselen",
+          "toggle-fullscreen": "Volledig Scherm Ja/Nee",
           "zoom-in": "Inzoomen",
           "zoom-out": "Uitzoomen"
         }
@@ -204,12 +204,12 @@
       "next": "Volgende",
       "play-pause": "Afspelen/Pauze",
       "previous": "Vorige",
-      "quit": "Afsluiten",
+      "quit": "Verlaat",
       "restart": "Herstarten App",
       "show": "Weergeven Venster",
       "tooltip": {
         "default": "YouTube Music",
-        "with-song-info": "YouTube Music: {{artiest}} - {{titel}}"
+        "with-song-info": "YouTube Music: {{artist}} - {{title}}"
       }
     }
   },
@@ -421,6 +421,19 @@
         }
       }
     },
+    "custom-output-device": {
+      "description": "Configureer een aangepast media uitvoerapparaat voor liedjes",
+      "menu": {
+        "device-selector": "Selecteer je apparaat"
+      },
+      "name": "Aangepast uitvoerapparaat",
+      "prompt": {
+        "device-selector": {
+          "label": "Kies het uitvoermedia-apparaat dat gebruikt zal worden",
+          "title": "Selecteer het uitvoermedia"
+        }
+      }
+    },
     "disable-autoplay": {
       "description": "Zorgt ervoor dat nummers starten in 'gepauzeerde' modus",
       "menu": {
@@ -444,7 +457,15 @@
         "hide-duration-left": "Verberg resterende tijd",
         "hide-github-button": "GitHub-knop verbergen",
         "play-on-youtube-music": "Afspelen op YouTube Music",
-        "set-inactivity-timeout": "Inactiviteitstime-out instellen"
+        "set-inactivity-timeout": "Inactiviteitstime-out instellen",
+        "set-status-display-type": {
+          "label": "Status tekst",
+          "submenu": {
+            "artist": "Naar {artist} aan het luisteren",
+            "title": "Naar {song title} aan het luisteren",
+            "youtube-music": "Naar Youtube Music aan het luisteren"
+          }
+        }
       },
       "name": "Discord Rich Presence",
       "prompt": {
@@ -736,6 +757,7 @@
         "listenbrainz": {
           "token": "Voer het ListenBrainz-gebruikerstoken in"
         },
+        "scrobble-alternative-artist": "Gebruik alternatieve artiesten",
         "scrobble-alternative-title": "Gebruik alternatieve titels",
         "scrobble-other-media": "Scrobble andere media"
       },
@@ -822,9 +844,12 @@
           "tooltip": "Bereken tot op de milliseconde de weergave van de volgende regel (kan een kleine impact hebben op de prestaties)"
         },
         "preferred-provider": {
+          "label": "Voorkeur van Provider",
           "none": {
+            "label": "Geen",
             "tooltip": "Geen provider beschikbaar"
-          }
+          },
+          "tooltip": "Kies de standaardprovider om te gebruiken"
         },
         "romanization": {
           "label": "Romaniseer songtekst",
@@ -857,6 +882,24 @@
     "touchbar": {
       "description": "Voegt een TouchBar-widget toe voor macOS-gebruikers",
       "name": "TouchBar"
+    },
+    "transparent-player": {
+      "menu": {
+        "opacity": {
+          "submenu": {
+            "percent": "{{opacity}}%"
+          }
+        },
+        "type": {
+          "label": "Soort",
+          "submenu": {
+            "acrylic": "Acrylic",
+            "mica": "Mica",
+            "none": "Geen",
+            "tabbed": "Tabbed"
+          }
+        }
+      }
     },
     "tuna-obs": {
       "description": "Integratie met OBS's plug-in Tuna",

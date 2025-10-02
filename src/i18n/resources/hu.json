@@ -150,6 +150,13 @@
           "visual-tweaks": {
             "label": "Megjelenési beállítások",
             "submenu": {
+              "custom-window-title": {
+                "label": "Saját ablak cím",
+                "prompt": {
+                  "label": "Kérem az egyéni ablak címét: (hagyd üresen a kikapcsoláshoz)",
+                  "placeholder": "Példa: Youtube Music"
+                }
+              },
               "like-buttons": {
                 "default": "Alapértelmezett",
                 "force-show": "Megjelenítés kényszerítése",
@@ -333,6 +340,16 @@
       "description": "Hang tömörítés alkalmazása (csökkenti a jel legzajosabb részeinek hangerősségét, és emeli a legcsendesebb részek hangerősségét)",
       "name": "Hangtömörítő"
     },
+    "auth-proxy-adapter": {
+      "menu": {
+        "hostname": {
+          "label": "Gazdanév"
+        },
+        "port": {
+          "label": "Port"
+        }
+      }
+    },
     "blur-nav-bar": {
       "description": "Átlátszóvá és elmosódottá teszi a navigációs sávot",
       "name": "Navigációs sáv elmosása"
@@ -357,6 +374,11 @@
       },
       "templates": {
         "title": "Feliratválasztó megnyitása"
+      },
+      "toast": {
+        "caption-changed": "Felirat {{language}} nyelvűre állítva",
+        "caption-disabled": "Feliratok kikapcsolva",
+        "no-captions": "Nincsenek elérhető feliratok ehhez a dalhoz"
       }
     },
     "compact-sidebar": {
@@ -385,6 +407,18 @@
         }
       }
     },
+    "custom-output-device": {
+      "menu": {
+        "device-selector": "Eszköz kiválasztása"
+      },
+      "name": "Saját kimeneti eszköz",
+      "prompt": {
+        "device-selector": {
+          "label": "Válaszd ki a kimeneti eszközt",
+          "title": "Kimeneti eszköz választása"
+        }
+      }
+    },
     "disable-autoplay": {
       "description": "Ez a funkció kikapcsolja az automatikus lejátszást, így a zenék nem indulnak el maguktól. Amikor egy album vagy egy dal lejátszása véget ér, a következő szám nem kezdődik el automatikusan. A bővítmény használata során minden zenét manuálisan kell elindítani",
       "menu": {
@@ -408,7 +442,15 @@
         "hide-duration-left": "Hátralévő idő elrejtése",
         "hide-github-button": "GitHub url gombjának elrejtése",
         "play-on-youtube-music": "Lejátszás a YouTube Music-on",
-        "set-inactivity-timeout": "Inaktivitási időkorlát beállítása"
+        "set-inactivity-timeout": "Inaktivitási időkorlát beállítása",
+        "set-status-display-type": {
+          "label": "Tevékenység szöveg",
+          "submenu": {
+            "artist": "Hallgatja: {artist}",
+            "title": "Hallgatja: {song title}",
+            "youtube-music": "Hallgatja: YouTube Music"
+          }
+        }
       },
       "name": "Discord Rich Presence",
       "prompt": {
@@ -576,7 +618,15 @@
     },
     "navigation": {
       "description": "Következő/Vissza navigációs nyilak közvetlenül az interfészbe integrálva, mint a kedvenc böngésződben",
-      "name": "Navigáció"
+      "name": "Navigáció",
+      "templates": {
+        "back": {
+          "title": "Előző oldal"
+        },
+        "forward": {
+          "title": "Következő oldal"
+        }
+      }
     },
     "no-google-login": {
       "description": "A Bejelentkezés gomb eltávolítása az interfészről (Jobb fentről eltünik a bejelentkezés gomb.)",
@@ -599,6 +649,10 @@
         "unpause-notification": "Értesítés megjelenítése a lejátszás folytatásakor"
       },
       "name": "Értesítések"
+    },
+    "performance-improvement": {
+      "description": "Teljesítmény fejlesztése kísérleti kódok engedélyezésével",
+      "name": "Teljesítmény fejlesztése [Béta]"
     },
     "picture-in-picture": {
       "description": "Lehetővé teszi az alkalmazás kép a képben módra váltását",

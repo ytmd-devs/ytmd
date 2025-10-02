@@ -884,7 +884,25 @@
       "name": "TouchBar"
     },
     "transparent-player": {
-      "description": "Fa la finestra de l'aplicació transparent"
+      "description": "Fa la finestra de l'aplicació transparent",
+      "menu": {
+        "opacity": {
+          "label": "Opacitat",
+          "submenu": {
+            "percent": "{{opacity}}%"
+          }
+        },
+        "type": {
+          "label": "Tipus",
+          "submenu": {
+            "acrylic": "Acrílic",
+            "mica": "Mica",
+            "none": "Cap",
+            "tabbed": "En pestanyes"
+          }
+        }
+      },
+      "name": "Reproductor Transparent"
     },
     "tuna-obs": {
       "description": "Integració amb l'extensió «Tuna» del OBS",

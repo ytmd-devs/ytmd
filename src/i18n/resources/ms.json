@@ -124,7 +124,7 @@
           "language": {
             "dialog": {
               "message": "Bahasa akan ditukar selepas dimulakan semula",
-              "title": "Bahasa Berubah"
+              "title": "Bahasa diubah"
             },
             "label": "Bahasa",
             "submenu": {
@@ -150,11 +150,18 @@
           "visual-tweaks": {
             "label": "Pembaikan Visual",
             "submenu": {
+              "custom-window-title": {
+                "label": "Tajuk tetingkap tersuai",
+                "prompt": {
+                  "label": "Masukkan tajuk tetingkap tersuai: (biarkan kosong untuk matikan)",
+                  "placeholder": "Contoh: YouTube Music"
+                }
+              },
               "like-buttons": {
                 "default": "Lalai",
                 "force-show": "Paksa pamer",
                 "hide": "Sembunyi",
-                "label": "Suka butang"
+                "label": "Butang suka"
               },
               "remove-upgrade-button": "Buang butang naik taraf",
               "theme": {
@@ -243,8 +250,17 @@
             "pixels": "{{blurAmount}}piksel"
           }
         },
+        "buffer": {
+          "label": "Buffer",
+          "submenu": {
+            "buffer": "{{buffer}}"
+          }
+        },
         "opacity": {
-          "label": "Kelegapan"
+          "label": "Kelegapan",
+          "submenu": {
+            "percent": "{{opacity}}%"
+          }
         },
         "quality": {
           "label": "Kualiti",
@@ -271,7 +287,11 @@
       "name": "Mod Sekitaran"
     },
     "amuse": {
-      "description": "Menambahkan sokongan YouTube Music untuk widget sedang dimain Amuse oleh 6K Labs"
+      "description": "Menambahkan sokongan YouTube Music untuk widget sedang dimain Amuse oleh 6K Labs",
+      "name": "Terhibur",
+      "response": {
+        "query": "API server Amuse telah berjalan. GET /query untuk mendapatkan maklumat lagu."
+      }
     },
     "api-server": {
       "description": "Perlukan server API untuk mengawal pemain",
@@ -321,13 +341,31 @@
       "name": "Pemampat Audio"
     },
     "auth-proxy-adapter": {
+      "description": "Sokongan untuk penggunaan perkhidmatan proksi pengesahan",
       "menu": {
+        "disable": "Matikan adapter proksi",
+        "enable": "Nyalakan adapter proksi",
         "hostname": {
           "label": "Nama perumah"
+        },
+        "port": {
+          "label": "Port"
+        }
+      },
+      "name": "Adapter Auth Proksi",
+      "prompt": {
+        "hostname": {
+          "label": "Nyatakan nama hos untuk server proksi tempatan (memerlukan mulakan semula):",
+          "title": "Nama hos proksi"
+        },
+        "port": {
+          "label": "Masukkan port untuk server proksi tempatan (memerlukan restart):",
+          "title": "Port Proksi"
         }
       }
     },
     "blur-nav-bar": {
+      "description": "Menjadikan bar navigasi telus dan kabur",
       "name": "Kaburkan Bar navigasi"
     },
     "bypass-age-restrictions": {
@@ -347,6 +385,172 @@
           "none": "Tiada",
           "title": "Pilih bahasa kapsyen"
         }
+      },
+      "templates": {
+        "title": "Buka pemilih kapsyen"
+      },
+      "toast": {
+        "caption-changed": "Sarikata berubah kepada {{language}}",
+        "caption-disabled": "Sarikata dimatikan",
+        "no-captions": "Tiada sarikata untuk lagu ini"
+      }
+    },
+    "compact-sidebar": {
+      "description": "Sentiasa tetapkan bar sisi dalam mod padat",
+      "name": "Bar Sisi Padat"
+    },
+    "crossfade": {
+      "description": "Pudar silang antara lagu",
+      "menu": {
+        "advanced": "Maju"
+      },
+      "name": "Pudar Selang [Beta]",
+      "prompt": {
+        "options": {
+          "multi-input": {
+            "fade-in-duration": "Pudar dalam tempoh (ms)",
+            "fade-out-duration": "Tempoh pudar (ms)",
+            "fade-scaling": {
+              "label": "Penskalaan pudar",
+              "linear": "Linear",
+              "logarithmic": "Logaritma"
+            },
+            "seconds-before-end": "Pudar silang N saat sebelum tamat"
+          },
+          "title": "Opsi pudar silang"
+        }
+      }
+    },
+    "custom-output-device": {
+      "description": "Konfigurasikan peranti media output tersuai untuk lagu",
+      "menu": {
+        "device-selector": "Pilih peranti"
+      },
+      "name": "Peranti Output Tersuai",
+      "prompt": {
+        "device-selector": {
+          "label": "Pilih peranti media output yang akan digunakan",
+          "title": "Pilih Peranti Output"
+        }
+      }
+    },
+    "disable-autoplay": {
+      "description": "Membuat lagu bermula dalam mod \"jeda\"",
+      "menu": {
+        "apply-once": "Terpakai hanya pada permulaan"
+      },
+      "name": "Matikan automain"
+    },
+    "discord": {
+      "backend": {
+        "already-connected": "Cuba untuk menyambung dengan sambungan aktif",
+        "connected": "Disambungkan ke Discord",
+        "disconnected": "Diputuskan sambungan daripada Discord"
+      },
+      "description": "Tunjukkan kepada rakan anda perkara yang anda dengar dengan Rich Presence",
+      "menu": {
+        "auto-reconnect": "Auto sambung semula",
+        "clear-activity": "Padamkan aktiviti",
+        "clear-activity-after-timeout": "Kosongkan aktiviti selepas tamat masa",
+        "connected": "Tersambung",
+        "disconnected": "Tidak disambungkan",
+        "hide-duration-left": "Sembunyikan tempoh yang tinggal",
+        "hide-github-button": "Sembunyikan Butang pautan GitHub",
+        "play-on-youtube-music": "Main di YouTube Music",
+        "set-inactivity-timeout": "Tetapkan tamat masa tidak aktif",
+        "set-status-display-type": {
+          "label": "Teks status",
+          "submenu": {
+            "artist": "Sedang mendengar {artist}",
+            "youtube-music": "Mendengar YouTube Music"
+          }
+        }
+      },
+      "name": "Discord Rich Presence",
+      "prompt": {
+        "set-inactivity-timeout": {
+          "label": "Masukkan tamat masa tidak aktif dalam beberapa saat:",
+          "title": "Tetapkan tamat masa tidak aktif"
+        }
+      }
+    },
+    "downloader": {
+      "backend": {
+        "dialog": {
+          "error": {
+            "buttons": {
+              "ok": "OK"
+            },
+            "message": "Argh! Maaf, muat turun gagal…",
+            "title": "Ralat dalam muat turun!"
+          },
+          "start-download-playlist": {
+            "buttons": {
+              "ok": "OK"
+            },
+            "detail": "({{playlistSize}} lagu)",
+            "message": "Memuat turun senarai main {{playlistTitle}}",
+            "title": "Memuat turn bermula"
+          }
+        },
+        "feedback": {
+          "conversion-progress": "Penukaran: {{percent}}%",
+          "converting": "Menukarkan…",
+          "done": "Selesai: {{filePath}}",
+          "download-info": "Memuat turun {{artist}} - {{title}} [{{videoId}}",
+          "downloading": "Memuat turun…",
+          "downloading-counter": "Memuat turun {{current}}/{{total}}…",
+          "downloading-playlist": "Memuat turun senarai main \"{{playlistTitle}}\" - {{playlistSize}} lagu ({{playlistId}})",
+          "error-while-downloading": "Gagal memuat turun \"{{author}} - {{title}}\": {{error}}",
+          "folder-already-exists": "Folder {{playlistFolder}} sudah ada",
+          "getting-playlist-info": "Mendapatkan maklumat senarai main…",
+          "loading": "Memuat…",
+          "playlist-has-only-one-song": "Senarai main hanya mempunyai satu item, memuat turunnya terus",
+          "playlist-id-not-found": "ID senarai main tidak dijumpai",
+          "playlist-is-empty": "Senarai main kosong",
+          "saving": "Menyimpan…",
+          "trying-to-get-playlist-id": "Mencuba untuk mendapatkan ID senarai main: {{playlistId}}",
+          "video-id-not-found": "Video tidak dijumpai"
+        }
+      },
+      "description": "Memuat turun audio MP3 / sumber terus dari antara muka",
+      "menu": {
+        "choose-download-folder": "Pilih folder muat turun",
+        "download-finish-settings": {
+          "prompt": {
+            "title": "Konfigurasikan masa untuk memuat turun"
+          },
+          "submenu": {
+            "enabled": "Dinyalakan",
+            "mode": "Mod masa",
+            "percent": "Peratus",
+            "seconds": "Saat"
+          }
+        },
+        "download-playlist": "Muat turun senarai main"
+      }
+    },
+    "lumiastream": {
+      "name": "Lumia Stream [Beta]"
+    },
+    "lyrics-genius": {
+      "description": "Menambahkan sokongan lirik untuk kebanyakan lagu",
+      "menu": {
+        "romanized-lyrics": "Lirik Romanized"
+      },
+      "name": "Lirik Genius",
+      "renderer": {
+        "fetched-lyrics": "Lirik yang diambil untuk Genius"
+      }
+    },
+    "music-together": {
+      "description": "Kongsi senarai main dengan orang lain. Apabila hos memainkan lagu, semua orang akan mendengar lagu yang sama",
+      "internal": {
+        "save": "Simpan",
+        "unknown-user": "Pengguna tidak diketahui"
+      },
+      "menu": {
+        "close": "Tutup Music Together"
       }
     },
     "synced-lyrics": {
