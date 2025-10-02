@@ -1,3 +1,9 @@
+import {
+  ensureLeadingPaddingEmptyLine,
+  ensureTrailingEmptyLine,
+  mergeConsecutiveEmptySyncedLines,
+} from '../shared/lines';
+
 import type { LyricProvider, LyricResult, SearchSongInfo } from '../types';
 import type { YouTubeMusicAppElement } from '@/types/youtube-music-app-element';
 
@@ -76,39 +82,20 @@ export class YTMusic implements LyricProvider {
       return null;
     }
 
-    if (synced?.length && synced[0].timeInMs > 300) {
-      synced.unshift({
-        duration: 0,
-        text: '',
-        time: '00:00.00',
-        timeInMs: 0,
-        status: 'upcoming' as const,
-      });
-    }
-
-    // ensure a final empty line exists
-    if (synced?.length) {
-      const last = synced[synced.length - 1];
-      const lastEnd = parseInt(last.timeInMs.toString()) + last.duration;
-
-      // youtube sometimes omits trailing silence, add our own
-      if (last.text !== '') {
-        synced.push({
-          duration: 0,
-          text: '',
-          time: this.millisToTime(lastEnd),
-          timeInMs: lastEnd,
-          status: 'upcoming' as const,
-        });
-      }
-    }
+    const processed = synced
+      ? (() => {
+          const merged = mergeConsecutiveEmptySyncedLines(synced);
+          const withLeading = ensureLeadingPaddingEmptyLine(merged, 300, 'span');
+          return ensureTrailingEmptyLine(withLeading, 'lastEnd');
+        })()
+      : undefined;
 
     return {
       title,
       artists: [artist],
 
       lyrics: plain,
-      lines: synced,
+      lines: processed,
     };
   }
 

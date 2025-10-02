@@ -1,3 +1,8 @@
+import {
+  ensureLeadingPaddingEmptyLine,
+  mergeConsecutiveEmptySyncedLines,
+} from '../shared/lines';
+
 interface LRCTag {
   tag: string;
   value: string;
@@ -79,42 +84,11 @@ export const LRC = {
       line.timeInMs += offset;
     }
 
-    const first = lrc.lines.at(0);
-    if (first && first.timeInMs > 300) {
-      lrc.lines.unshift({
-        time: '0:0:0',
-        timeInMs: 0,
-        duration: first.timeInMs,
-        text: '',
-      });
-    }
+    // leading padding line if the first line starts late
+    lrc.lines = ensureLeadingPaddingEmptyLine(lrc.lines, 300, 'span');
 
     // Merge consecutive empty lines into a single empty line
-    {
-      const merged: LRCLine[] = [];
-      for (const line of lrc.lines) {
-        const isEmpty = !line.text || !line.text.trim();
-        if (isEmpty && merged.length > 0) {
-          const prev = merged[merged.length - 1];
-          const prevEmpty = !prev.text || !prev.text.trim();
-          if (prevEmpty) {
-            const prevEnd = Number.isFinite(prev.duration)
-              ? prev.timeInMs + prev.duration
-              : Infinity;
-            const thisEnd = Number.isFinite(line.duration)
-              ? line.timeInMs + line.duration
-              : Infinity;
-            const newEnd = Math.max(prevEnd, thisEnd);
-            prev.duration = Number.isFinite(newEnd)
-              ? newEnd - prev.timeInMs
-              : Infinity;
-            continue;
-          }
-        }
-        merged.push(line);
-      }
-      lrc.lines = merged;
-    }
+    lrc.lines = mergeConsecutiveEmptySyncedLines(lrc.lines);
 
     return lrc;
   },

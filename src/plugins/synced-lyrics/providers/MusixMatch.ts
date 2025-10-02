@@ -1,6 +1,11 @@
 import * as z from 'zod';
 
 import { LRC } from '../parsers/lrc';
+import {
+  ensureLeadingPaddingEmptyLine,
+  ensureTrailingEmptyLine,
+  mergeConsecutiveEmptySyncedLines,
+} from '../shared/lines';
 import { netFetch } from '../renderer';
 
 import type { LyricProvider, LyricResult, SearchSongInfo } from '../types';
@@ -47,26 +52,13 @@ export class MusixMatch implements LyricProvider {
               (l) => ({ ...l, status: 'upcoming' as const }),
             );
 
-            // Merge consecutive empty lines into a single empty line
-            const merged: typeof parsed = [];
-            for (const line of parsed) {
-              const isEmpty = !line.text || !line.text.trim();
-              if (isEmpty && merged.length > 0) {
-                const prev = merged[merged.length - 1];
-                const prevEmpty = !prev.text || !prev.text.trim();
-                if (prevEmpty) {
-                  // extend previous duration to cover this line
-                  const prevEnd = prev.timeInMs + prev.duration;
-                  const thisEnd = line.timeInMs + line.duration;
-                  const newEnd = Math.max(prevEnd, thisEnd);
-                  prev.duration = newEnd - prev.timeInMs;
-                  continue; // skip adding this line
-                }
-              }
-              merged.push(line);
-            }
-
-            return merged;
+            const merged = mergeConsecutiveEmptySyncedLines(parsed);
+            const withLeading = ensureLeadingPaddingEmptyLine(
+              merged,
+              300,
+              'span',
+            );
+            return ensureTrailingEmptyLine(withLeading, 'lastEnd');
           })()
         : undefined,
       lyrics: lyrics,

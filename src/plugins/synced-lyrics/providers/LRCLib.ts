@@ -2,6 +2,11 @@ import { jaroWinkler } from '@skyra/jaro-winkler';
 
 import { config } from '../renderer/renderer';
 import { LRC } from '../parsers/lrc';
+import {
+  ensureLeadingPaddingEmptyLine,
+  ensureTrailingEmptyLine,
+  mergeConsecutiveEmptySyncedLines,
+} from '../shared/lines';
 
 import type { LyricProvider, LyricResult, SearchSongInfo } from '../types';
 
@@ -162,67 +167,18 @@ export class LRCLib implements LyricProvider {
         ...l,
         status: 'upcoming' as const,
       }));
-
-      // Merge consecutive empty lines into a single empty line
-      const merged: typeof parsed = [];
-      for (const line of parsed) {
-        const isEmpty = !line.text || !line.text.trim();
-        if (isEmpty && merged.length > 0) {
-          const prev = merged[merged.length - 1];
-          const prevEmpty = !prev.text || !prev.text.trim();
-          if (prevEmpty) {
-            // extend previous duration to cover this line
-            const prevEnd = prev.timeInMs + prev.duration;
-            const thisEnd = line.timeInMs + line.duration;
-            const newEnd = Math.max(prevEnd, thisEnd);
-            prev.duration = newEnd - prev.timeInMs;
-            continue; // skip adding this line
-          }
-        }
-        merged.push(line);
-      }
-
-      // If the final merged line is not empty, append a computed empty line
-      if (merged.length > 0) {
-        const last = merged[merged.length - 1];
-        const lastIsEmpty = !last.text || !last.text.trim();
-        if (lastIsEmpty) {
-          // last line already empty, don't append another
-        } else {
-          // If duration is infinity (no following line), treat end as start for midpoint calculation
-          const lastEndCandidate = Number.isFinite(last.duration)
-            ? last.timeInMs + last.duration
-            : last.timeInMs;
-          const songEnd = songDuration * 1000;
-
-          if (lastEndCandidate < songEnd) {
-            const midpoint = Math.floor((lastEndCandidate + songEnd) / 2);
-
-            // update last duration to end at midpoint
-            last.duration = midpoint - last.timeInMs;
-
-            const minutes = Math.floor(midpoint / 60000);
-            const seconds = Math.floor((midpoint % 60000) / 1000);
-            const centiseconds = Math.floor((midpoint % 1000) / 10);
-            const timeStr = `${minutes.toString().padStart(2, '0')}:${seconds
-              .toString()
-              .padStart(2, '0')}.${centiseconds.toString().padStart(2, '0')}`;
-
-            merged.push({
-              timeInMs: midpoint,
-              time: timeStr,
-              duration: songEnd - midpoint,
-              text: '',
-              status: 'upcoming' as const,
-            });
-          }
-        }
-      }
+      const merged = mergeConsecutiveEmptySyncedLines(parsed);
+      const withLeading = ensureLeadingPaddingEmptyLine(merged, 300, 'span');
+      const finalLines = ensureTrailingEmptyLine(
+        withLeading,
+        'midpoint',
+        songDuration * 1000,
+      );
 
       return {
         title: closestResult.trackName,
         artists: closestResult.artistName.split(/[&,]/g),
-        lines: merged,
+        lines: finalLines,
       };
     } else if (plain) {
       // Fallback to plain if no synced
