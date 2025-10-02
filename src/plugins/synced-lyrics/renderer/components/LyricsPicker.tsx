@@ -79,6 +79,12 @@ export const LyricsPicker = (props: {
   const [starredProvider, setStarredProvider] =
     createSignal<ProviderName | null>(null);
 
+  const favoriteProviderKey = (id: string) => `ytmd-sl-starred-${id}`;
+  const switchProvider = (provider: ProviderName, fastMs = 2500) => {
+    requestFastScroll(fastMs);
+    setLyricsStore('provider', provider);
+  };
+
   createEffect(() => {
     const id = videoId();
     if (id === null) {
@@ -86,7 +92,7 @@ export const LyricsPicker = (props: {
       return;
     }
 
-    const key = `ytmd-sl-starred-${id}`;
+    const key = favoriteProviderKey(id);
     const value = localStorage.getItem(key);
     if (!value) {
       setStarredProvider(null);
@@ -106,7 +112,7 @@ export const LyricsPicker = (props: {
     const id = videoId();
     if (id === null) return;
 
-    const key = `ytmd-sl-starred-${id}`;
+    const key = favoriteProviderKey(id);
 
     setStarredProvider((starredProvider) => {
       if (lyricsStore.provider === starredProvider) {
@@ -141,8 +147,7 @@ export const LyricsPicker = (props: {
     if (!hasManuallySwitchedProvider()) {
       const starred = starredProvider();
       if (starred !== null) {
-        requestFastScroll(2500);
-        setLyricsStore('provider', starred);
+        switchProvider(starred, 2500);
         return;
       }
 
@@ -156,29 +161,29 @@ export const LyricsPicker = (props: {
         force ||
         providerBias(lyricsStore.provider) < providerBias(provider)
       ) {
-        requestFastScroll(2500);
-        setLyricsStore('provider', provider);
+        switchProvider(provider, 2500);
       }
     }
   });
 
   const next = () => {
     setHasManuallySwitchedProvider(true);
-    requestFastScroll(2500);
     setLyricsStore('provider', (prevProvider) => {
       const idx = providerNames.indexOf(prevProvider);
-      return providerNames[(idx + 1) % providerNames.length];
+      const nextProvider = providerNames[(idx + 1) % providerNames.length];
+      switchProvider(nextProvider, 2500);
+      return nextProvider;
     });
   };
 
   const previous = () => {
     setHasManuallySwitchedProvider(true);
-    requestFastScroll(2500);
     setLyricsStore('provider', (prevProvider) => {
       const idx = providerNames.indexOf(prevProvider);
-      return providerNames[
-        (idx + providerNames.length - 1) % providerNames.length
-      ];
+      const prev =
+        providerNames[(idx + providerNames.length - 1) % providerNames.length];
+      switchProvider(prev, 2500);
+      return prev;
     });
   };
 
@@ -317,8 +322,7 @@ export const LyricsPicker = (props: {
                 class="lyrics-picker-dot"
                 onClick={() => {
                   setHasManuallySwitchedProvider(true);
-                  requestFastScroll(2500);
-                  setLyricsStore('provider', providerNames[idx()]);
+                  switchProvider(providerNames[idx()], 2500);
                 }}
                 style={{
                   background: idx() === providerIdx() ? 'white' : 'black',

@@ -11,7 +11,13 @@ import { type VirtualizerHandle, VList } from 'virtua/solid';
 
 import { LyricsPicker } from './components/LyricsPicker';
 
-import { selectors, getSeekTime, SFont } from './utils';
+import {
+  selectors,
+  getSeekTime,
+  SFont,
+  normalizePlainLyrics,
+  isBlank,
+} from './utils';
 
 import {
   ErrorDisplay,
@@ -306,7 +312,7 @@ export const LyricsRenderer = () => {
 
       if (data?.lines) {
         const lines = data.lines;
-        const firstEmpty = lines.findIndex((l) => !l.text?.trim());
+        const firstEmpty = lines.findIndex((l) => isBlank(l.text));
         setFirstEmptyIndex(firstEmpty === -1 ? null : firstEmpty);
 
         return lines.map((line) => ({
@@ -316,17 +322,7 @@ export const LyricsRenderer = () => {
       }
 
       if (data?.lyrics) {
-        const rawLines = data.lyrics.split('\n');
-
-        // preserve a single trailing empty line if provided by the provider
-        const hasTrailingEmpty =
-          rawLines.length > 0 && rawLines[rawLines.length - 1].trim() === '';
-
-        const lines = rawLines.filter((line, idx) => {
-          if (line.trim()) return true;
-          // keep only the final empty line (for padding) if it exists
-          return hasTrailingEmpty && idx === rawLines.length - 1;
-        });
+        const lines = normalizePlainLyrics(data.lyrics);
 
         return lines.map((line) => ({
           kind: 'PlainLine' as const,

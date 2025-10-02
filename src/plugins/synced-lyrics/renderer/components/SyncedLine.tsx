@@ -7,7 +7,14 @@ import { type LineLyrics } from '@/plugins/synced-lyrics/types';
 import { config, currentTime } from '../renderer';
 import { _ytAPI } from '..';
 
-import { canonicalize, romanize, simplifyUnicode, getSeekTime } from '../utils';
+import {
+  canonicalize,
+  romanize,
+  simplifyUnicode,
+  getSeekTime,
+  isBlank,
+  timeCodeText,
+} from '../utils';
 
 interface SyncedLineProps {
   scroller: VirtualizerHandle;
@@ -17,26 +24,6 @@ interface SyncedLineProps {
   status: 'upcoming' | 'current' | 'previous';
   isFinalLine?: boolean;
   isFirstEmptyLine?: boolean;
-}
-
-function formatTime(timeInMs: number, preciseTiming: boolean): string {
-  if (!preciseTiming) {
-    const totalSeconds = Math.round(timeInMs / 1000);
-    const minutes = Math.floor(totalSeconds / 60);
-    const seconds = totalSeconds % 60;
-
-    return `${minutes.toString().padStart(2, '0')}:${seconds
-      .toString()
-      .padStart(2, '0')}`;
-  }
-
-  const minutes = Math.floor(timeInMs / 60000);
-  const seconds = Math.floor((timeInMs % 60000) / 1000);
-  const ms = Math.floor((timeInMs % 1000) / 10);
-
-  return `${minutes.toString().padStart(2, '0')}:${seconds
-    .toString()
-    .padStart(2, '0')}.${ms.toString().padStart(2, '0')}`;
 }
 
 const EmptyLine = (props: SyncedLineProps) => {
@@ -82,7 +69,7 @@ const EmptyLine = (props: SyncedLineProps) => {
   });
 
   const shouldRenderPlaceholder = createMemo(() => {
-    const isEmpty = !props.line.text?.trim();
+    const isEmpty = isBlank(props.line.text);
     const showEmptySymbols = config()?.showEmptyLineSymbols ?? false;
 
     return isEmpty
@@ -92,7 +79,7 @@ const EmptyLine = (props: SyncedLineProps) => {
 
   const isHighlighted = createMemo(() => props.status === 'current');
   const isFinalEmpty = createMemo(() => {
-    return props.isFinalLine && !props.line.text?.trim();
+    return props.isFinalLine && isBlank(props.line.text);
   });
 
   const shouldRemovePadding = createMemo(() => {
@@ -116,18 +103,17 @@ const EmptyLine = (props: SyncedLineProps) => {
           text={{
             runs: [
               {
-                text: config()?.showTimeCodes
-                  ? `[${formatTime(
-                      props.line.timeInMs,
-                      config()?.preciseTiming ?? false,
-                    )}] `
-                  : '',
+                text: timeCodeText(
+                  props.line.timeInMs,
+                  config()?.preciseTiming ?? false,
+                  config()?.showTimeCodes ?? false,
+                ),
               },
             ],
           }}
         />
         <div class="text-lyrics">
-          {props.isFinalLine && !props.line.text?.trim() ? (
+          {props.isFinalLine && isBlank(props.line.text) ? (
             <span>
               <span class={`fade ${isHighlighted() ? 'show' : ''}`}>
                 <yt-formatted-string text={{ runs: [{ text: '' }] }} />
@@ -185,9 +171,11 @@ export const SyncedLine = (props: SyncedLineProps) => {
             text={{
               runs: [
                 {
-                  text: config()?.showTimeCodes
-                    ? `[${formatTime(props.line.timeInMs, config()?.preciseTiming ?? false)}] `
-                    : '',
+                  text: timeCodeText(
+                    props.line.timeInMs,
+                    config()?.preciseTiming ?? false,
+                    config()?.showTimeCodes ?? false,
+                  ),
                 },
               ],
             }}
