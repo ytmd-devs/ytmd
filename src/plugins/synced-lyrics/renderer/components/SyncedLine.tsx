@@ -26,6 +26,31 @@ interface SyncedLineProps {
   isFirstEmptyLine?: boolean;
 }
 
+// small helpers
+const WORD_ANIM_DELAY_STEP = 0.05; // seconds per word index
+
+const seekToMs = (ms: number) => {
+  const precise = config()?.preciseTiming ?? false;
+  _ytAPI?.seekTo(getSeekTime(ms, precise));
+};
+
+const renderWordSpans = (input: string) => (
+  <span>
+    <For each={input.split(' ')}>
+      {(word, index) => (
+        <span
+          style={{
+            'transition-delay': `${index() * WORD_ANIM_DELAY_STEP}s`,
+            'animation-delay': `${index() * WORD_ANIM_DELAY_STEP}s`,
+          }}
+        >
+          <yt-formatted-string text={{ runs: [{ text: `${word} ` }] }} />
+        </span>
+      )}
+    </For>
+  </span>
+);
+
 const EmptyLine = (props: SyncedLineProps) => {
   const states = createMemo(() => {
     const defaultText = config()?.defaultTextString ?? '';
@@ -40,16 +65,16 @@ const EmptyLine = (props: SyncedLineProps) => {
 
     if (stepCount === 1) return 0;
 
-    let earlyCut: number;
-    if (total > 3000) {
-      earlyCut = 1000;
-    } else if (total >= 1000) {
-      const ratio = (total - 1000) / 2000;
-      const addend = ratio * 500;
-      earlyCut = 500 + addend;
-    } else {
-      earlyCut = Math.min(total * 0.8, total - 150);
-    }
+    const computeEarlyCut = (t: number) => {
+      if (t > 3000) return 1000;
+      if (t >= 1000) {
+        const ratio = (t - 1000) / 2000;
+        const addend = ratio * 500;
+        return 500 + addend;
+      }
+      return Math.min(t * 0.8, t - 150);
+    };
+    const earlyCut = computeEarlyCut(total);
 
     const effectiveTotal =
       total <= 1000
@@ -94,8 +119,7 @@ const EmptyLine = (props: SyncedLineProps) => {
     <div
       class={`synced-emptyline ${props.status} ${isFinalEmpty() ? 'final-empty' : ''} ${shouldRemovePadding() ? 'no-padding' : ''}`}
       onClick={() => {
-        const precise = config()?.preciseTiming ?? false;
-        _ytAPI?.seekTo(getSeekTime(props.line.timeInMs, precise));
+        seekToMs(props.line.timeInMs);
       }}
     >
       <div class="description ytmusic-description-shelf-renderer" dir="auto">
@@ -162,8 +186,7 @@ export const SyncedLine = (props: SyncedLineProps) => {
       <div
         class={`synced-line ${props.status}`}
         onClick={() => {
-          const precise = config()?.preciseTiming ?? false;
-          _ytAPI?.seekTo(getSeekTime(props.line.timeInMs, precise));
+          seekToMs(props.line.timeInMs);
         }}
       >
         <div class="description ytmusic-description-shelf-renderer" dir="auto">
@@ -193,26 +216,7 @@ export const SyncedLine = (props: SyncedLineProps) => {
             }}
             style={{ 'display': 'flex', 'flex-direction': 'column' }}
           >
-            <span>
-              <For each={text().split(' ')}>
-                {(word, index) => {
-                  return (
-                    <span
-                      style={{
-                        'transition-delay': `${index() * 0.05}s`,
-                        'animation-delay': `${index() * 0.05}s`,
-                      }}
-                    >
-                      <yt-formatted-string
-                        text={{
-                          runs: [{ text: `${word} ` }],
-                        }}
-                      />
-                    </span>
-                  );
-                }}
-              </For>
-            </span>
+            {renderWordSpans(text())}
 
             <Show
               when={
@@ -220,26 +224,7 @@ export const SyncedLine = (props: SyncedLineProps) => {
                 simplifyUnicode(text()) !== simplifyUnicode(romanization())
               }
             >
-              <span class="romaji">
-                <For each={romanization().split(' ')}>
-                  {(word, index) => {
-                    return (
-                      <span
-                        style={{
-                          'transition-delay': `${index() * 0.05}s`,
-                          'animation-delay': `${index() * 0.05}s`,
-                        }}
-                      >
-                        <yt-formatted-string
-                          text={{
-                            runs: [{ text: `${word} ` }],
-                          }}
-                        />
-                      </span>
-                    );
-                  }}
-                </For>
-              </span>
+              <span class="romaji">{renderWordSpans(romanization())}</span>
             </Show>
           </div>
         </div>

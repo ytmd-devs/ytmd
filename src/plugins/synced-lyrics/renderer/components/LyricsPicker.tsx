@@ -35,6 +35,8 @@ export const providerIdx = createMemo(() =>
   providerNames.indexOf(lyricsStore.provider),
 );
 
+const FAST_SWITCH_MS = 2500;
+
 const shouldSwitchProvider = (providerData: ProviderState) => {
   if (providerData.state === 'error') return true;
   if (providerData.state === 'fetching') return true;
@@ -80,7 +82,7 @@ export const LyricsPicker = (props: {
     createSignal<ProviderName | null>(null);
 
   const favoriteProviderKey = (id: string) => `ytmd-sl-starred-${id}`;
-  const switchProvider = (provider: ProviderName, fastMs = 2500) => {
+  const switchProvider = (provider: ProviderName, fastMs = FAST_SWITCH_MS) => {
     requestFastScroll(fastMs);
     setLyricsStore('provider', provider);
   };
@@ -99,7 +101,13 @@ export const LyricsPicker = (props: {
       return;
     }
 
-    const parseResult = LocalStorageSchema.safeParse(JSON.parse(value));
+    let parsed: unknown = null;
+    try {
+      parsed = JSON.parse(value);
+    } catch {
+      parsed = null;
+    }
+    const parseResult = LocalStorageSchema.safeParse(parsed);
     if (parseResult.success) {
       setLyricsStore('provider', parseResult.data.provider);
       setStarredProvider(parseResult.data.provider);
@@ -147,7 +155,7 @@ export const LyricsPicker = (props: {
     if (!hasManuallySwitchedProvider()) {
       const starred = starredProvider();
       if (starred !== null) {
-        switchProvider(starred, 2500);
+        switchProvider(starred);
         return;
       }
 
@@ -161,30 +169,25 @@ export const LyricsPicker = (props: {
         force ||
         providerBias(lyricsStore.provider) < providerBias(provider)
       ) {
-        switchProvider(provider, 2500);
+        switchProvider(provider);
       }
     }
   });
 
   const next = () => {
     setHasManuallySwitchedProvider(true);
-    setLyricsStore('provider', (prevProvider) => {
-      const idx = providerNames.indexOf(prevProvider);
-      const nextProvider = providerNames[(idx + 1) % providerNames.length];
-      switchProvider(nextProvider, 2500);
-      return nextProvider;
-    });
+    const nextProvider =
+      providerNames[(providerIdx() + 1) % providerNames.length];
+    switchProvider(nextProvider);
   };
 
   const previous = () => {
     setHasManuallySwitchedProvider(true);
-    setLyricsStore('provider', (prevProvider) => {
-      const idx = providerNames.indexOf(prevProvider);
-      const prev =
-        providerNames[(idx + providerNames.length - 1) % providerNames.length];
-      switchProvider(prev, 2500);
-      return prev;
-    });
+    const prev =
+      providerNames[
+        (providerIdx() + providerNames.length - 1) % providerNames.length
+      ];
+    switchProvider(prev);
   };
 
   const chevronLeft: YtIcons = 'yt-icons:chevron_left';
@@ -322,7 +325,7 @@ export const LyricsPicker = (props: {
                 class="lyrics-picker-dot"
                 onClick={() => {
                   setHasManuallySwitchedProvider(true);
-                  switchProvider(providerNames[idx()], 2500);
+                  switchProvider(providerNames[idx()]);
                 }}
                 style={{
                   background: idx() === providerIdx() ? 'white' : 'black',
