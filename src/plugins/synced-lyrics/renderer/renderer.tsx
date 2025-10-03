@@ -28,6 +28,7 @@ import {
 } from './components';
 
 import { currentLyrics } from './store';
+import { clamp, SCROLL_DURATION, LEAD_IN_TIME_MS } from './scrolling';
 
 import type { LineLyrics, SyncedLyricsPluginConfig } from '../types';
 
@@ -391,6 +392,8 @@ export const LyricsRenderer = () => {
     const targetIndex = scrollTargetIndex();
     const maxIndex = untrack(statuses).length - 1;
     const scrollerInstance = scroller();
+    const lineEffect = config()?.lineEffect;
+    const isEnhanced = lineEffect === 'enhanced';
 
     if (!visible || !scrollerInstance || !current.data?.lines) return;
 
@@ -403,27 +406,33 @@ export const LyricsRenderer = () => {
       jumpSize: number,
       fast: boolean,
     ) => {
-      // fast scroll for others
       if (fast) {
-        const d = 260 + distance * 0.28;
-        return Math.min(680, Math.max(240, d));
+        return clamp(
+          SCROLL_DURATION.FAST_BASE + distance * SCROLL_DURATION.FAST_MULT,
+          SCROLL_DURATION.FAST_MIN,
+          SCROLL_DURATION.FAST_MAX,
+        );
       }
 
-      let minDuration = 850;
-      let maxDuration = 1650;
-      let duration = 550 + distance * 0.7;
+      let base: number = SCROLL_DURATION.NORMAL_BASE;
+      let mult: number = SCROLL_DURATION.NORMAL_MULT;
+      let min: number = SCROLL_DURATION.NORMAL_MIN;
+      let max: number = SCROLL_DURATION.NORMAL_MAX;
 
       if (jumpSize === 1) {
-        minDuration = 1000;
-        maxDuration = 1800;
-        duration = 700 + distance * 0.8;
+        base = SCROLL_DURATION.JUMP1_BASE;
+        mult = SCROLL_DURATION.JUMP1_MULT;
+        min = SCROLL_DURATION.JUMP1_MIN;
+        max = SCROLL_DURATION.JUMP1_MAX;
       } else if (jumpSize > 3) {
-        minDuration = 600;
-        maxDuration = 1400;
-        duration = 400 + distance * 0.6;
+        base = SCROLL_DURATION.JUMP4_BASE;
+        mult = SCROLL_DURATION.JUMP4_MULT;
+        min = SCROLL_DURATION.JUMP4_MIN;
+        max = SCROLL_DURATION.JUMP4_MAX;
       }
 
-      return Math.min(maxDuration, Math.max(minDuration, duration));
+      const duration = base + distance * mult;
+      return clamp(duration, min, max);
     };
 
     // easing function
@@ -452,7 +461,7 @@ export const LyricsRenderer = () => {
       const itemCenter = itemSize / 2;
       const centerOffset = itemOffset - viewportCenter + itemCenter;
 
-      return Math.max(0, Math.min(centerOffset, maxScroll));
+      return clamp(centerOffset, 0, maxScroll);
     };
 
     // enhanced scroll animation
@@ -527,7 +536,7 @@ export const LyricsRenderer = () => {
 
     // wait for scroller ready
     const waitForReady = (tries = 0) => {
-      const nonEnhanced = config()?.lineEffect !== 'enhanced';
+      const nonEnhanced = !isEnhanced;
       const scrollerReady = isScrollerReady(scrollerInstance, scrollIndex);
       const hasCurrentIndex = !nonEnhanced || currentIndex() >= 0;
 
@@ -543,7 +552,7 @@ export const LyricsRenderer = () => {
       const inFastWindow = now < fastScrollUntil();
       const suppressed = now < suppressFastUntil();
 
-      if (config()?.lineEffect !== 'enhanced') {
+      if (!isEnhanced) {
         scrollerInstance.scrollToIndex(scrollIndex, {
           smooth: true,
           align: 'center',
@@ -628,10 +637,9 @@ export const LyricsRenderer = () => {
 
       if (nextLine) {
         // start scroll early
-        const leadInTimeMs = 130;
         const timeUntilNextLine = nextLine.timeInMs - currentTimeMs;
 
-        if (timeUntilNextLine <= leadInTimeMs) {
+        if (timeUntilNextLine <= LEAD_IN_TIME_MS) {
           setScrollTargetIndex(nextIdx);
           prevIndexForFast = effIdx;
           return;
