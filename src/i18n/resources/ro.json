@@ -421,6 +421,19 @@
         }
       }
     },
+    "custom-output-device": {
+      "description": "Configurați un dispozitiv de ieșire personalizat pentru melodii",
+      "menu": {
+        "device-selector": "Selectați dispozitivul"
+      },
+      "name": "Dispozitiv de ieșire personalizat",
+      "prompt": {
+        "device-selector": {
+          "label": "Alegeți dispozitivul media de ieșire care va fi utilizat",
+          "title": "Selectați dispozitivul de ieșire"
+        }
+      }
+    },
     "disable-autoplay": {
       "description": "Face cântecul să înceapă în modul \"pauză\"",
       "menu": {
@@ -444,7 +457,15 @@
         "hide-duration-left": "Ascunde timpul rămas",
         "hide-github-button": "Ascunde butonul cu link-ul GitHub",
         "play-on-youtube-music": "Redă pe YouTube Music",
-        "set-inactivity-timeout": "Setează intervalul de inactivitate"
+        "set-inactivity-timeout": "Setează intervalul de inactivitate",
+        "set-status-display-type": {
+          "label": "Text stare",
+          "submenu": {
+            "artist": "Ascultând {artist}",
+            "title": "Ascultând {song title}",
+            "youtube-music": "Ascultând YouTube Music"
+          }
+        }
       },
       "name": "Discord Rich Presence",
       "prompt": {
@@ -712,7 +733,12 @@
         }
       },
       "description": "Permite schimbarea calității video cu un buton prezent peste video",
-      "name": "Schimbător de calitate video"
+      "name": "Schimbător de calitate video",
+      "renderer": {
+        "quality-settings-button": {
+          "label": "Deschide setările de calitate"
+        }
+      }
     },
     "scrobbler": {
       "description": "Adaugă asistenta pentru scrobbling (etc. last.fm, Listenbrainz)",
@@ -731,6 +757,7 @@
         "listenbrainz": {
           "token": "Introdu token-ul de utilizator ListenBrainz"
         },
+        "scrobble-alternative-artist": "Utilizați artiști alternativi",
         "scrobble-alternative-title": "Folosește titluri alternative",
         "scrobble-other-media": "Scrobble alte surse media"
       },
@@ -816,6 +843,14 @@
           "label": "Sincronizează versurile perfect",
           "tooltip": "Calculează afisarea următoarei linii până la milisecundă (poate afecta performanța)"
         },
+        "preferred-provider": {
+          "label": "Furnizor preferat",
+          "none": {
+            "label": "Niciunul",
+            "tooltip": "Niciun furnizor preferat"
+          },
+          "tooltip": "Alegeți furnizorul preferat"
+        },
         "romanization": {
           "label": "Transcrie versurile în alfabet latin",
           "tooltip": "Dacă versurile sunt într-o altă limbă, încearcă să afișezi o versiune în alfabet latin."
@@ -847,6 +882,27 @@
     "touchbar": {
       "description": "Adaugă un widget TouchBar pentru utilizatorii macOS",
       "name": "TouchBar"
+    },
+    "transparent-player": {
+      "description": "Face fereastra aplicației transparentă",
+      "menu": {
+        "opacity": {
+          "label": "Opacitate",
+          "submenu": {
+            "percent": "{{opacity}}%"
+          }
+        },
+        "type": {
+          "label": "Tip",
+          "submenu": {
+            "acrylic": "Acrilic",
+            "mica": "Efect mica",
+            "none": "Niciunul",
+            "tabbed": "Cu file"
+          }
+        }
+      },
+      "name": "Player transparent"
     },
     "tuna-obs": {
       "description": "Integrare cu plugin-ul OBS Tuna",
