@@ -1,9 +1,9 @@
 {
   "$schema": "https://biomejs.dev/schemas/2.2.5/schema.json",
   "vcs": {
-    "enabled": true,
+    "enabled": false,
     "clientKind": "git",
-    "useIgnoreFile": true
+    "useIgnoreFile": false
   },
   "files": {
     "ignoreUnknown": false
@@ -121,7 +121,13 @@
         "useNamespaceKeyword": "error"
       }
     },
-    "includes": ["**", "!dist", "!node_modules", "!*.config.*js", "!*.test.*js"]
+    "includes": [
+      "**",
+      "!dist",
+      "!node_modules",
+      "!*.config.*js",
+      "!*.test.*js"
+    ]
   },
   "javascript": {
     "formatter": {
@@ -144,7 +150,12 @@
   },
   "overrides": [
     {
-      "includes": ["**/*.ts", "**/*.tsx", "**/*.mts", "**/*.cts"],
+      "includes": [
+        "**/*.ts",
+        "**/*.tsx",
+        "**/*.mts",
+        "**/*.cts"
+      ],
       "linter": {
         "rules": {
           "complexity": {
@@ -180,7 +191,12 @@
       }
     },
     {
-      "includes": ["**/*.ts", "**/*.tsx", "**/*.mts", "**/*.cts"],
+      "includes": [
+        "**/*.ts",
+        "**/*.tsx",
+        "**/*.mts",
+        "**/*.cts"
+      ],
       "linter": {
         "rules": {
           "complexity": {
