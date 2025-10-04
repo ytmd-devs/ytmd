@@ -1,7 +1,15 @@
 import i18next from 'i18next';
-
-import { startingPages } from './providers/extracted-data';
-import { setupSongInfo } from './providers/song-info-front';
+import { t as i18t, loadI18n, setLanguage } from '@/i18n';
+import { type PluginConfig } from '@/types/plugins';
+import { type QueueElement } from '@/types/queue';
+import { type SearchBoxElement } from '@/types/search-box-element';
+import { type YouTubeMusicAppElement } from '@/types/youtube-music-app-element';
+import { type QueueResponse } from '@/types/youtube-music-desktop-internal';
+import { type YoutubePlayer } from '@/types/youtube-player';
+import {
+  defaultTrustedTypePolicy,
+  registerWindowDefaultTrustedTypePolicy,
+} from '@/utils/trusted-types';
 import {
   createContext,
   forceLoadRendererPlugin,
@@ -10,20 +18,8 @@ import {
   getLoadedRendererPlugin,
   loadAllRendererPlugins,
 } from './loader/renderer';
-
-import { loadI18n, setLanguage, t as i18t } from '@/i18n';
-
-import {
-  defaultTrustedTypePolicy,
-  registerWindowDefaultTrustedTypePolicy,
-} from '@/utils/trusted-types';
-
-import type { PluginConfig } from '@/types/plugins';
-import type { YoutubePlayer } from '@/types/youtube-player';
-import type { QueueElement } from '@/types/queue';
-import type { QueueResponse } from '@/types/youtube-music-desktop-internal';
-import type { YouTubeMusicAppElement } from '@/types/youtube-music-app-element';
-import type { SearchBoxElement } from '@/types/search-box-element';
+import { startingPages } from './providers/extracted-data';
+import { setupSongInfo } from './providers/song-info-front';
 
 let api: (Element & YoutubePlayer) | null = null;
 let isPluginLoaded = false;
@@ -88,9 +84,9 @@ async function onApiLoaded() {
   window.ipcRenderer.on('ytmd:seek-by', (_, t: number) => api!.seekBy(t));
   window.ipcRenderer.on('ytmd:shuffle', () => {
     document
-      .querySelector<
-        HTMLElement & { queue: { shuffle: () => void } }
-      >('ytmusic-player-bar')
+      .querySelector<HTMLElement & { queue: { shuffle: () => void } }>(
+        'ytmusic-player-bar',
+      )
       ?.queue.shuffle();
   });
 
@@ -120,17 +116,17 @@ async function onApiLoaded() {
   window.ipcRenderer.on('ytmd:switch-repeat', (_, repeat = 1) => {
     for (let i = 0; i < repeat; i++) {
       document
-        .querySelector<
-          HTMLElement & { onRepeatButtonClick: () => void }
-        >('ytmusic-player-bar')
+        .querySelector<HTMLElement & { onRepeatButtonClick: () => void }>(
+          'ytmusic-player-bar',
+        )
         ?.onRepeatButtonClick();
     }
   });
   window.ipcRenderer.on('ytmd:update-volume', (_, volume: number) => {
     document
-      .querySelector<
-        HTMLElement & { updateVolume: (volume: number) => void }
-      >('ytmusic-player-bar')
+      .querySelector<HTMLElement & { updateVolume: (volume: number) => void }>(
+        'ytmusic-player-bar',
+      )
       ?.updateVolume(volume);
   });
 
@@ -169,9 +165,9 @@ async function onApiLoaded() {
 
   window.ipcRenderer.on('ytmd:toggle-mute', (_) => {
     document
-      .querySelector<
-        HTMLElement & { onVolumeClick: () => void }
-      >('ytmusic-player-bar')
+      .querySelector<HTMLElement & { onVolumeClick: () => void }>(
+        'ytmusic-player-bar',
+      )
       ?.onVolumeClick();
   });
 
@@ -402,10 +398,9 @@ async function onApiLoaded() {
  * YouTube Music still using ES5, so we need to define custom elements using ES5 style
  */
 const defineYTMDTransElements = () => {
+  // biome-ignore lint/suspicious/noEmptyBlockStatements: Empty constructor required for ES5-style custom element definition
   const YTMDTrans = function () {};
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   YTMDTrans.prototype = Object.create(HTMLElement.prototype);
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
   YTMDTrans.prototype.connectedCallback = function () {
     const that = this as HTMLElement;
     const key = that.getAttribute('key');

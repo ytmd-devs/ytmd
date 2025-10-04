@@ -6,8 +6,8 @@ env:
   NODE_VERSION: "22.x"
 
 jobs:
-  eslint:
-    name: runner / eslint
+  biome:
+    name: runner / Biome
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -33,9 +33,8 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - uses: reviewdog/action-eslint@v1.34.0
+      - uses: mongolyy/reviewdog-action-biome@v1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           reporter: github-pr-review # Change reporter.
-          eslint_flags: './src'
           fail_level: error
