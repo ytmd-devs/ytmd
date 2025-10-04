@@ -151,9 +151,9 @@
             "label": "介面設定",
             "submenu": {
               "custom-window-title": {
-                "label": "客製化窗口標題",
+                "label": "自訂窗口標題",
                 "prompt": {
-                  "label": "輸入客製化窗口標題: (留空讓其停用)",
+                  "label": "輸入自訂視窗標題: (留空將其停用)",
                   "placeholder": "例如: YouTube 音樂"
                 }
               },
@@ -459,11 +459,11 @@
         "play-on-youtube-music": "顯示 Play on YouTube Music 按鈕",
         "set-inactivity-timeout": "設定閒置狀態時長",
         "set-status-display-type": {
-          "label": "狀態文字",
+          "label": "狀態樣式",
           "submenu": {
-            "artist": "正在聽 {artist}",
-            "title": "正在聽 {song title}",
-            "youtube-music": "正在聽 YouTube Music"
+            "artist": "正在聆聽 {artist} 的歌曲",
+            "title": "正在聆聽 {song title}",
+            "youtube-music": "正在聆聽 YouTube Music"
           }
         }
       },
@@ -666,8 +666,8 @@
       "name": "歌曲播放通知"
     },
     "performance-improvement": {
-      "description": "使用實驗性的腳本以最佳化效能",
-      "name": "效能最佳化 [Beta]"
+      "description": "使用實驗性的腳本以優化效能",
+      "name": "效能優化 [Beta]"
     },
     "picture-in-picture": {
       "description": "允許應用程式切換至子母畫面模式",
@@ -765,7 +765,7 @@
       "prompt": {
         "lastfm": {
           "api-key": "Last.fm API 金鑰",
-          "api-secret": "Last.fm API 金鑰"
+          "api-secret": "Last.fm API 密鑰"
         },
         "listenbrainz": {
           "token": {
@@ -849,7 +849,7 @@
             "label": "無",
             "tooltip": "沒有偏好的提供者"
           },
-          "tooltip": "選擇要使用的預設提供者"
+          "tooltip": "選擇預設的歌詞提供者"
         },
         "romanization": {
           "label": "羅馬拼音化歌詞",
@@ -884,7 +884,7 @@
       "name": "觸控列 (Touchbar) 支援"
     },
     "transparent-player": {
-      "description": "讓應用程式視窗變為透明",
+      "description": "讓視窗背景變為透明糢糊",
       "menu": {
         "opacity": {
           "label": "不透明度",
@@ -893,16 +893,16 @@
           }
         },
         "type": {
-          "label": "類型",
+          "label": "樣式",
           "submenu": {
-            "acrylic": "壓克力",
-            "mica": "雲母",
+            "acrylic": "壓克力(Acrylic)",
+            "mica": "雲母(Mica)",
             "none": "無",
-            "tabbed": "分頁式"
+            "tabbed": "分頁式(Tabbed)"
           }
         }
       },
-      "name": "透明撥放器"
+      "name": "透明糢糊效果"
     },
     "tuna-obs": {
       "description": "與 OBS 的 Tuna 外掛連線",
@@ -940,9 +940,9 @@
       }
     },
     "visualizer": {
-      "description": "新增一個視覺化音樂效果",
+      "description": "在播放器新增視覺化效果",
       "menu": {
-        "visualizer-type": "視覺化效果類型"
+        "visualizer-type": "視覺化效果樣式"
       },
       "name": "視覺化效果"
     }
