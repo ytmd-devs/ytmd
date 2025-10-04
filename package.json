@@ -57,7 +57,8 @@
       "@malept/flatpak-bundler@0.4.0": "patches/@malept__flatpak-bundler@0.4.0.patch",
       "kuromoji@0.1.2": "patches/kuromoji@0.1.2.patch",
       "file-type@16.5.4": "patches/file-type@16.5.4.patch",
-      "electron-is@3.0.0": "patches/electron-is@3.0.0.patch"
+      "electron-is@3.0.0": "patches/electron-is@3.0.0.patch",
+      "mdui@2.1.4": "patches/mdui@2.1.4.patch"
     },
     "neverBuiltDependencies": []
   },
@@ -115,6 +116,7 @@
     "kuroshiro": "1.2.0",
     "kuroshiro-analyzer-kuromoji": "1.1.0",
     "lazy-var": "2.2.2",
+    "mdui": "2.1.4",
     "node-html-parser": "7.0.1",
     "node-id3": "0.2.9",
     "peerjs": "1.5.5",

@@ -8,6 +8,37 @@ import is from 'electron-is';
 
 import * as config from './config';
 
+import mduiStyleSheet from "@assets/mdui.css?inline"
+
+contextBridge.exposeInMainWorld('litIssuedWarnings', new Set([
+  "Lit is in dev mode. Not recommended for production! See https://lit.dev/msg/dev-mode for more information.",
+  "Shadow DOM is being polyfilled via `ShadyDOM` but the `polyfill-support` module has not been loaded. See https://lit.dev/msg/polyfill-support-missing for more information."
+]))
+
+new MutationObserver((mutations, observer) => {
+  outer: for (const mutation of mutations) {
+    for (const node of mutation.addedNodes) {
+      const elem = node as HTMLElement;
+      if (elem.tagName !== 'SCRIPT') continue;
+
+      const script = elem as HTMLScriptElement;
+      if (
+        !script.getAttribute('src')?.endsWith('custom-elements-es5-adapter.js')
+      )
+        continue;
+
+      script.remove();
+
+      const styleSheet = new CSSStyleSheet();
+      styleSheet.replaceSync(mduiStyleSheet);
+      document.adoptedStyleSheets.push(styleSheet);
+
+      observer.disconnect();
+      break outer;
+    }
+  }
+}).observe(document, { subtree: true, childList: true });
+
 import {
   forceLoadPreloadPlugin,
   forceUnloadPreloadPlugin,

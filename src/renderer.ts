@@ -1,5 +1,10 @@
 import i18next from 'i18next';
 
+import 'mdui';
+import { setTheme } from 'mdui/functions/setTheme.js';
+
+setTheme('dark')
+
 import { startingPages } from './providers/extracted-data';
 import { setupSongInfo } from './providers/song-info-front';
 import {
@@ -88,9 +93,9 @@ async function onApiLoaded() {
   window.ipcRenderer.on('ytmd:seek-by', (_, t: number) => api!.seekBy(t));
   window.ipcRenderer.on('ytmd:shuffle', () => {
     document
-      .querySelector<
-        HTMLElement & { queue: { shuffle: () => void } }
-      >('ytmusic-player-bar')
+      .querySelector<HTMLElement & { queue: { shuffle: () => void } }>(
+        'ytmusic-player-bar',
+      )
       ?.queue.shuffle();
   });
 
@@ -120,17 +125,17 @@ async function onApiLoaded() {
   window.ipcRenderer.on('ytmd:switch-repeat', (_, repeat = 1) => {
     for (let i = 0; i < repeat; i++) {
       document
-        .querySelector<
-          HTMLElement & { onRepeatButtonClick: () => void }
-        >('ytmusic-player-bar')
+        .querySelector<HTMLElement & { onRepeatButtonClick: () => void }>(
+          'ytmusic-player-bar',
+        )
         ?.onRepeatButtonClick();
     }
   });
   window.ipcRenderer.on('ytmd:update-volume', (_, volume: number) => {
     document
-      .querySelector<
-        HTMLElement & { updateVolume: (volume: number) => void }
-      >('ytmusic-player-bar')
+      .querySelector<HTMLElement & { updateVolume: (volume: number) => void }>(
+        'ytmusic-player-bar',
+      )
       ?.updateVolume(volume);
   });
 
@@ -169,9 +174,9 @@ async function onApiLoaded() {
 
   window.ipcRenderer.on('ytmd:toggle-mute', (_) => {
     document
-      .querySelector<
-        HTMLElement & { onVolumeClick: () => void }
-      >('ytmusic-player-bar')
+      .querySelector<HTMLElement & { onVolumeClick: () => void }>(
+        'ytmusic-player-bar',
+      )
       ?.onVolumeClick();
   });
 
@@ -388,10 +393,14 @@ async function onApiLoaded() {
     const style = document.createElement('style');
     style.textContent = `
       ytmusic-player-bar[is-mweb-player-bar-modernization-enabled] .middle-controls-buttons.ytmusic-player-bar, #like-button-renderer {
-        display: ${likeButtonsOptions === 'hide' ? 'none' : 'inherit'} !important;
+        display: ${
+          likeButtonsOptions === 'hide' ? 'none' : 'inherit'
+        } !important;
       }
       ytmusic-player-bar[is-mweb-player-bar-modernization-enabled] .middle-controls.ytmusic-player-bar {
-        justify-content: ${likeButtonsOptions === 'hide' ? 'flex-start' : 'space-between'} !important;
+        justify-content: ${
+          likeButtonsOptions === 'hide' ? 'flex-start' : 'space-between'
+        } !important;
       }`;
 
     document.head.appendChild(style);
