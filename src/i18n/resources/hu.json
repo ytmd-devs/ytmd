@@ -342,11 +342,23 @@
     },
     "auth-proxy-adapter": {
       "menu": {
+        "disable": "Proxy adapder kikapcsolása",
+        "enable": "Proxy adapter bekapcsolása",
         "hostname": {
           "label": "Gazdanév"
         },
         "port": {
           "label": "Port"
+        }
+      },
+      "prompt": {
+        "hostname": {
+          "label": "Adjon meg egy hosztnevet a lokális proxy szerverhez (újraindítást igényel):",
+          "title": "Proxy hosztnév"
+        },
+        "port": {
+          "label": "Adjon meg egy portot a lokális proxy szerverhez (újraindátást igényel):",
+          "title": "Proxy Port"
         }
       }
     },
