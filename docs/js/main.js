@@ -1,4 +1,6 @@
-/* eslint-disable */
+/** biome-ignore-all lint/complexity/noUselessThisAlias: Idk why people want to do this */
+/** biome-ignore-all lint/correctness/noUndeclaredVariables: ScrollReveal is declared in a script in index.html*/
+/** biome-ignore-all lint/suspicious/noAssignInExpressions: Ignore this one */
 
 // Constants
 const element = document.documentElement;
@@ -64,9 +66,9 @@ bubbleCanvas.prototype.update = function () {
   t.posX += (t.mouseX / (t.staticity / t.magnetism) - t.posX) / t.smoothFactor;
   t.posY += (t.mouseY / (t.staticity / t.magnetism) - t.posY) / t.smoothFactor;
   if (
-    t.translateY + t.posY < 0
-    || t.translateX + t.posX < 0
-    || t.translateX + t.posX > t.canvasWidth
+    t.translateY + t.posY < 0 ||
+    t.translateX + t.posX < 0 ||
+    t.translateX + t.posX > t.canvasWidth
   ) {
     t.randomise();
     t.translateY = t.canvasHeight;
