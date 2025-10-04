@@ -196,6 +196,36 @@ export const onMenu = async ({
       },
     },
     {
+      label: t('plugins.downloader.menu.yt-dlp-location-nice'),
+      click: async () => {
+        const ytDlpPathValue = typeof config.advanced?.ytDlpPath === 'string' ? config.advanced.ytDlpPath : '';
+        const promptRes = await prompt({
+          title: t('plugins.downloader.menu.yt-dlp-location-title'),
+          label: t('plugins.downloader.menu.yt-dlp-location-label'),
+          value: ytDlpPathValue,
+          inputAttrs: {
+            type: 'text',
+            placeholder: 'C:/yt-dlp.exe or /usr/bin/yt-dlp',
+          },
+          type: 'input',
+          ...promptOptions(),
+        }).catch(console.error);
+        if (typeof promptRes === 'string') {
+          setConfig({
+            advanced: {
+              ...(config.advanced || {}),
+              ytDlpPath: promptRes,
+            },
+          });
+          dialog.showMessageBox({
+            type: 'info',
+            message: t('plugins.downloader.menu.yt-dlp-location-saved'),
+            detail: promptRes,
+          });
+        }
+      },
+    },
+    {
       label: t('plugins.downloader.menu.presets'),
       submenu: Object.keys(DefaultPresetList).map((preset) => ({
         label: preset,
