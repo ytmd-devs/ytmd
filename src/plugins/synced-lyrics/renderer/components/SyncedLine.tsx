@@ -27,7 +27,30 @@ interface SyncedLineProps {
 }
 
 // small helpers
+const END_DELAY_SECONDS = 1.0; // end delay at line end
 const WORD_ANIM_DELAY_STEP = 0.05; // seconds per word index
+
+const computeEndDelayMs = (totalMs: number): number => {
+  const LONG_MS = 3000;
+  const SHORT_MS = 1000;
+  const SHORT_SECONDS = END_DELAY_SECONDS / 2;
+  const SHORT_FRACTION = 0.8;
+  const SHORT_MIN_GAP_MS = Math.round(SHORT_SECONDS * 1000 * 0.3);
+
+  if (totalMs > LONG_MS) {
+    return Math.round(END_DELAY_SECONDS * 1000);
+  }
+  if (totalMs >= SHORT_MS) {
+    const ratio = (totalMs - SHORT_MS) / (LONG_MS - SHORT_MS);
+    const endDelayDelta = (END_DELAY_SECONDS - SHORT_SECONDS) * ratio;
+    const endDelaySeconds = SHORT_SECONDS + endDelayDelta;
+    return Math.round(endDelaySeconds * 1000);
+  }
+  return Math.min(
+    Math.round(totalMs * SHORT_FRACTION),
+    totalMs - SHORT_MIN_GAP_MS,
+  );
+};
 
 const seekToMs = (ms: number) => {
   const precise = config()?.preciseTiming ?? false;
@@ -71,23 +94,14 @@ const EmptyLine = (props: SyncedLineProps) => {
 
     if (stepCount === 1) return 0;
 
-    const computeEarlyCut = (t: number) => {
-      if (t > 3000) return 1000;
-      if (t >= 1000) {
-        const ratio = (t - 1000) / 2000;
-        const addend = ratio * 500;
-        return 500 + addend;
-      }
-      return Math.min(t * 0.8, t - 150);
-    };
-    const earlyCut = computeEarlyCut(total);
+    const endDelayMs = computeEndDelayMs(total);
 
     const effectiveTotal =
       total <= 1000
-        ? total - earlyCut
+        ? total - endDelayMs
         : precise
-          ? total - earlyCut
-          : Math.round((total - earlyCut) / 1000) * 1000;
+          ? total - endDelayMs
+          : Math.round((total - endDelayMs) / 1000) * 1000;
 
     if (effectiveTotal <= 0) return 0;
 
