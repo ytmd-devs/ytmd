@@ -57,6 +57,12 @@ const EmptyLine = (props: SyncedLineProps) => {
     return Array.isArray(defaultText) ? defaultText : [defaultText];
   });
 
+  const isCumulative = createMemo(() => {
+    const arr = states();
+    if (arr.length <= 1) return false;
+    return arr.every((value) => value === arr[0]);
+  });
+
   const index = createMemo(() => {
     const progress = currentTime() - props.line.timeInMs;
     const total = props.line.duration;
@@ -144,23 +150,42 @@ const EmptyLine = (props: SyncedLineProps) => {
               </span>
             </span>
           ) : (
-            <For each={states()}>
-              {(text, i) => (
+            <Show
+              fallback={
                 <span
                   class={`fade ${
                     shouldRenderPlaceholder()
-                      ? i() <= index()
-                        ? isHighlighted()
-                          ? 'show'
-                          : 'placeholder'
-                        : 'dim'
+                      ? isHighlighted()
+                        ? 'show'
+                        : 'placeholder'
                       : ''
                   }`}
                 >
-                  <yt-formatted-string text={{ runs: [{ text }] }} />
+                  <yt-formatted-string
+                    text={{ runs: [{ text: states()[index()] ?? '' }] }}
+                  />
                 </span>
-              )}
-            </For>
+              }
+              when={isCumulative()}
+            >
+              <For each={states()}>
+                {(text, i) => (
+                  <span
+                    class={`fade ${
+                      shouldRenderPlaceholder()
+                        ? i() <= index()
+                          ? isHighlighted()
+                            ? 'show'
+                            : 'placeholder'
+                          : 'dim'
+                        : ''
+                    }`}
+                  >
+                    <yt-formatted-string text={{ runs: [{ text }] }} />
+                  </span>
+                )}
+              </For>
+            </Show>
           )}
         </div>
       </div>
