@@ -19,7 +19,9 @@ interface PlayerApi {
 export const renderer = ({ ipc }: RendererContext<Record<string, unknown>>) => {
   let playerApi: PlayerApi | null = null;
 
-  (window as { onPlayerApiReady: (callback: (api: PlayerApi) => void) => void }).onPlayerApiReady((api: PlayerApi) => {
+  (
+    window as { onPlayerApiReady: (callback: (api: PlayerApi) => void) => void }
+  ).onPlayerApiReady((api: PlayerApi) => {
     playerApi = api;
   });
 
