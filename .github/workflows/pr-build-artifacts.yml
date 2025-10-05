@@ -12,7 +12,7 @@ jobs:
     name: Check if user has write access
     runs-on: ubuntu-latest
     outputs:
-      has-write-access: ${{ steps.check.outputs.has-write-access }}
+      has-write-access: ${{ steps.check.outputs.require-result }}
     steps:
       - name: Check user permission
         id: check
