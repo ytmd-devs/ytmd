@@ -86,6 +86,10 @@ const EmptyLine = (props: SyncedLineProps) => {
     return arr.every((value) => value === arr[0]);
   });
 
+  const endDelayMsValue = createMemo(() =>
+    computeEndDelayMs(props.line.duration),
+  );
+
   const index = createMemo(() => {
     const progress = currentTime() - props.line.timeInMs;
     const total = props.line.duration;
@@ -94,7 +98,7 @@ const EmptyLine = (props: SyncedLineProps) => {
 
     if (stepCount === 1) return 0;
 
-    const endDelayMs = computeEndDelayMs(total);
+    const endDelayMs = endDelayMsValue();
 
     const effectiveTotal =
       total <= 1000
