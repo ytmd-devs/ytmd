@@ -884,8 +884,10 @@
       "name": "TouchBar"
     },
     "transparent-player": {
+      "description": "Maakt het app venster doorzichtig",
       "menu": {
         "opacity": {
+          "label": "Dekking",
           "submenu": {
             "percent": "{{opacity}}%"
           }
@@ -899,7 +901,8 @@
             "tabbed": "Tabbed"
           }
         }
-      }
+      },
+      "name": "Doorzichtige muziek speler"
     },
     "tuna-obs": {
       "description": "Integratie met OBS's plug-in Tuna",
