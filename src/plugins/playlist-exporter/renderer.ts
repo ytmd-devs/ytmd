@@ -1,9 +1,25 @@
 import type { RendererContext } from '../../types/contexts';
 
-export const renderer = ({ ipc }: RendererContext<any>) => {
-  let playerApi: any = null;
+interface VideoDetails {
+  title?: string;
+  author?: string;
+  album?: string;
+  lengthSeconds?: number;
+  videoId?: string;
+}
 
-  (window as any).onPlayerApiReady((api: any) => {
+interface QueueItem {
+  videoDetails?: VideoDetails;
+}
+
+interface PlayerApi {
+  getQueue: () => QueueItem[];
+}
+
+export const renderer = ({ ipc }: RendererContext<Record<string, unknown>>) => {
+  let playerApi: PlayerApi | null = null;
+
+  (window as { onPlayerApiReady: (callback: (api: PlayerApi) => void) => void }).onPlayerApiReady((api: PlayerApi) => {
     playerApi = api;
   });
 
@@ -19,7 +35,7 @@ export const renderer = ({ ipc }: RendererContext<any>) => {
       return;
     }
 
-    const playlistData = queue.map((song: any) => ({
+    const playlistData = queue.map((song: QueueItem) => ({
       title: song.videoDetails?.title,
       artist: song.videoDetails?.author,
       album: song.videoDetails?.album,

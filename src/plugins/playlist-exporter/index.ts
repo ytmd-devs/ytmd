@@ -1,6 +1,7 @@
-import { createPlugin } from '../../utils';
 import { backend } from './backend';
 import { renderer } from './renderer';
+
+import { createPlugin } from '../../utils';
 
 export default createPlugin({
   name: () => 'Playlist Exporter',
