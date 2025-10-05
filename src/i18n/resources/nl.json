@@ -884,7 +884,7 @@
       "name": "TouchBar"
     },
     "transparent-player": {
-      "description": "Maakt het app venster doorzichtig",
+      "description": "Maakt de applicatiescherm doorzichtbaar",
       "menu": {
         "opacity": {
           "label": "Dekking",
