@@ -895,14 +895,14 @@
         "type": {
           "label": "Typ",
           "submenu": {
-            "acrylic": "Acrylic",
+            "acrylic": "Acryl",
             "mica": "Mica",
             "none": "Nichts",
-            "tabbed": "Tabbed"
+            "tabbed": "Mit Registerkarten"
           }
         }
       },
-      "name": "Transparent Player"
+      "name": "Transparenter Player"
     },
     "tuna-obs": {
       "description": "Integration mit dem OBS-Plugin Tuna",
