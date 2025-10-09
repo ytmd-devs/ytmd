@@ -75,13 +75,13 @@ this [wiki page](https://wiki.archlinux.org/index.php/Arch_User_Repository#Insta
 You can install the app using Homebrew (see the [cask definition](https://github.com/th-ch/homebrew-youtube-music)):
 
 ```bash
-brew install pear-devs/pear-desktop/youtube-music
+brew install pear-devs/pear-desktop
 ```
 
 If you install the app manually and get an error "is damaged and can’t be opened." when launching the app, run the following in the Terminal:
 
 ```bash
-/usr/bin/xattr -cr /Applications/YouTube\ Music.app
+/usr/bin/xattr -cr /Applications/Pear\ Desktop.app
 ```
 
 ### Windows
@@ -125,7 +125,7 @@ Some predefined themes are available in https://github.com/kerichdev/themes-for-
 
 ```bash
 git clone https://github.com/pear-devs/pear-desktop
-cd youtube-music
+cd pear-desktop
 pnpm install --frozen-lockfile
 pnpm dev
 ```
@@ -219,7 +219,7 @@ import { createPlugin } from '@/utils';
 
 export default createPlugin({
   name: 'Plugin Label',
-  restartNeeded: true, // if value is true, ytmusic will show a restart dialog
+  restartNeeded: true, // if value is true, pear-desktop will show a restart dialog
   config: {
     enabled: false,
   }, // your custom config
@@ -281,7 +281,7 @@ Uses [Playwright](https://playwright.dev/) to test the app.
 
 ## License
 
-MIT © [th-ch](https://github.com/pear-devs/pear-desktop)
+MIT © [pear-devs](https://github.com/pear-devs/pear-desktop)
 
 ## FAQ
 
