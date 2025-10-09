@@ -462,6 +462,7 @@
           "label": "Teks status",
           "submenu": {
             "artist": "Sedang mendengar {artist}",
+            "title": "Sedang mendengar {tajuk lagu}",
             "youtube-music": "Mendengar YouTube Music"
           }
         }
@@ -498,6 +499,7 @@
           "converting": "Menukarkan…",
           "done": "Selesai: {{filePath}}",
           "download-info": "Memuat turun {{artist}} - {{title}} [{{videoId}}",
+          "download-progress": "Muat turun: {{peratus}}%",
           "downloading": "Memuat turun…",
           "downloading-counter": "Memuat turun {{current}}/{{total}}…",
           "downloading-playlist": "Memuat turun senarai main \"{{playlistTitle}}\" - {{playlistSize}} lagu ({{playlistId}})",
@@ -508,26 +510,42 @@
           "playlist-has-only-one-song": "Senarai main hanya mempunyai satu item, memuat turunnya terus",
           "playlist-id-not-found": "ID senarai main tidak dijumpai",
           "playlist-is-empty": "Senarai main kosong",
+          "playlist-is-mix-or-private": "Ralat dalam mendapatkan senarai info main: pastikan ia tidak peribadi atau di dalam senarai main \"Campuran untuk anda\"\n\n{{ralat}}",
+          "preparing-file": "Menyediakan fail…",
           "saving": "Menyimpan…",
           "trying-to-get-playlist-id": "Mencuba untuk mendapatkan ID senarai main: {{playlistId}}",
-          "video-id-not-found": "Video tidak dijumpai"
+          "video-id-not-found": "Video tidak dijumpai",
+          "writing-id3": "Sedang menulis tag ID3…"
         }
       },
       "description": "Memuat turun audio MP3 / sumber terus dari antara muka",
       "menu": {
         "choose-download-folder": "Pilih folder muat turun",
         "download-finish-settings": {
+          "label": "Muat turun selesai",
           "prompt": {
+            "last-percent": "Selepas peratus x",
+            "last-seconds": "Saat x terakhir",
             "title": "Konfigurasikan masa untuk memuat turun"
           },
           "submenu": {
+            "advanced": "Lanjutan",
             "enabled": "Dinyalakan",
             "mode": "Mod masa",
             "percent": "Peratus",
             "seconds": "Saat"
           }
         },
-        "download-playlist": "Muat turun senarai main"
+        "download-playlist": "Muat turun senarai main",
+        "presets": "Pratetap",
+        "skip-existing": "Langkau fail sedia ada"
+      },
+      "name": "Pemuat turun",
+      "renderer": {
+        "can-not-update-progress": "Tidak boleh memuat turun perkembangan"
+      },
+      "templates": {
+        "button": "Memuat turun"
       }
     },
     "lumiastream": {
