@@ -1,21 +1,20 @@
 <div align="center">
 
-# YTMD
+# :pear: Pear Desktop
 
-[![GitHub release](https://img.shields.io/github/release/th-ch/youtube-music.svg?style=for-the-badge&logo=youtube-music)](https://github.com/th-ch/youtube-music/releases/)
-[![GitHub license](https://img.shields.io/github/license/th-ch/youtube-music.svg?style=for-the-badge)](https://github.com/th-ch/youtube-music/blob/master/license)
-[![Formatted with Biome](https://img.shields.io/badge/Formatted_with-Biome-60a5fa?style=for-the-badge&logo=biome)](https://biomejs.dev/)
-[![Build status](https://img.shields.io/github/actions/workflow/status/th-ch/youtube-music/build.yml?branch=master&style=for-the-badge&logo=youtube-music)](https://GitHub.com/th-ch/youtube-music/releases/)
-[![GitHub All Releases](https://img.shields.io/github/downloads/th-ch/youtube-music/total?style=for-the-badge&logo=youtube-music)](https://GitHub.com/th-ch/youtube-music/releases/)
+[![GitHub release](https://img.shields.io/github/release/pear-devs/pear-desktop.svg?style=for-the-badge&logo=youtube-music)](https://github.com/pear-devs/pear-desktop/releases/)
+[![GitHub license](https://img.shields.io/github/license/pear-devs/pear-desktop.svg?style=for-the-badge)](https://github.com/pear-devs/pear-desktop/blob/master/license)
+[![eslint code style](https://img.shields.io/badge/code_style-eslint-5ed9c7.svg?style=for-the-badge)](https://github.com/pear-devs/pear-desktop/blob/master/eslint.config.mjs)
+[![Build status](https://img.shields.io/github/actions/workflow/status/pear-devs/pear-desktop/build.yml?branch=master&style=for-the-badge&logo=youtube-music)](https://GitHub.com/pear-devs/pear-desktop/releases/)
+[![GitHub All Releases](https://img.shields.io/github/downloads/pear-devs/pear-desktop/total?style=for-the-badge&logo=youtube-music)](https://GitHub.com/pear-devs/pear-desktop/releases/)
 [![AUR](https://img.shields.io/aur/version/youtube-music-bin?color=blueviolet&style=for-the-badge&logo=youtube-music)](https://aur.archlinux.org/packages/youtube-music-bin)
-[![Known Vulnerabilities](https://snyk.io/test/github/th-ch/youtube-music/badge.svg)](https://snyk.io/test/github/th-ch/youtube-music)
+[![Known Vulnerabilities](https://snyk.io/test/github/pear-devs/pear-desktop/badge.svg)](https://snyk.io/test/github/pear-devs/pear-desktop)
 
 </div>
 
-![Screenshot](web/screenshot.png "Screenshot")
+<!--![Screenshot](web/screenshot.png "Screenshot")-->
 
-- Native look & feel extension, aims at keeping the original interface
-  one click
+- Native look & feel extension
 
 > [!IMPORTANT] 
 > ⚠️ Disclaimer
@@ -63,7 +62,7 @@ You can help with translation on [Hosted Weblate](https://hosted.weblate.org/pro
 
 ## Download
 
-You can check out the [latest release](https://github.com/th-ch/youtube-music/releases/latest) to quickly find the
+You can check out the [latest release](https://github.com/pear-devs/pear-desktop/releases/latest) to quickly find the
 latest version.
 
 ### Arch Linux
@@ -76,7 +75,7 @@ this [wiki page](https://wiki.archlinux.org/index.php/Arch_User_Repository#Insta
 You can install the app using Homebrew (see the [cask definition](https://github.com/th-ch/homebrew-youtube-music)):
 
 ```bash
-brew install th-ch/youtube-music/youtube-music
+brew install pear-devs/pear-desktop/youtube-music
 ```
 
 If you install the app manually and get an error "is damaged and can’t be opened." when launching the app, run the following in the Terminal:
@@ -108,7 +107,7 @@ winget install th-ch.YouTubeMusic
 
 #### How to install without a network connection? (in Windows)
 
-- Download the `*.nsis.7z` file for _your device architecture_ in [release page](https://github.com/th-ch/youtube-music/releases/latest).
+- Download the `*.nsis.7z` file for _your device architecture_ in [release page](https://github.com/pear-devs/pear-desktop/releases/latest).
   - `x64` for 64-bit Windows
   - `ia32` for 32-bit Windows
   - `arm64` for ARM64 Windows
@@ -125,7 +124,7 @@ Some predefined themes are available in https://github.com/kerichdev/themes-for-
 ## Dev
 
 ```bash
-git clone https://github.com/th-ch/youtube-music
+git clone https://github.com/pear-devs/pear-desktop
 cd youtube-music
 pnpm install --frozen-lockfile
 pnpm dev
@@ -282,7 +281,7 @@ Uses [Playwright](https://playwright.dev/) to test the app.
 
 ## License
 
-MIT © [th-ch](https://github.com/th-ch/youtube-music)
+MIT © [th-ch](https://github.com/pear-devs/pear-desktop)
 
 ## FAQ
 
