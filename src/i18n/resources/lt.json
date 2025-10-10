@@ -150,6 +150,11 @@
           "visual-tweaks": {
             "label": "Vizualiniai patobulinimai",
             "submenu": {
+              "custom-window-title": {
+                "prompt": {
+                  "placeholder": "Pavyzdys: YouTube Music"
+                }
+              },
               "like-buttons": {
                 "default": "Numatytasis",
                 "force-show": "Priversti rodyti",
@@ -357,6 +362,10 @@
       },
       "templates": {
         "title": "Atidaryti antraščių parinkiklį"
+      },
+      "toast": {
+        "caption-changed": "Subtitrai pakeisti į {{language}}",
+        "caption-disabled": "Subtitrai išjungti"
       }
     },
     "compact-sidebar": {
@@ -385,6 +394,17 @@
         }
       }
     },
+    "custom-output-device": {
+      "menu": {
+        "device-selector": "Pasirinkti įrenginį"
+      },
+      "name": "Pasirinktinas išvesties įrenginys",
+      "prompt": {
+        "device-selector": {
+          "title": "Pasirinkite išvesties įrenginį"
+        }
+      }
+    },
     "disable-autoplay": {
       "description": "Pradeda dainą pristabdytame rėžime",
       "menu": {
@@ -408,7 +428,14 @@
         "hide-duration-left": "Slėpti kiek liko laiko",
         "hide-github-button": "Slėpti \"GitHub\" nuorodos mygtuką",
         "play-on-youtube-music": "Leisti ant \"Youtube Music\"",
-        "set-inactivity-timeout": "Nustatyti neveiklumo laiką"
+        "set-inactivity-timeout": "Nustatyti neveiklumo laiką",
+        "set-status-display-type": {
+          "submenu": {
+            "artist": "Klausosi {artist]",
+            "title": "Klausosi {song title}",
+            "youtube-music": "Klausosi Youtube Music"
+          }
+        }
       },
       "name": "\"Discord\" Turtingas Buvimas (Rich Presence)",
       "prompt": {
@@ -464,6 +491,19 @@
       "description": "Atsisiunčia MP3 / šaltinio garsą tiesiogiai iš sąsajos",
       "menu": {
         "choose-download-folder": "Pasirinkti atsisiuntimų aplanką",
+        "download-finish-settings": {
+          "prompt": {
+            "last-percent": "Po x procentų",
+            "last-seconds": "Paskutinės x sekundės",
+            "title": "Nustatyti kada atsisiųsti"
+          },
+          "submenu": {
+            "enabled": "Įjungtas",
+            "mode": "Laiko rėžimas",
+            "percent": "Procentai",
+            "seconds": "Sekundės"
+          }
+        },
         "download-playlist": "Atsisiųsti grojaraštį",
         "presets": "Iš anksto nustatyti nustatymai",
         "skip-existing": "Praleisti egzistuojančius failus"
@@ -474,6 +514,13 @@
       },
       "templates": {
         "button": "Atsisiųsti"
+      }
+    },
+    "equalizer": {
+      "menu": {
+        "presets": {
+          "label": "Išankstiniai nustatymai"
+        }
       }
     },
     "exponential-volume": {
@@ -512,7 +559,20 @@
         "unknown-user": "Nežinomas Naudotojas"
       },
       "menu": {
-        "click-to-copy-id": "Kopijuoti Vedėjo ID"
+        "click-to-copy-id": "Kopijuoti Vedėjo ID",
+        "permission": {
+          "all": "Leisti svečiams valdyti grojaraštį ir grotuvą",
+          "playlist": "Leisti svečiams valdyti grojaraštį"
+        },
+        "set-permission": "Keisti valdymo leidimus",
+        "status": {
+          "disconnected": "Atsijungta",
+          "guest": "Prisijungta kaip svečias"
+        }
+      },
+      "toast": {
+        "add-song-failed": "Nepavyko pridėti dainos",
+        "remove-song-failed": "Nepavyko pašalinti dainos"
       }
     },
     "navigation": {
@@ -607,6 +667,17 @@
       "description": "Leidžia pakeisti vaizdo kokybę su mygtuku ant vaizdo perdangos",
       "name": "Vaizdo Kokybės Pakeitėjas"
     },
+    "scrobbler": {
+      "menu": {
+        "scrobble-alternative-artist": "Naudoti alternatyvius atlikėjus",
+        "scrobble-alternative-title": "Naudoti alternatyvius pavadinimus"
+      },
+      "prompt": {
+        "lastfm": {
+          "api-key": "Last.fm API raktas"
+        }
+      }
+    },
     "shortcuts": {
       "description": "Leidžia nustatyti visuotinius atkūrimo sparčiuosius klavišus (paleisti / pristabdyti / kitą / ankstesnį) ir išjungti medijos OSD nepaisant medijos klavišų, įjungti Ctrl / CMD + F ieškoti, įjungti Linux MPRIS palaikymą medijos klavišams ir pasirinktinius sparčiuosius klavišus pažengusiems vartotojams.",
       "menu": {
@@ -639,6 +710,11 @@
       "name": "Rėmėjų blokuotojas"
     },
     "synced-lyrics": {
+      "description": "Teikia sinchronizuotus dainų žodžius, naudojantis tiekėjais kaip LRClib.",
+      "errors": {
+        "fetch": "⚠️\t\tĮvyko klaida gaunant dainos žodžius.\n\tPabandykite dar karta vėliau.",
+        "not-found": "⚠️ Šiai dainai nerasti dainos tekstai."
+      },
       "refetch-btn": {
         "fetching": "Gaunama...",
         "normal": "Atgauti dainos žodžius"

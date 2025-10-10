@@ -12,6 +12,8 @@ import type {
 import type { SongInfo } from './song-info';
 import type { VideoDataChanged } from '@/types/video-data-changed';
 
+const DATAUPDATED_FALLBACK_TIMEOUT_MS = 1500;
+
 let songInfo: SongInfo = {} as SongInfo;
 export const getSongInfo = () => songInfo;
 
@@ -253,12 +255,25 @@ export const setupSongInfo = (api: YoutubePlayer) => {
     );
 
   const waitingEvent = new Set<string>();
+  const waitingTimeouts = new Map<string, NodeJS.Timeout>();
+
+  const clearVideoTimeout = (videoId: string) => {
+    const timeoutId = waitingTimeouts.get(videoId);
+
+    if (timeoutId) {
+      clearTimeout(timeoutId);
+      waitingTimeouts.delete(videoId);
+    }
+  };
+
   // Name = "dataloaded" and abit later "dataupdated"
+  // Sometimes "dataupdated" is not fired, so we need to fallback to "dataloaded"
   api.addEventListener('videodatachange', (name, videoData) => {
     videoEventDispatcher(name, videoData);
 
     if (name === 'dataupdated' && waitingEvent.has(videoData.videoId)) {
       waitingEvent.delete(videoData.videoId);
+      clearVideoTimeout(videoData.videoId);
       sendSongInfo(videoData);
     } else if (name === 'dataloaded') {
       const video = document.querySelector<HTMLVideoElement>('video');
@@ -269,7 +284,18 @@ export const setupSongInfo = (api: YoutubePlayer) => {
         video?.addEventListener(status, playPausedHandlers[status]);
       }
 
+      clearVideoTimeout(videoData.videoId);
       waitingEvent.add(videoData.videoId);
+
+      const timeoutId = setTimeout(() => {
+        if (waitingEvent.has(videoData.videoId)) {
+          waitingEvent.delete(videoData.videoId);
+          waitingTimeouts.delete(videoData.videoId);
+          sendSongInfo(videoData);
+        }
+      }, DATAUPDATED_FALLBACK_TIMEOUT_MS);
+
+      waitingTimeouts.set(videoData.videoId, timeoutId);
     }
   });
 

@@ -421,6 +421,13 @@
         }
       }
     },
+    "custom-output-device": {
+      "description": "गानों के लिए एक कस्टम आउटपुट मीडिया डिवाइस कॉन्फ़िगर करें",
+      "menu": {
+        "device-selector": "डिवाइस चुनें"
+      },
+      "name": "अपनी पसंद का आउटपुट डिवाइस"
+    },
     "disable-autoplay": {
       "description": "गीत को \"रुके हुए \" मोड में शुरू करता है",
       "menu": {

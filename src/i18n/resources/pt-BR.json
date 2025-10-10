@@ -757,6 +757,7 @@
         "listenbrainz": {
           "token": "Insira o token de usuário ListenBrainz"
         },
+        "scrobble-alternative-artist": "Use artistas alternativos",
         "scrobble-alternative-title": "Usar títulos alternativos",
         "scrobble-other-media": "Scrobble outras mídias"
       },
@@ -842,6 +843,14 @@
           "label": "Deixa as letras perfeitamente sincronizadas",
           "tooltip": "Calcular até o milissegundo a exibição da próxima linha (pode ter um pequeno impacto no desempenho)"
         },
+        "preferred-provider": {
+          "label": "Provedor Preferido",
+          "none": {
+            "label": "Nenhum",
+            "tooltip": "Sem provedor preferido"
+          },
+          "tooltip": "Escolha o provedor padrão para uso"
+        },
         "romanization": {
           "label": "Letras romanizadas",
           "tooltip": "Se as letras estiverem em um idioma diferente, tente exibir uma versão latina."
@@ -873,6 +882,27 @@
     "touchbar": {
       "description": "Adiciona um widget TouchBar para usuários do macOS",
       "name": "TouchBar"
+    },
+    "transparent-player": {
+      "description": "Faz a janela do app transparente",
+      "menu": {
+        "opacity": {
+          "label": "Opacidade",
+          "submenu": {
+            "percent": "{{opacity}}%"
+          }
+        },
+        "type": {
+          "label": "Tipo",
+          "submenu": {
+            "acrylic": "Acrílico",
+            "mica": "Mica",
+            "none": "Nenhum",
+            "tabbed": "Em abas"
+          }
+        }
+      },
+      "name": "Player transparente"
     },
     "tuna-obs": {
       "description": "Integração com o plugin Tuna do OBS",

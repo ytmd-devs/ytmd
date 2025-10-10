@@ -136,13 +136,13 @@
           "start-at-login": "Iniciar com o sistema",
           "starting-page": {
             "label": "Página inicial",
-            "unset": "Limpar"
+            "unset": "Indefinida"
           },
           "tray": {
             "label": "Área de notificação",
             "submenu": {
               "disabled": "Desativada",
-              "enabled-and-hide-app": "Ativado e ocultar aplicação",
+              "enabled-and-hide-app": "Ativada e ocultar aplicação",
               "enabled-and-show-app": "Ativada e a mostrar aplicação",
               "play-pause-on-click": "Reprodução/Pausa ao clicar"
             }
@@ -421,6 +421,19 @@
         }
       }
     },
+    "custom-output-device": {
+      "description": "Configurar um dispositivo de saída padrão para as músicas",
+      "menu": {
+        "device-selector": "Selecionar dispositivo"
+      },
+      "name": "Dispositivo personalizado",
+      "prompt": {
+        "device-selector": {
+          "label": "Escolha o dispositivo de saída a utilizar",
+          "title": "Selecione o dispositivo de saída"
+        }
+      }
+    },
     "disable-autoplay": {
       "description": "Faz com que a música inicie no modo \"pausa\"",
       "menu": {
@@ -444,7 +457,15 @@
         "hide-duration-left": "Ocultar tempo restante",
         "hide-github-button": "Ocultar botão GitHub",
         "play-on-youtube-music": "Reproduzir em YouTube Music",
-        "set-inactivity-timeout": "Definir tempo de inatividade"
+        "set-inactivity-timeout": "Definir tempo de inatividade",
+        "set-status-display-type": {
+          "label": "Texto de estado",
+          "submenu": {
+            "artist": "A ouvir {artist}",
+            "title": "A ouvir {song title}",
+            "youtube-music": "A reproduzir YouTube Music"
+          }
+        }
       },
       "name": "Discord Rich Presence",
       "prompt": {
@@ -736,6 +757,7 @@
         "listenbrainz": {
           "token": "Introduza o 'token' do utilizador ListenBrainz"
         },
+        "scrobble-alternative-artist": "Utilizar artistas alternativos",
         "scrobble-alternative-title": "Utilizar títulos alternativos",
         "scrobble-other-media": "Scrobble de outros conteúdos"
       },
@@ -821,6 +843,14 @@
           "label": "Sincronização perfeita da entre letra e música",
           "tooltip": "Calcular, ao milissegundo, a exibição da linha seguinte (pode ter um pequeno impacto no desempenho)"
         },
+        "preferred-provider": {
+          "label": "Serviço preferencial",
+          "none": {
+            "label": "Nenhum",
+            "tooltip": "Nenhum serviço preferencial"
+          },
+          "tooltip": "Escolha o serviço padrão a utilizar"
+        },
         "romanization": {
           "label": "Letras romanas",
           "tooltip": "Se as letras estiverem num idioma diferente, tentar mostrar uma versão em latim"
@@ -852,6 +882,27 @@
     "touchbar": {
       "description": "Adicionar widget TouchBar para utilizadores macOS",
       "name": "TouchBar"
+    },
+    "transparent-player": {
+      "description": "Tornar janela da aplicação transparente",
+      "menu": {
+        "opacity": {
+          "label": "Opacidade",
+          "submenu": {
+            "percent": "{{opacity}}%"
+          }
+        },
+        "type": {
+          "label": "Tipo",
+          "submenu": {
+            "acrylic": "Acrílico",
+            "mica": "Mica",
+            "none": "Nada",
+            "tabbed": "Separadores"
+          }
+        }
+      },
+      "name": "Reprodutor transparente"
     },
     "tuna-obs": {
       "description": "Integração com o plugin Tuna do OBS",

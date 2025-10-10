@@ -421,6 +421,19 @@
         }
       }
     },
+    "custom-output-device": {
+      "description": "Einen maßgeschneiderten Ausgabemedienträger für Lieder einrichten",
+      "menu": {
+        "device-selector": "Gerät auswählen"
+      },
+      "name": "Benutzerdefiniertes Ausgabegerät",
+      "prompt": {
+        "device-selector": {
+          "label": "Wähle das Ausgabegerät, welches benutzt werden soll",
+          "title": "Wähle ein Ausgabegerät"
+        }
+      }
+    },
     "disable-autoplay": {
       "description": "Startet Lied im pausierten Modus",
       "menu": {
@@ -444,7 +457,15 @@
         "hide-duration-left": "Verbleibende Zeit verstecken",
         "hide-github-button": "Knopf mit Link zu GitHub ausblenden",
         "play-on-youtube-music": "Auf YouTube Music abspielen",
-        "set-inactivity-timeout": "Inaktivitätstimeout setzen"
+        "set-inactivity-timeout": "Inaktivitätstimeout setzen",
+        "set-status-display-type": {
+          "label": "Status Text",
+          "submenu": {
+            "artist": "Hört {artist} zu",
+            "title": "Du hörst {song title}",
+            "youtube-music": "Hört YouTube Music"
+          }
+        }
       },
       "name": "Discords Aktivitätsstatus",
       "prompt": {
@@ -736,6 +757,7 @@
         "listenbrainz": {
           "token": "ListenBrainz-Benutzer-Token eintragen"
         },
+        "scrobble-alternative-artist": "Benutze Alternative Künstler",
         "scrobble-alternative-title": "Nutze alternative Titel",
         "scrobble-other-media": "Andere Medien scrobbeln"
       },
@@ -821,6 +843,14 @@
           "label": "Den Songtext perfekt synchronisieren",
           "tooltip": "Auf die Millisekunde genau berechnen, wann die nächste Zeile angezeigt werden soll (Kann Einfluss auf die Leistung haben)"
         },
+        "preferred-provider": {
+          "label": "bevorzugter Anbieter",
+          "none": {
+            "label": "Nichts",
+            "tooltip": "Kein bevorzugter Anbieter"
+          },
+          "tooltip": "Standardanbieter auswählen"
+        },
         "romanization": {
           "label": "Lateinische Umschrift anzeigen",
           "tooltip": "Wenn der Liedtext in einer anderen Schrift ist, zeige nach Möglichkeit eine Version in lateinischer Schrift an."
@@ -855,7 +885,6 @@
     },
     "transparent-player": {
       "description": "Macht das Player-Fenster transparent",
-      "name": "Transparent Player",
       "menu": {
         "opacity": {
           "label": "Hintergrund-Sichtbarkeit",
@@ -866,12 +895,14 @@
         "type": {
           "label": "Typ",
           "submenu": {
-            "acrylic": "Acrylic",
+            "acrylic": "Acryl",
             "mica": "Mica",
-            "tabbed": "Tabbed"
+            "none": "Nichts",
+            "tabbed": "Mit Registerkarten"
           }
         }
-      }
+      },
+      "name": "Transparenter Player"
     },
     "tuna-obs": {
       "description": "Integration mit dem OBS-Plugin Tuna",

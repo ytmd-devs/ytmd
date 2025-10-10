@@ -20,7 +20,7 @@ const typeList = Object.values(MaterialType);
 export default createPlugin({
   name: () => t('plugins.transparent-player.name'),
   description: () => t('plugins.transparent-player.description'),
-  addedVersion: '3.10.x',
+  addedVersion: '3.11.x',
   restartNeeded: true,
   platform: Platform.Windows,
   config: defaultConfig,

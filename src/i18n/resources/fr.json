@@ -79,7 +79,7 @@
       }
     },
     "menu": {
-      "about": "À-propos",
+      "about": "À propos",
       "navigation": {
         "label": "Navigation",
         "submenu": {
@@ -94,7 +94,7 @@
         "label": "Paramètres",
         "submenu": {
           "advanced-options": {
-            "label": "Options avancée",
+            "label": "Options avancées",
             "submenu": {
               "auto-reset-app-cache": "Réinitialiser le cache de l'application au démarrage",
               "disable-hardware-acceleration": "Désactiver les accélérations matérielles",
@@ -189,7 +189,7 @@
         "new": "NOUVEAU"
       },
       "view": {
-        "label": "Vue",
+        "label": "Fenêtre",
         "submenu": {
           "force-reload": "Forcer l'actualisation",
           "reload": "Actualiser",
@@ -421,6 +421,19 @@
         }
       }
     },
+    "custom-output-device": {
+      "description": "Configurer un périphérique de sortie personnalisé pour les morceaux",
+      "menu": {
+        "device-selector": "Sélectionner un appareil"
+      },
+      "name": "Périphérique de sortie personnalisé",
+      "prompt": {
+        "device-selector": {
+          "label": "Choisissez le périphérique de sortie à utiliser",
+          "title": "Sélectionner le périphérique de sortie"
+        }
+      }
+    },
     "disable-autoplay": {
       "description": "Fait démarrer la chanson en mode \"pause\"",
       "menu": {
@@ -444,7 +457,15 @@
         "hide-duration-left": "Masquer la durée restante",
         "hide-github-button": "Masquer le bouton du lien GitHub",
         "play-on-youtube-music": "Jouer sur YouTube Music",
-        "set-inactivity-timeout": "Définir le délai d'inactivité"
+        "set-inactivity-timeout": "Définir le délai d'inactivité",
+        "set-status-display-type": {
+          "label": "Texte d'état",
+          "submenu": {
+            "artist": "Écoute {artiste}",
+            "title": "Écoute {titre de la chanson}",
+            "youtube-music": "Écoute YouTube Music"
+          }
+        }
       },
       "name": "Discord Rich Presence",
       "prompt": {
@@ -736,6 +757,7 @@
         "listenbrainz": {
           "token": "Entrer le token utilisateur de ListenBrainz"
         },
+        "scrobble-alternative-artist": "Utilisez d'autres artistes",
         "scrobble-alternative-title": "Utiliser des titres alternatifs",
         "scrobble-other-media": "Scrobbler d'autres médias"
       },
@@ -743,7 +765,7 @@
       "prompt": {
         "lastfm": {
           "api-key": "Clé API de Last.fm",
-          "api-secret": "API secret de Last.fm"
+          "api-secret": "Secret de l'API de Last.fm"
         },
         "listenbrainz": {
           "token": {
@@ -774,7 +796,7 @@
     },
     "skip-disliked-songs": {
       "description": "Passer les musiques que je n'aime pas",
-      "name": "Passer Chansons Déplaisantes"
+      "name": "Passer les chansons « Je n'aime pas »"
     },
     "skip-silences": {
       "description": "Ignorer automatiquement les sections de silence dans les chansons",
@@ -821,6 +843,14 @@
           "label": "Rend les paroles parfaitement synchronisées",
           "tooltip": "Calcul à la milliseconde près l'affichage de la ligne suivante (peut avoir un faible impact sur les performances)"
         },
+        "preferred-provider": {
+          "label": "Fournisseur privilégié",
+          "none": {
+            "label": "Aucun",
+            "tooltip": "Aucun fournisseur privilégié"
+          },
+          "tooltip": "Choisissez le fournisseur par défaut à utiliser"
+        },
         "romanization": {
           "label": "Romaniser les paroles",
           "tooltip": "Si les paroles sont dans une autre langue, essayez de les afficher dans une version latine."
@@ -852,6 +882,27 @@
     "touchbar": {
       "description": "Ajoute un widget TouchBar pour les utilisateurs de macOS",
       "name": "TouchBar"
+    },
+    "transparent-player": {
+      "description": "Rend la fenêtre de l'application transparente",
+      "menu": {
+        "opacity": {
+          "label": "Opacité",
+          "submenu": {
+            "percent": "{{opacity}}%"
+          }
+        },
+        "type": {
+          "label": "Type",
+          "submenu": {
+            "acrylic": "Acrylique",
+            "mica": "Mica",
+            "none": "Aucun",
+            "tabbed": "À onglets"
+          }
+        }
+      },
+      "name": "Lecteur transparent"
     },
     "tuna-obs": {
       "description": "Intégration avec le plugin OBS Tuna",

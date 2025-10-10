@@ -843,6 +843,14 @@
           "label": "Làm cho lời bài hát được đồng bộ hoàn hảo",
           "tooltip": "Tính toán chính xác đến mili giây thời gian hiển thị dòng tiếp theo (có thể có tác động nhỏ đến hiệu suất)"
         },
+        "preferred-provider": {
+          "label": "Nhà cung cấp ưa thích",
+          "none": {
+            "label": "Không có",
+            "tooltip": "Không có nhà cung cấp ưu thích"
+          },
+          "tooltip": "Chọn nhà cung cấp lời bài hát mặc định để sử dụng"
+        },
         "romanization": {
           "label": "Chuyển lời bài hát sang chữ Latin",
           "tooltip": "Nếu lời bài hát đang ở ngôn ngữ khác, thử hiển thị phiên bản bảng chữ cái La-tinh."

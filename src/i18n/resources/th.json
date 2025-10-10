@@ -421,6 +421,19 @@
         }
       }
     },
+    "custom-output-device": {
+      "description": "ตั้งค่าอุปกรณ์เสียงออกสำหรับเพลง",
+      "menu": {
+        "device-selector": "เลือกอุปกรณ์"
+      },
+      "name": "อุปกรณ์เสียงออกที่กำหนดเอง",
+      "prompt": {
+        "device-selector": {
+          "label": "เลือกอุปกรณ์เสียงออกที่ต้องการใช้",
+          "title": "เลือกอุปกรณ์เสียงออก"
+        }
+      }
+    },
     "disable-autoplay": {
       "description": "เริ่มเพลงในโหมดหยุดชั่วคราว",
       "menu": {
@@ -744,6 +757,7 @@
         "listenbrainz": {
           "token": "ใส่ user token ของ ListenBrainz"
         },
+        "scrobble-alternative-artist": "ใช้ชื่อศิลปินอื่น",
         "scrobble-alternative-title": "ใช้ชื่ออื่น",
         "scrobble-other-media": "บันทึกการเล่นสื่ออื่นๆ"
       },
@@ -829,6 +843,14 @@
           "label": "ให้เนื้อเพลงตรงกับเพลงเป๊ะๆ",
           "tooltip": "คำนวณมิลิวินาทีในการแสดงบรรทัดถัดไป (มีผลเล็กน้อยกับประสิทธิภาพการทำงาน)"
         },
+        "preferred-provider": {
+          "label": "ผู้ให้บริการที่ต้องการ",
+          "none": {
+            "label": "ไม่มี",
+            "tooltip": "ไม่มีผู้ให้บริการที่ต้องการ"
+          },
+          "tooltip": "เลือกผู้ให้บริการที่ต้องการใช้งาน"
+        },
         "romanization": {
           "label": "เนื้อเพลงตัวด้วยอักษรโรมัน",
           "tooltip": "ถ้าหากเนื้อเพลงอยู่ในภาษาอื่น ลองเปลี่ยนการแสดงผลโดยใช้เวอร์ชั่นลาติน"
@@ -860,6 +882,27 @@
     "touchbar": {
       "description": "เพิ่ม Widget บน TouchBar สำหรับผู้ใช้ macOS",
       "name": "TouchBar"
+    },
+    "transparent-player": {
+      "description": "ทำให้หน้าต่างของแอปโปร่งใส",
+      "menu": {
+        "opacity": {
+          "label": "ความทึบแสง",
+          "submenu": {
+            "percent": "{{opacity}}%"
+          }
+        },
+        "type": {
+          "label": "ประเภท",
+          "submenu": {
+            "acrylic": "อะคริลิก",
+            "mica": "ไมกา",
+            "none": "ไม่มี",
+            "tabbed": "Tabbed"
+          }
+        }
+      },
+      "name": "ที่เล่นเพลงโปร่งใส"
     },
     "tuna-obs": {
       "description": "ใช้งานร่วมกันกับปลั้กอิน Tuna บน OBS",

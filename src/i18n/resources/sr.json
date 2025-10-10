@@ -421,6 +421,19 @@
         }
       }
     },
+    "custom-output-device": {
+      "description": "Konfigurišite prilagođeni izlazni medijski uređaj za pesme",
+      "menu": {
+        "device-selector": "Izaberite uređaj"
+      },
+      "name": "Prilagođeni izlazni uređaj",
+      "prompt": {
+        "device-selector": {
+          "label": "Izaberite izlazni medijski uređaj koji će se koristiti",
+          "title": "Izaberite izlazni uređaj"
+        }
+      }
+    },
     "disable-autoplay": {
       "description": "Numere se pokreću u pauziranom režimu",
       "menu": {
@@ -444,7 +457,15 @@
         "hide-duration-left": "Sakrij preostalo vreme",
         "hide-github-button": "Sakrij dugme sa GitHub linkom",
         "play-on-youtube-music": "Reprodukuj na YouTube Muzici",
-        "set-inactivity-timeout": "Podesi tajmer za neaktivnost"
+        "set-inactivity-timeout": "Podesi tajmer za neaktivnost",
+        "set-status-display-type": {
+          "label": "Tekst statusa",
+          "submenu": {
+            "artist": "Slušanje {artist}",
+            "title": "Slušanje {song title}",
+            "youtube-music": "Slušanje YouTube muzike"
+          }
+        }
       },
       "name": "Discord Bogato Prisustvo",
       "prompt": {
@@ -736,6 +757,7 @@
         "listenbrainz": {
           "token": "Unesi korisnički žeton za ListenBrainz"
         },
+        "scrobble-alternative-artist": "Koristi alternativne izvođače",
         "scrobble-alternative-title": "Koristi alternativne naslove",
         "scrobble-other-media": "Učetkaj druge medije"
       },
@@ -821,6 +843,14 @@
           "label": "Učini da tekst pesme bude savršeno usklađen",
           "tooltip": "Izračunaj do milisekunde prikaz sledeće linije teksta (može malo uticati na učinak)"
         },
+        "preferred-provider": {
+          "label": "Preferirani dobavljač",
+          "none": {
+            "label": "Nijedan",
+            "tooltip": "Bez preferiranog dobavljača"
+          },
+          "tooltip": "Izaberite podrazumevanog dobavljača kog ćete koristiti"
+        },
         "romanization": {
           "label": "Romanizuj tekstove pesama",
           "tooltip": "Ako je tekst pesme na drugom jeziku, pokušaj da ga prikažeš u latiničnoj varijanti."
@@ -852,6 +882,27 @@
     "touchbar": {
       "description": "Dodaje dodatak dodirne trake za macOS korisnike",
       "name": "Dodirna Traka"
+    },
+    "transparent-player": {
+      "description": "Čini prozor aplikacije transparentnim",
+      "menu": {
+        "opacity": {
+          "label": "Neprozirnost",
+          "submenu": {
+            "percent": "{{opacity}}%"
+          }
+        },
+        "type": {
+          "label": "Tip",
+          "submenu": {
+            "acrylic": "Akrilan",
+            "mica": "Mika",
+            "none": "Nijedan",
+            "tabbed": "Kartice"
+          }
+        }
+      },
+      "name": "Transparentni plejer"
     },
     "tuna-obs": {
       "description": "Integracija sa OBS-ovim Tuna dodatkom",

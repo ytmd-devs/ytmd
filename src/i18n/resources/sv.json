@@ -86,7 +86,7 @@
           "copy-current-url": "Kopiera nuvarande länk",
           "go-back": "Gå tillbaka",
           "go-forward": "Gå framåt",
-          "quit": "Lämna",
+          "quit": "Avsluta",
           "restart": "Starta om appen"
         }
       },
@@ -421,6 +421,19 @@
         }
       }
     },
+    "custom-output-device": {
+      "description": "Konfigurera en anpassad utdataenhet för låtar",
+      "menu": {
+        "device-selector": "Välj enhet"
+      },
+      "name": "Anpassad Utdataenhet",
+      "prompt": {
+        "device-selector": {
+          "label": "Välj den utdataenhet som ska användas",
+          "title": "Välj utdataenhet"
+        }
+      }
+    },
     "disable-autoplay": {
       "description": "Starta låt i \"pausat\" läge",
       "menu": {
@@ -444,7 +457,15 @@
         "hide-duration-left": "Dölj återstående tid",
         "hide-github-button": "Dölj knapp för GitHub-länk",
         "play-on-youtube-music": "Spela på YouTube Music",
-        "set-inactivity-timeout": "Ställ in inaktivitetstid"
+        "set-inactivity-timeout": "Ställ in inaktivitetstid",
+        "set-status-display-type": {
+          "label": "Statusmeddelande",
+          "submenu": {
+            "artist": "Lyssnar på {artist}",
+            "title": "Lyssnar på {song title}",
+            "youtube-music": "Lyssnar på YouTube Music"
+          }
+        }
       },
       "name": "Discord Aktivitetsdelning",
       "prompt": {
@@ -736,6 +757,7 @@
         "listenbrainz": {
           "token": "Ange ListenBrainz användartoken"
         },
+        "scrobble-alternative-artist": "Använd alternativa artister",
         "scrobble-alternative-title": "Använd alternativa titlar",
         "scrobble-other-media": "Scrobbla annan media"
       },
@@ -821,6 +843,14 @@
           "label": "Gör låttexterna perfekt synkroniserade",
           "tooltip": "Beräkna till millisekunden när nästa rad ska visas (kan ha en liten inverkan på prestanda)"
         },
+        "preferred-provider": {
+          "label": "Föredragen leverantör",
+          "none": {
+            "label": "Ingen",
+            "tooltip": "Ingen föredragen leverantör"
+          },
+          "tooltip": "Välj standardleverantör att använda"
+        },
         "romanization": {
           "label": "Romanisera låttexter",
           "tooltip": "Om låttexterna är på ett annat språk, försök visa en latinsk version."
@@ -852,6 +882,27 @@
     "touchbar": {
       "description": "Lägger till en TouchBar-widget för macOS-användare",
       "name": "TouchBar"
+    },
+    "transparent-player": {
+      "description": "Gör appfönstret genomskinligt",
+      "menu": {
+        "opacity": {
+          "label": "Opacitet",
+          "submenu": {
+            "percent": "{{opacity}}%"
+          }
+        },
+        "type": {
+          "label": "Typ",
+          "submenu": {
+            "acrylic": "Akryl",
+            "mica": "Mica",
+            "none": "Ingen",
+            "tabbed": "Flikad"
+          }
+        }
+      },
+      "name": "Genomskinlig Spelare"
     },
     "tuna-obs": {
       "description": "Integration med OBS-pluginprogrammet Tuna",

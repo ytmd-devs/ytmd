@@ -843,6 +843,14 @@
           "label": "让滚动歌词完全同步",
           "tooltip": "以毫秒精度估算下句歌词的显示时间（可能对性能有小幅影响）"
         },
+        "preferred-provider": {
+          "label": "首选歌词源",
+          "none": {
+            "label": "无",
+            "tooltip": "没有首选的歌词源"
+          },
+          "tooltip": "选择默认要用的源"
+        },
         "romanization": {
           "label": "将歌词罗马化",
           "tooltip": "如果歌词以不同语言显示，试着展示拉丁字母版本。"

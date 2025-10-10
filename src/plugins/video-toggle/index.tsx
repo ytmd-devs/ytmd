@@ -314,38 +314,37 @@ export default createPlugin({
       };
 
       if (config.mode !== 'native' && config.mode != 'disabled') {
-        document
-          .querySelector<HTMLVideoElement>('#player')
-          ?.prepend(switchButtonContainer);
+        setTimeout(() => {
+          const playerSelector =
+            document.querySelector<HTMLVideoElement>('#player');
+          if (!playerSelector) return;
 
-        setVideoState(!config.hideVideo);
-        forcePlaybackMode();
-        // Fix black video
-        if (video) {
-          video.style.height = 'auto';
-        }
-
-        video?.addEventListener('ytmd:src-changed', videoStarted);
-
-        observeThumbnail();
-        videoStarted();
-
-        switch (config.align) {
-          case 'right': {
-            switchButtonContainer.style.justifyContent = 'flex-end';
-            return;
+          playerSelector.prepend(switchButtonContainer);
+          setVideoState(!config.hideVideo);
+          forcePlaybackMode();
+          if (video) {
+            video.style.height = 'auto';
           }
+          video?.addEventListener('ytmd:src-changed', videoStarted);
+          observeThumbnail();
+          videoStarted();
+          switch (config.align) {
+            case 'right': {
+              switchButtonContainer.style.justifyContent = 'flex-end';
+              return;
+            }
 
-          case 'middle': {
-            switchButtonContainer.style.justifyContent = 'center';
-            return;
-          }
+            case 'middle': {
+              switchButtonContainer.style.justifyContent = 'center';
+              return;
+            }
 
-          default:
-          case 'left': {
-            switchButtonContainer.style.justifyContent = 'flex-start';
+            default:
+            case 'left': {
+              switchButtonContainer.style.justifyContent = 'flex-start';
+            }
           }
-        }
+        }, 0);
       }
     },
     onConfigChange(newConfig) {

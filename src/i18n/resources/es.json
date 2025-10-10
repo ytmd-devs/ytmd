@@ -2,14 +2,14 @@
   "common": {
     "console": {
       "plugins": {
-        "execute-failed": "Error al ejecutar el plugin {{pluginName}}::{{contextName}}",
-        "executed-at-ms": "Plugin {{pluginName}}::{{contextName}} Ejecutó en {{ms}}ms",
-        "initialize-failed": "Error al inicializar el plugin \"{{pluginName}}\"",
-        "load-all": "Cargando todos los plugins",
-        "load-failed": "Error al cargar el plugin \"{{pluginName}}\"",
-        "loaded": "Plugin \"{{pluginName}}\" cargado",
-        "unload-failed": "No se ha podido descargar el plugin \"{{pluginName}}\"",
-        "unloaded": "Plugin \"{{pluginName}}\" descargado"
+        "execute-failed": "Error al ejecutar el complemento {{pluginName}}::{{contextName}}",
+        "executed-at-ms": "Complemento {{pluginName}}::{{contextName}} Ejecutó en {{ms}}ms",
+        "initialize-failed": "Error al inicializar el complemento \"{{pluginName}}\"",
+        "load-all": "Cargando todos los complementos",
+        "load-failed": "Error al cargar el complemento \"{{pluginName}}\"",
+        "loaded": "Complementos \"{{pluginName}}\" cargado",
+        "unload-failed": "No se ha podido descargar el complemento \"{{pluginName}}\"",
+        "unloaded": "Complemento \"{{pluginName}}\" descargado"
       }
     }
   },
@@ -53,7 +53,7 @@
           "later": "Más tarde",
           "restart-now": "Reiniciar ahora"
         },
-        "detail": "El plugin \"{{pluginName}}\" requiere reiniciar para tomar efecto",
+        "detail": "El complemento \"{{pluginName}}\" requiere reiniciar para tomar efecto",
         "message": "\"{{pluginName}}\" necesita reiniciar",
         "title": "Se requiere reinicio"
       },
@@ -185,7 +185,7 @@
       },
       "plugins": {
         "enabled": "Habilitado",
-        "label": "Plugins",
+        "label": "Complementos",
         "new": "NUEVO"
       },
       "view": {
@@ -457,7 +457,15 @@
         "hide-duration-left": "Ocultar la duración restante",
         "hide-github-button": "Ocultar el botón de enlace a GitHub",
         "play-on-youtube-music": "Reproducir en YouTube Music",
-        "set-inactivity-timeout": "Establecer tiempo de inactividad"
+        "set-inactivity-timeout": "Establecer tiempo de inactividad",
+        "set-status-display-type": {
+          "label": "Texto de estado",
+          "submenu": {
+            "artist": "Escuchando a {artist}",
+            "title": "Escuchando {song title}",
+            "youtube-music": "Escuchando YouTube Music"
+          }
+        }
       },
       "name": "Discord Rich Presence",
       "prompt": {
@@ -482,7 +490,7 @@
               "ok": "OK"
             },
             "detail": "({{playlistSize}} canciones)",
-            "message": "Descargando Playlist {{playlistTitle}}",
+            "message": "Descargando lista de reproducción {{playlistTitle}}",
             "title": "Descarga iniciada"
           }
         },
@@ -749,6 +757,7 @@
         "listenbrainz": {
           "token": "Introduzca el token de usuario de ListenBrainz"
         },
+        "scrobble-alternative-artist": "Usar artistas alternativos",
         "scrobble-alternative-title": "Usar títulos alternativos",
         "scrobble-other-media": "Hacer Scrobble sobre otros medios"
       },
@@ -834,6 +843,14 @@
           "label": "Haz que la letra esté perfectamente sincronizada",
           "tooltip": "Calcular al milisegundo la visualización de la siguiente línea (puede tener un pequeño impacto en el rendimiento)"
         },
+        "preferred-provider": {
+          "label": "Proveedor preferido",
+          "none": {
+            "label": "Ninguno",
+            "tooltip": "Ningún proveedor preferido"
+          },
+          "tooltip": "Elige el proveedor predeterminado que deseas usar"
+        },
         "romanization": {
           "label": "Romanizar letras",
           "tooltip": "Si la letra está en un idioma diferente, intenta mostrar una versión en latín."
@@ -866,8 +883,29 @@
       "description": "Añade un widget TouchBar para los usuarios de macOS",
       "name": "TouchBar"
     },
+    "transparent-player": {
+      "description": "Hace que la ventana de la aplicación sea transparente",
+      "menu": {
+        "opacity": {
+          "label": "Opacidad",
+          "submenu": {
+            "percent": "{{opacity}}%"
+          }
+        },
+        "type": {
+          "label": "Tipo",
+          "submenu": {
+            "acrylic": "Acrílico",
+            "mica": "Mica",
+            "none": "Ninguno",
+            "tabbed": "Con pestañas"
+          }
+        }
+      },
+      "name": "Reproductor transparente"
+    },
     "tuna-obs": {
-      "description": "Integración con el plugin Tuna de OBS",
+      "description": "Integración con el complemento Tuna de OBS",
       "name": "Tuna OBS"
     },
     "unobtrusive-player": {

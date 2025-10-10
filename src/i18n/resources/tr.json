@@ -843,6 +843,14 @@
           "label": "Şarkı sözlerini mükemmel şekilde senkronize edin",
           "tooltip": "Bir sonraki satırın görüntülenmesini milisaniyesine kadar hesaplayın (performans üzerinde küçük bir etkisi olabilir)"
         },
+        "preferred-provider": {
+          "label": "Tercih edilen Sağlayıcı",
+          "none": {
+            "label": "Hiçbiri",
+            "tooltip": "Varsayılan sağlayıcı yok"
+          },
+          "tooltip": "Kullanmak İçin varsayılan sağlayıcıyı seçin"
+        },
         "romanization": {
           "label": "Sözleri Romanize Et",
           "tooltip": "Sözler başka bir dilde gözüküyorsa, Latin versiyonunu dene."
