@@ -25,9 +25,9 @@ patchedDependencies:
   kuromoji@0.1.2:
     hash: 4a948f1ea45c61779fa371feb020253ccf7a24e1f7c6b2e250b3ce53d86216d4
     path: patches/kuromoji@0.1.2.patch
-  mdui:
+  mdui@2.1.4:
     hash: 008b925e23862ced06c38f9765eef4322eb8a93cb5e9a6b684fd717fec0ea0d9
-    path: patches/mdui.patch
+    path: patches/mdui@2.1.4.patch
   vudio@2.1.1:
     hash: 0e06c2ed11c02bdc490c209fa80070e98517c2735c641f5738b6e15d7dc1959d
     path: patches/vudio@2.1.1.patch
@@ -90,6 +90,9 @@ importers:
       '@jimp/plugin-color':
         specifier: 1.6.0
         version: 1.6.0
+      '@mdui/icons':
+        specifier: ^1.0.3
+        version: 1.0.3
       '@skyra/jaro-winkler':
         specifier: 1.1.1
         version: 1.1.1
@@ -1017,14 +1020,14 @@ packages:
   '@jridgewell/trace-mapping@0.3.30':
     resolution: {integrity: sha512-GQ7Nw5G2lTu/BtHTKfXhKHok2WGetd4XYcVKGx00SjAk8GMwgJM3zr6zORiPGuOE+/vkc90KtTosSSvaCjKb2Q==}
 
-  '@lit-labs/ssr-dom-shim@1.3.0':
-    resolution: {integrity: sha512-nQIWonJ6eFAvUUrSlwyHDm/aE8PBDu5kRpL0vHMg6K8fK3Diq1xdPjTnsJSwxABhaZ+5eBi1btQB5ShUTKo4nQ==}
+  '@lit-labs/ssr-dom-shim@1.4.0':
+    resolution: {integrity: sha512-ficsEARKnmmW5njugNYKipTm4SFnbik7CXtoencDZzmzo/dQ+2Q0bgkzJuoJP20Aj0F+izzJjOqsnkd6F/o1bw==}
 
   '@lit/localize@0.12.2':
     resolution: {integrity: sha512-Qv9kvgJKDq/JVSwXOxuWvQnnOBysHA99ti9im9a4fImCmx+fto+XXcUYQbjZHqiueEEc4V20PcRDPO+1g/6seQ==}
 
-  '@lit/reactive-element@2.1.0':
-    resolution: {integrity: sha512-L2qyoZSQClcBmq0qajBVbhYEcG6iK0XfLn66ifLe/RfC0/ihpc+pl0Wdn8bJ8o+hj38cG0fGXRgSS20MuXn7qA==}
+  '@lit/reactive-element@2.1.1':
+    resolution: {integrity: sha512-N+dm5PAYdQ8e6UlywyyrgI2t++wFGXfHx+dSJ1oBrg6FAxUj40jId++EaRm80MKX5JnlH1sBsyZ5h0bcZKemCg==}
 
   '@malept/cross-spawn-promise@2.0.0':
     resolution: {integrity: sha512-1DpKU0Z5ThltBwjNySMC14g0CkbyhCaz9FkhxqNsZI6uAPJXFS8cMXlBKo26FJ8ZuW6S9GCMcR9IO5k2X5/9Fg==}
@@ -1036,6 +1039,9 @@ packages:
 
   '@material/material-color-utilities@0.3.0':
     resolution: {integrity: sha512-ztmtTd6xwnuh2/xu+Vb01btgV8SQWYCaK56CkRK8gEkWe5TuDyBcYJ0wgkMRn+2VcE9KUmhvkz+N9GHrqw/C0g==}
+
+  '@mdui/icons@1.0.3':
+    resolution: {integrity: sha512-Jq9juUqIJMBvIRSTr0qBKiqnlbY5pVUzUP20EHSN8dT7GcqN7bq0AL8MASL5DxKs09kgcERq+z5bHJOkz/VDlA==}
 
   '@mdui/jq@3.0.3':
     resolution: {integrity: sha512-nI8QK9UPHhiIbECrC1aMdLXNxP6WgUtC9XwRPs/e56FtwduePyxPyloXmgU8VYw85i6TtYdgClHS9tW8JweNZA==}
@@ -3376,14 +3382,14 @@ packages:
     resolution: {integrity: sha512-xi6IyHML+c9+Q3W0S4fCQJOym42pyurFiJUHEcEyHS0CeKzia4yZDEsLlqOFykxOdHpNy0NmvVO31vcSqAxJCg==}
     engines: {node: '>= 12.0.0'}
 
-  lit-element@4.2.0:
-    resolution: {integrity: sha512-MGrXJVAI5x+Bfth/pU9Kst1iWID6GHDLEzFEnyULB/sFiRLgkd8NPK/PeeXxktA3T6EIIaq8U3KcbTU5XFcP2Q==}
+  lit-element@4.2.1:
+    resolution: {integrity: sha512-WGAWRGzirAgyphK2urmYOV72tlvnxw7YfyLDgQ+OZnM9vQQBQnumQ7jUJe6unEzwGU3ahFOjuz1iz1jjrpCPuw==}
 
-  lit-html@3.3.0:
-    resolution: {integrity: sha512-RHoswrFAxY2d8Cf2mm4OZ1DgzCoBKUKSPvA1fhtSELxUERq2aQQ2h05pO9j81gS1o7RIRJ+CePLogfyahwmynw==}
+  lit-html@3.3.1:
+    resolution: {integrity: sha512-S9hbyDu/vs1qNrithiNyeyv64c9yqiW9l+DBgI18fL+MTvOtWoFR0FWiyq1TxaYef5wNlpEmzlXoBlZEO+WjoA==}
 
-  lit@3.3.0:
-    resolution: {integrity: sha512-DGVsqsOIHBww2DqnuZzW7QsuCdahp50ojuDaBPC7jUDRpYoH0z7kHBBYZewRzer75FwtrkmkKk7iOAwSaWdBmw==}
+  lit@3.3.1:
+    resolution: {integrity: sha512-Ksr/8L3PTapbdXJCk+EJVB78jDodUMaP54gD24W186zGRARvwrsPfS60wae/SSCTCNZVPd1chXqio1qHQmu4NA==}
 
   locate-path@6.0.0:
     resolution: {integrity: sha512-iPZK6eYjbxRu3uB4/WZ3EsEIMJFMqAoopl3R+zuq0UjcAm/MO6KCweDgPfP3elTztoKP3KtnVHxTn2NHBSDVUw==}
@@ -5651,15 +5657,15 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.5
 
-  '@lit-labs/ssr-dom-shim@1.3.0': {}
+  '@lit-labs/ssr-dom-shim@1.4.0': {}
 
   '@lit/localize@0.12.2':
     dependencies:
-      lit: 3.3.0
+      lit: 3.3.1
 
-  '@lit/reactive-element@2.1.0':
+  '@lit/reactive-element@2.1.1':
     dependencies:
-      '@lit-labs/ssr-dom-shim': 1.3.0
+      '@lit-labs/ssr-dom-shim': 1.4.0
 
   '@malept/cross-spawn-promise@2.0.0':
     dependencies:
@@ -5676,6 +5682,12 @@ snapshots:
 
   '@material/material-color-utilities@0.3.0': {}
 
+  '@mdui/icons@1.0.3':
+    dependencies:
+      '@mdui/shared': 1.0.8
+      lit: 3.3.1
+      tslib: 2.8.1
+
   '@mdui/jq@3.0.3':
     dependencies:
       ssr-window: 5.0.1
@@ -5683,9 +5695,9 @@ snapshots:
 
   '@mdui/shared@1.0.8':
     dependencies:
-      '@lit/reactive-element': 2.1.0
+      '@lit/reactive-element': 2.1.1
       '@mdui/jq': 3.0.3
-      lit: 3.3.0
+      lit: 3.3.1
       ssr-window: 5.0.1
       tslib: 2.8.1
 
@@ -8336,21 +8348,21 @@ snapshots:
       lightningcss-win32-arm64-msvc: 1.30.1
       lightningcss-win32-x64-msvc: 1.30.1
 
-  lit-element@4.2.0:
+  lit-element@4.2.1:
     dependencies:
-      '@lit-labs/ssr-dom-shim': 1.3.0
-      '@lit/reactive-element': 2.1.0
-      lit-html: 3.3.0
+      '@lit-labs/ssr-dom-shim': 1.4.0
+      '@lit/reactive-element': 2.1.1
+      lit-html: 3.3.1
 
-  lit-html@3.3.0:
+  lit-html@3.3.1:
     dependencies:
       '@types/trusted-types': 2.0.7
 
-  lit@3.3.0:
+  lit@3.3.1:
     dependencies:
-      '@lit/reactive-element': 2.1.0
-      lit-element: 4.2.0
-      lit-html: 3.3.0
+      '@lit/reactive-element': 2.1.1
+      lit-element: 4.2.1
+      lit-html: 3.3.1
 
   locate-path@6.0.0:
     dependencies:
@@ -8446,13 +8458,13 @@ snapshots:
     dependencies:
       '@floating-ui/utils': 0.2.10
       '@lit/localize': 0.12.2
-      '@lit/reactive-element': 2.1.0
+      '@lit/reactive-element': 2.1.1
       '@material/material-color-utilities': 0.3.0
       '@mdui/jq': 3.0.3
       '@mdui/shared': 1.0.8
       classcat: 5.0.5
       is-promise: 4.0.0
-      lit: 3.3.0
+      lit: 3.3.1
       ssr-window: 5.0.1
       tslib: 2.8.1
 
