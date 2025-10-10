@@ -1,45 +1,41 @@
+import { randomBytes } from 'node:crypto';
 import { existsSync, mkdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { randomBytes } from 'node:crypto';
-
+import { Mutex } from 'async-mutex';
+import { BG, type BgConfig } from 'bgutils-js';
 import { app, type BrowserWindow, dialog, ipcMain } from 'electron';
-import { Innertube, UniversalCache, Utils, YTNodes } from 'youtubei.js';
 import is from 'electron-is';
 import filenamify from 'filenamify';
-import { Mutex } from 'async-mutex';
-import * as NodeID3 from 'node-id3';
-import { BG, type BgConfig } from 'bgutils-js';
 import { lazy } from 'lazy-var';
-
+import { type PlayerErrorMessage } from 'node_modules/youtubei.js/dist/src/parser/nodes';
+import { type VideoInfo } from 'node_modules/youtubei.js/dist/src/parser/youtube';
+import {
+  type Playlist,
+  type TrackInfo,
+} from 'node_modules/youtubei.js/dist/src/parser/ytmusic';
+import { type FormatOptions } from 'node_modules/youtubei.js/dist/src/types';
+import * as NodeID3 from 'node-id3';
+import { Innertube, UniversalCache, Utils, YTNodes } from 'youtubei.js';
+import { t } from '@/i18n';
+import { getNetFetchAsFetch } from '@/plugins/utils/main';
+import {
+  cleanupName,
+  getImage,
+  MediaType,
+  registerCallback,
+  type SongInfo,
+  SongInfoEvent,
+} from '@/providers/song-info';
+import { type BackendContext } from '@/types/contexts';
+import { type GetPlayerResponse } from '@/types/get-player-response';
+import { type DownloaderPluginConfig } from '../index';
+import { DefaultPresetList, type Preset, YoutubeFormatList } from '../types';
 import {
   cropMaxWidth,
   getFolder,
   sendFeedback as sendFeedback_,
   setBadge,
 } from './utils';
-import {
-  registerCallback,
-  cleanupName,
-  getImage,
-  MediaType,
-  type SongInfo,
-  SongInfoEvent,
-} from '@/providers/song-info';
-import { getNetFetchAsFetch } from '@/plugins/utils/main';
-import { t } from '@/i18n';
-
-import { DefaultPresetList, type Preset, YoutubeFormatList } from '../types';
-
-import type { DownloaderPluginConfig } from '../index';
-import type { BackendContext } from '@/types/contexts';
-import type { GetPlayerResponse } from '@/types/get-player-response';
-import type { FormatOptions } from 'node_modules/youtubei.js/dist/src/types';
-import type { VideoInfo } from 'node_modules/youtubei.js/dist/src/parser/youtube';
-import type { PlayerErrorMessage } from 'node_modules/youtubei.js/dist/src/parser/nodes';
-import type {
-  TrackInfo,
-  Playlist,
-} from 'node_modules/youtubei.js/dist/src/parser/ytmusic';
 
 type CustomSongInfo = SongInfo & { trackId?: string };
 
@@ -87,7 +83,6 @@ const sendError = (error: Error, source?: string) => {
   const songNameMessage = source ? `\nin ${source}` : '';
   const cause = error.cause
     ? `\n\n${
-        // eslint-disable-next-line @typescript-eslint/no-base-to-string,@typescript-eslint/restrict-template-expressions
         error.cause instanceof Error ? error.cause.toString() : error.cause
       }`
     : '';
@@ -171,7 +166,6 @@ export const onMainLoad = async ({
       if (interpreterJavascript) {
         // This is a workaround to run the interpreterJavascript code
         // Maybe there is a better way to do this (e.g. https://github.com/Siubaak/sval ?)
-        // eslint-disable-next-line @typescript-eslint/no-implied-eval,@typescript-eslint/no-unsafe-call
         new Function(interpreterJavascript)();
 
         const poTokenResult = await BG.PoToken.generate({
