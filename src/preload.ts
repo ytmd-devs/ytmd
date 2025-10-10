@@ -8,12 +8,15 @@ import is from 'electron-is';
 
 import * as config from './config';
 
-import mduiStyleSheet from "@assets/mdui.css?inline"
+import mduiStyleSheet from '@assets/mdui.css?inline';
 
-contextBridge.exposeInMainWorld('litIssuedWarnings', new Set([
-  "Lit is in dev mode. Not recommended for production! See https://lit.dev/msg/dev-mode for more information.",
-  "Shadow DOM is being polyfilled via `ShadyDOM` but the `polyfill-support` module has not been loaded. See https://lit.dev/msg/polyfill-support-missing for more information."
-]))
+contextBridge.exposeInMainWorld(
+  'litIssuedWarnings',
+  new Set([
+    'Lit is in dev mode. Not recommended for production! See https://lit.dev/msg/dev-mode for more information.',
+    'Shadow DOM is being polyfilled via `ShadyDOM` but the `polyfill-support` module has not been loaded. See https://lit.dev/msg/polyfill-support-missing for more information.',
+  ]),
+);
 
 new MutationObserver((mutations, observer) => {
   outer: for (const mutation of mutations) {
