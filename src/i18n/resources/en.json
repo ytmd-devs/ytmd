@@ -504,6 +504,7 @@
           "downloading-counter": "Downloading {{current}}/{{total}}…",
           "downloading-playlist": "Downloading playlist \"{{playlistTitle}}\" - {{playlistSize}} songs ({{playlistId}})",
           "error-while-downloading": "Error downloading \"{{author}} - {{title}}\": {{error}}",
+          "file-already-exists": "File already exists, skipping download",
           "folder-already-exists": "The folder {{playlistFolder}} already exists",
           "getting-playlist-info": "Getting playlist info…",
           "loading": "Loading…",
