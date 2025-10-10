@@ -5,8 +5,8 @@ import { createPlugin } from '@/utils';
 
 import { t } from '@/i18n';
 
-import { ForwardButton } from './components/forward-button';
-import { BackButton } from './components/back-button';
+import '@mdui/icons/chevron-left.js';
+import '@mdui/icons/chevron-right.js';
 
 export default createPlugin({
   name: () => t('plugins.navigation.name'),
@@ -15,7 +15,6 @@ export default createPlugin({
   config: {
     enabled: true,
   },
-  stylesheets: [style],
   renderer: {
     buttonContainer: document.createElement('div'),
     start() {
@@ -26,14 +25,24 @@ export default createPlugin({
       render(
         () => (
           <>
-            <BackButton
-              onClick={() => history.back()}
-              title={t('plugins.navigation.templates.back.title')}
-            />
-            <ForwardButton
-              onClick={() => history.forward()}
-              title={t('plugins.navigation.templates.forward.title')}
-            />
+            <mdui-tooltip
+              content={t('plugins.navigation.templates.back.title')}
+            >
+              <mdui-button-icon onClick={() => history.back()}>
+                <mdui-icon-chevron-left
+                  style={{ padding: '5px', scale: '1.5' }}
+                />
+              </mdui-button-icon>
+            </mdui-tooltip>
+            <mdui-tooltip
+              content={t('plugins.navigation.templates.forward.title')}
+            >
+              <mdui-button-icon onClick={() => history.forward()}>
+                <mdui-icon-chevron-right
+                  style={{ padding: '5px', scale: '1.5' }}
+                />
+              </mdui-button-icon>
+            </mdui-tooltip>
           </>
         ),
         this.buttonContainer,
