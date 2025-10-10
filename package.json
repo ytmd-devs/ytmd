@@ -17,6 +17,7 @@
     "test": "pnpm playwright test",
     "test:debug": "pnpm cross-env DEBUG=pw:*,-pw:test:protocol playwright test",
     "build": "pnpm electron-vite build",
+    "build:android": "pnpm build && npx cap sync android",
     "vite:inspect": "pnpm clean && electron-vite build --mode development && pnpm exec serve .vite-inspect",
     "start": "pnpm electron-vite preview",
     "start:debug": "pnpm cross-env ELECTRON_ENABLE_LOGGING=1 pnpm start",
@@ -62,6 +63,9 @@
     "neverBuiltDependencies": []
   },
   "dependencies": {
+    "@capacitor/android": "^7.4.3",
+    "@capacitor/cli": "^7.4.3",
+    "@capacitor/core": "^7.4.3",
     "@dehoist/romanize-thai": "1.0.0",
     "@electron-toolkit/tsconfig": "1.0.1",
     "@electron/remote": "2.1.3",
@@ -76,6 +80,8 @@
     "@hono/swagger-ui": "0.5.2",
     "@hono/zod-openapi": "1.1.0",
     "@hono/zod-validator": "0.7.2",
+    "@ionic/cli": "^7.2.1",
+    "@ionic/core": "^8.7.6",
     "@jellybrick/dbus-next": "0.10.3",
     "@jellybrick/electron-better-web-request": "1.0.4",
     "@jellybrick/mpris-service": "2.1.5",

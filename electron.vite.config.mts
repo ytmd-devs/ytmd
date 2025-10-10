@@ -142,6 +142,7 @@ export default defineConfig({
         }),
       ],
       root: './src/',
+      base: './',
       build: {
         lib: {
           entry: 'src/index.html',

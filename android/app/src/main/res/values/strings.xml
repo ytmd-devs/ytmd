@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">YouTube Music</string>
+    <string name="title_activity_main">YouTube Music</string>
+    <string name="package_name">com.github.th_ch.youtube_music</string>
+    <string name="custom_url_scheme">com.github.th_ch.youtube_music</string>
+</resources>
