@@ -1,9 +1,8 @@
 import i18next from 'i18next';
 
-import 'mdui';
 import { setTheme } from 'mdui/functions/setTheme.js';
-
-setTheme('dark');
+import 'mdui/mdui.css';
+import 'mdui';
 
 import { startingPages } from './providers/extracted-data';
 import { setupSongInfo } from './providers/song-info-front';
@@ -29,6 +28,8 @@ import type { QueueElement } from '@/types/queue';
 import type { QueueResponse } from '@/types/youtube-music-desktop-internal';
 import type { YouTubeMusicAppElement } from '@/types/youtube-music-app-element';
 import type { SearchBoxElement } from '@/types/search-box-element';
+
+setTheme('dark');
 
 let api: (Element & YoutubePlayer) | null = null;
 let isPluginLoaded = false;

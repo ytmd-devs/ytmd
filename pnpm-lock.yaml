@@ -90,6 +90,9 @@ importers:
       '@jimp/plugin-color':
         specifier: 1.6.0
         version: 1.6.0
+      '@mdui/icons':
+        specifier: ^1.0.3
+        version: 1.0.3
       '@skyra/jaro-winkler':
         specifier: 1.1.1
         version: 1.1.1
@@ -1036,6 +1039,9 @@ packages:
 
   '@material/material-color-utilities@0.3.0':
     resolution: {integrity: sha512-ztmtTd6xwnuh2/xu+Vb01btgV8SQWYCaK56CkRK8gEkWe5TuDyBcYJ0wgkMRn+2VcE9KUmhvkz+N9GHrqw/C0g==}
+
+  '@mdui/icons@1.0.3':
+    resolution: {integrity: sha512-Jq9juUqIJMBvIRSTr0qBKiqnlbY5pVUzUP20EHSN8dT7GcqN7bq0AL8MASL5DxKs09kgcERq+z5bHJOkz/VDlA==}
 
   '@mdui/jq@3.0.3':
     resolution: {integrity: sha512-nI8QK9UPHhiIbECrC1aMdLXNxP6WgUtC9XwRPs/e56FtwduePyxPyloXmgU8VYw85i6TtYdgClHS9tW8JweNZA==}
@@ -5675,6 +5681,12 @@ snapshots:
       - supports-color
 
   '@material/material-color-utilities@0.3.0': {}
+
+  '@mdui/icons@1.0.3':
+    dependencies:
+      '@mdui/shared': 1.0.8
+      lit: 3.3.1
+      tslib: 2.8.1
 
   '@mdui/jq@3.0.3':
     dependencies:

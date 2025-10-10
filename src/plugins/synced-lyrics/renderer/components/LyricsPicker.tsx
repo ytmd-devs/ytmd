@@ -1,3 +1,4 @@
+/* eslint-disable stylistic/no-mixed-operators */
 import {
   createEffect,
   createMemo,
@@ -8,6 +9,7 @@ import {
   onCleanup,
   onMount,
   type Setter,
+  Show,
   Switch,
 } from 'solid-js';
 
@@ -15,6 +17,7 @@ import * as z from 'zod';
 
 import {
   type ProviderName,
+  ProviderNames,
   providerNames,
   ProviderNameSchema,
   type ProviderState,
@@ -23,7 +26,14 @@ import { currentLyrics, lyricsStore, setLyricsStore } from '../store';
 import { _ytAPI } from '../index';
 import { config } from '../renderer';
 
-import type { YtIcons } from '@/types/icons';
+import '@mdui/icons/chevron-left.js';
+import '@mdui/icons/chevron-right.js';
+import '@mdui/icons/check-circle.js';
+import '@mdui/icons/warning.js';
+import '@mdui/icons/error.js';
+import '@mdui/icons/star.js';
+import '@mdui/icons/star-border.js';
+
 import type { PlayerAPIEvents } from '@/types/player-api-events';
 
 const LocalStorageSchema = z.object({
@@ -47,7 +57,8 @@ const shouldSwitchProvider = (providerData: ProviderState) => {
 const providerBias = (p: ProviderName) =>
   (lyricsStore.lyrics[p].state === 'done' ? 1 : -1) +
   (lyricsStore.lyrics[p].data?.lines?.length ? 2 : -1) +
-  (lyricsStore.lyrics[p].data?.lines?.length && p === 'YTMusic' ? 1 : 0) +
+  // eslint-disable-next-line prettier/prettier
+  (lyricsStore.lyrics[p].data?.lines?.length && p === ProviderNames.YTMusic ? 1 : 0) +
   (lyricsStore.lyrics[p].data?.lyrics ? 1 : -1);
 
 const pickBestProvider = () => {
@@ -60,7 +71,6 @@ const pickBestProvider = () => {
   }
 
   const providers = Array.from(providerNames);
-
   providers.sort((a, b) => providerBias(b) - providerBias(a));
 
   return { provider: providers[0], force: false };
@@ -175,50 +185,16 @@ export const LyricsPicker = (props: {
     });
   };
 
-  const chevronLeft: YtIcons = 'yt-icons:chevron_left';
-  const chevronRight: YtIcons = 'yt-icons:chevron_right';
-
-  const successIcon: YtIcons = 'yt-icons:check-circle';
-  const errorIcon: YtIcons = 'yt-icons:error';
-  const notFoundIcon: YtIcons = 'yt-icons:warning';
-
   return (
     <div class="lyrics-picker" ref={props.setStickRef}>
       <div class="lyrics-picker-left">
-        <yt-icon-button
-          class="style-scope ytmusic-player-bar"
-          icon={chevronLeft}
-          onClick={previous}
-          role={'button'}
-        >
-          <span class="yt-icon-shape style-scope yt-icon yt-spec-icon-shape">
-            <div
-              style={{
-                'width': '100%',
-                'height': '100%',
-                'display': 'flex',
-                'align-items': 'center',
-                'fill': 'currentcolor',
-              }}
-            >
-              <svg
-                class="style-scope yt-icon"
-                fill="#FFFFFF"
-                height={'40px'}
-                preserveAspectRatio="xMidYMid meet"
-                viewBox="0 -960 960 960"
-                width={'40px'}
-              >
-                <g class="style-scope yt-icon">
-                  <path
-                    class="style-scope yt-icon"
-                    d="M560.67-240 320-480.67l240.67-240.66L608-674 414.67-480.67 608-287.33 560.67-240Z"
-                  />
-                </g>
-              </svg>
-            </div>
-          </span>
-        </yt-icon-button>
+        <mdui-button-icon>
+          <mdui-icon-chevron-left
+            onClick={previous}
+            role="button"
+            style={{ padding: '5px' }}
+          />
+        </mdui-button-icon>
       </div>
 
       <div class="lyrics-picker-content">
@@ -247,9 +223,8 @@ export const LyricsPicker = (props: {
                     />
                   </Match>
                   <Match when={currentLyrics().state === 'error'}>
-                    <yt-icon
-                      icon={errorIcon}
-                      style={{ padding: '5px', transform: 'scale(0.8)' }}
+                    <mdui-icon-error
+                      style={{ padding: '5px', scale: '0.8' }}
                       tabindex="-1"
                     />
                   </Match>
@@ -260,9 +235,8 @@ export const LyricsPicker = (props: {
                         currentLyrics().data?.lyrics)
                     }
                   >
-                    <yt-icon
-                      icon={successIcon}
-                      style={{ padding: '5px', transform: 'scale(0.8)' }}
+                    <mdui-icon-check-circle
+                      style={{ padding: '5px', scale: '0.8' }}
                       tabindex="-1"
                     />
                   </Match>
@@ -273,9 +247,8 @@ export const LyricsPicker = (props: {
                       !currentLyrics().data?.lyrics
                     }
                   >
-                    <yt-icon
-                      icon={notFoundIcon}
-                      style={{ padding: '5px', transform: 'scale(0.8)' }}
+                    <mdui-icon-warning
+                      style={{ padding: '5px', scale: '0.8' }}
                       tabindex="-1"
                     />
                   </Match>
@@ -284,20 +257,14 @@ export const LyricsPicker = (props: {
                   class="description ytmusic-description-shelf-renderer"
                   text={{ runs: [{ text: provider() }] }}
                 />
-                <yt-icon
-                  icon={
-                    starredProvider() === provider()
-                      ? 'yt-sys-icons:star-filled'
-                      : 'yt-sys-icons:star'
-                  }
-                  onClick={toggleStar}
-                  style={{
-                    padding: '5px',
-                    transform: 'scale(0.8)',
-                    cursor: 'pointer',
-                  }}
-                  tabindex="-1"
-                />
+                <mdui-button-icon onClick={toggleStar} tabindex={-1}>
+                  <Show
+                    fallback={<mdui-icon-star-border />}
+                    when={starredProvider() === provider()}
+                  >
+                    <mdui-icon-star />
+                  </Show>
+                </mdui-button-icon>
               </div>
             )}
           </Index>
@@ -318,41 +285,14 @@ export const LyricsPicker = (props: {
         </ul>
       </div>
 
-      <div class="lyrics-picker-right">
-        <yt-icon-button
-          class="style-scope ytmusic-player-bar"
-          icon={chevronRight}
-          onClick={next}
-          role={'button'}
-        >
-          <span class="yt-icon-shape style-scope yt-icon yt-spec-icon-shape">
-            <div
-              style={{
-                'width': '100%',
-                'height': '100%',
-                'display': 'flex',
-                'align-items': 'center',
-                'fill': 'currentcolor',
-              }}
-            >
-              <svg
-                class="style-scope yt-icon"
-                fill="#FFFFFF"
-                height={'40px'}
-                preserveAspectRatio="xMidYMid meet"
-                viewBox="0 -960 960 960"
-                width={'40px'}
-              >
-                <g class="style-scope yt-icon">
-                  <path
-                    class="style-scope yt-icon"
-                    d="M521.33-480.67 328-674l47.33-47.33L616-480.67 375.33-240 328-287.33l193.33-193.34Z"
-                  />
-                </g>
-              </svg>
-            </div>
-          </span>
-        </yt-icon-button>
+      <div class="lyrics-picker-left">
+        <mdui-button-icon>
+          <mdui-icon-chevron-right
+            onClick={next}
+            role="button"
+            style={{ padding: '5px' }}
+          />
+        </mdui-button-icon>
       </div>
     </div>
   );
