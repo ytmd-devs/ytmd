@@ -126,6 +126,7 @@ export const onMainLoad = async ({
 
   yt = await Innertube.create({
     cache: new UniversalCache(false),
+    player_id: '0004de42',
     cookie: await getCookieFromWindow(win),
     generate_session_locally: true,
     fetch: getNetFetchAsFetch(),

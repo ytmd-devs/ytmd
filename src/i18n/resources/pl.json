@@ -426,7 +426,7 @@
       "menu": {
         "device-selector": "Wybierz urządzenie"
       },
-      "name": "Niestandardowe wyjście audio",
+      "name": "Niestandardowe urządzenie wyjścia",
       "prompt": {
         "device-selector": {
           "label": "Wybierz wyjście audio które ma być użyte",
