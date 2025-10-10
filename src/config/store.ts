@@ -1,6 +1,6 @@
 import Store from 'electron-store';
 
-import defaults from './defaults';
+import { defaultConfig as defaults } from './defaults';
 
 import { DefaultPresetList, type Preset } from '@/plugins/downloader/types';
 
@@ -257,7 +257,7 @@ const migrations = {
   },
 };
 
-export default new Store({
+export const store = new Store({
   defaults: {
     ...defaults,
     // README: 'plugin' uses deepmerge to populate the default values, so it is not necessary to include it here

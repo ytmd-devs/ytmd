@@ -1,5 +1,5 @@
 import { FastAverageColor } from 'fast-average-color';
-import Color, { ColorInstance } from 'color';
+import Color, { type ColorInstance } from 'color';
 
 import style from './style.css?inline';
 
@@ -31,7 +31,7 @@ export default createPlugin<
       alpha?: number,
       ratioMultiply?: number,
     ): string;
-    updateColor(): void;
+    updateColor(alpha: number): void;
   },
   {
     enabled: boolean;
@@ -143,7 +143,16 @@ export default createPlugin<
           document.documentElement.style.setProperty(DARK_COLOR_KEY, '0, 0, 0');
         }
 
-        this.updateColor();
+        let alpha: number | null = null;
+        if (await window.mainConfig.plugins.isEnabled('transparent-player')) {
+          const value: unknown = window.mainConfig.get(
+            'plugins.transparent-player.opacity',
+          );
+          if (typeof value === 'number' && value >= 0 && value <= 1) {
+            alpha = value;
+          }
+        }
+        this.updateColor(alpha ?? 1);
       });
     },
     onConfigChange(config) {
@@ -163,7 +172,7 @@ export default createPlugin<
       }
       return `color-mix(in srgb, ${color} ${originalRatio}, ${keyColor} ${colorRatio})`;
     },
-    updateColor() {
+    updateColor(alpha: number) {
       const variableMap = {
         '--ytmusic-color-black1': '#212121',
         '--ytmusic-color-black2': '#181818',
@@ -202,19 +211,20 @@ export default createPlugin<
       Object.entries(variableMap).map(([variable, color]) => {
         document.documentElement.style.setProperty(
           variable,
-          this.getMixedColor(color, COLOR_KEY),
+          this.getMixedColor(color, COLOR_KEY, alpha),
           'important',
         );
       });
 
       document.body.style.setProperty(
         'background',
-        this.getMixedColor('#030303', COLOR_KEY),
+        this.getMixedColor('rgba(3, 3, 3)', DARK_COLOR_KEY, alpha),
         'important',
       );
       document.documentElement.style.setProperty(
         '--ytmusic-background',
-        this.getMixedColor('#030303', DARK_COLOR_KEY),
+        // #030303
+        this.getMixedColor('rgba(3, 3, 3)', DARK_COLOR_KEY, alpha),
         'important',
       );
     },

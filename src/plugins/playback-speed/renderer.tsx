@@ -43,8 +43,6 @@ export const onPlayerApiReady = () => {
     render(
       () => (
         <PlaybackSpeedSlider
-          speed={speed()}
-          title={t('plugins.playback-speed.templates.button')}
           onImmediateValueChanged={(e) => {
             let targetSpeed = Number(e.detail.value ?? MIN_PLAYBACK_SPEED);
 
@@ -78,6 +76,8 @@ export const onPlayerApiReady = () => {
 
             updatePlayBackSpeed();
           }}
+          speed={speed()}
+          title={t('plugins.playback-speed.templates.button')}
         />
       ),
       sliderContainer,

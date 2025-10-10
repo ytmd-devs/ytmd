@@ -1,7 +1,7 @@
 import { net } from 'electron';
 
 import { createPlugin } from '@/utils';
-import registerCallback from '@/providers/song-info';
+import { registerCallback } from '@/providers/song-info';
 import { t } from '@/i18n';
 
 type LumiaData = {

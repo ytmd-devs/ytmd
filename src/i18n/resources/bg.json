@@ -150,6 +150,13 @@
           "visual-tweaks": {
             "label": "Визуални настройки",
             "submenu": {
+              "custom-window-title": {
+                "label": "Персонализирано заглавие на прозорец",
+                "prompt": {
+                  "label": "Въведи персонализирано заглавие: (остави празно за да изключиш)",
+                  "placeholder": "Пример: Youtube Music"
+                }
+              },
               "like-buttons": {
                 "default": "По подразбиране",
                 "force-show": "Принудително показване",
@@ -414,6 +421,19 @@
         }
       }
     },
+    "custom-output-device": {
+      "description": "Конфигуриране на изходно медийно устройство за песни",
+      "menu": {
+        "device-selector": "Избери устройство"
+      },
+      "name": "Персонализирано изходно устройство",
+      "prompt": {
+        "device-selector": {
+          "label": "Избери изходното медийно устройство",
+          "title": "Избери изходно устройство"
+        }
+      }
+    },
     "disable-autoplay": {
       "description": "Започва песента в паузиран режим",
       "menu": {
@@ -437,7 +457,15 @@
         "hide-duration-left": "Скрий оставащото време",
         "hide-github-button": "Скрий бутона за линк към GitHub",
         "play-on-youtube-music": "Възпроизведи в YouTube Music",
-        "set-inactivity-timeout": "Задай таймаут за неактивност"
+        "set-inactivity-timeout": "Задай таймаут за неактивност",
+        "set-status-display-type": {
+          "label": "Статус текст",
+          "submenu": {
+            "artist": "Слушам {artist}",
+            "title": "Слушам {song title}",
+            "youtube-music": "Слушам YouTube Music"
+          }
+        }
       },
       "name": "Дискорд Разширен статус",
       "prompt": {
@@ -729,6 +757,7 @@
         "listenbrainz": {
           "token": "Въведете ListenBrainz потребителски токен"
         },
+        "scrobble-alternative-artist": "Използвай алтернативни изпълнители",
         "scrobble-alternative-title": "Използвай алтернативни заглавия",
         "scrobble-other-media": "Скробъл на други медии"
       },
@@ -814,6 +843,14 @@
           "label": "Направете текстовете перфектно синхронизирани",
           "tooltip": "Изчислете до милисекунда показването на следващия ред (може да има малък ефект върху производителността)"
         },
+        "preferred-provider": {
+          "label": "Предпочитан доставчик",
+          "none": {
+            "label": "Празно",
+            "tooltip": "Без предпочитан доставчик"
+          },
+          "tooltip": "Изберете доставчик по подразбиране"
+        },
         "romanization": {
           "label": "Романизиране на текстовете",
           "tooltip": "Ако текстовете са на друг език, опитайте да покажете латинска версия."
@@ -845,6 +882,27 @@
     "touchbar": {
       "description": "Добавя уиджет за TouchBar за потребители на macOS",
       "name": "TouchBar"
+    },
+    "transparent-player": {
+      "description": "Прави прозореца на приложението прозрачен",
+      "menu": {
+        "opacity": {
+          "label": "Прозрачност",
+          "submenu": {
+            "percent": "{{opacity}}%"
+          }
+        },
+        "type": {
+          "label": "Тип",
+          "submenu": {
+            "acrylic": "Акрил",
+            "mica": "Слюда",
+            "none": "Празно",
+            "tabbed": "С раздели"
+          }
+        }
+      },
+      "name": "Прозрачен плейър"
     },
     "tuna-obs": {
       "description": "Интеграция с плъгина Tuna за OBS",

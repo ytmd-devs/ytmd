@@ -1,8 +1,8 @@
-import { BrowserWindow, ipcMain, nativeImage, net } from 'electron';
+import { type BrowserWindow, ipcMain, nativeImage, net } from 'electron';
 
 import { Mutex } from 'async-mutex';
 
-import config from '@/config';
+import * as config from '@/config';
 
 import type { GetPlayerResponse } from '@/types/get-player-response';
 
@@ -30,6 +30,7 @@ export interface SongInfo {
   title: string;
   alternativeTitle?: string;
   artist: string;
+  artistUrl?: string;
   views: number;
   uploadDate?: string;
   imageSrc?: string | null;
@@ -72,6 +73,7 @@ const handleData = async (
     title: '',
     alternativeTitle: '',
     artist: '',
+    artistUrl: '',
     views: 0,
     uploadDate: '',
     imageSrc: '',
@@ -93,6 +95,9 @@ const handleData = async (
     songInfo.url = microformat.urlCanonical?.split('&')[0];
     songInfo.playlistId =
       new URL(microformat.urlCanonical).searchParams.get('list') ?? '';
+    if (microformat.pageOwnerDetails?.externalChannelId) {
+      songInfo.artistUrl = `https://music.youtube.com/channel/${microformat.pageOwnerDetails.externalChannelId}`;
+    }
     // Used for options.resumeOnStart
     config.set('url', microformat.urlCanonical);
     songInfo.alternativeTitle = microformat.linkAlternates.find(
@@ -110,7 +115,7 @@ const handleData = async (
     songInfo.elapsedSeconds = videoDetails.elapsedSeconds;
     songInfo.isPaused = videoDetails.isPaused;
     songInfo.videoId = videoDetails.videoId;
-    songInfo.album = data?.videoDetails?.album; // Will be undefined if video exist
+    songInfo.album = videoDetails.album; // Will be undefined if video exist
 
     switch (videoDetails?.musicVideoType) {
       case 'MUSIC_VIDEO_TYPE_ATV':
@@ -179,7 +184,7 @@ export type SongInfoCallback = (
 const callbacks: Set<SongInfoCallback> = new Set();
 
 // This function will allow plugins to register callback that will be triggered when data changes
-const registerCallback = (callback: SongInfoCallback) => {
+export const registerCallback = (callback: SongInfoCallback) => {
   callbacks.add(callback);
 };
 
@@ -277,5 +282,4 @@ export function cleanupName(name: string): string {
   return name;
 }
 
-export default registerCallback;
 export const setupSongInfo = registerProvider;

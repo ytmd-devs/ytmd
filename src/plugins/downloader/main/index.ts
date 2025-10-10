@@ -2,12 +2,12 @@ import { existsSync, mkdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { randomBytes } from 'node:crypto';
 
-import { app, BrowserWindow, dialog, ipcMain } from 'electron';
+import { app, type BrowserWindow, dialog, ipcMain } from 'electron';
 import { Innertube, UniversalCache, Utils, YTNodes } from 'youtubei.js';
 import is from 'electron-is';
 import filenamify from 'filenamify';
 import { Mutex } from 'async-mutex';
-import NodeID3, { TagConstants } from 'node-id3';
+import * as NodeID3 from 'node-id3';
 import { BG, type BgConfig } from 'bgutils-js';
 import { lazy } from 'lazy-var';
 
@@ -17,7 +17,8 @@ import {
   sendFeedback as sendFeedback_,
   setBadge,
 } from './utils';
-import registerCallback, {
+import {
+  registerCallback,
   cleanupName,
   getImage,
   MediaType,
@@ -125,6 +126,7 @@ export const onMainLoad = async ({
 
   yt = await Innertube.create({
     cache: new UniversalCache(false),
+    player_id: '0004de42',
     cookie: await getCookieFromWindow(win),
     generate_session_locally: true,
     fetch: getNetFetchAsFetch(),
@@ -590,7 +592,7 @@ async function writeID3(
       tags.image = {
         mime: 'image/png',
         type: {
-          id: TagConstants.AttachedPicture.PictureType.FRONT_COVER,
+          id: NodeID3.TagConstants.AttachedPicture.PictureType.FRONT_COVER,
         },
         description: 'thumbnail',
         imageBuffer: coverBuffer,

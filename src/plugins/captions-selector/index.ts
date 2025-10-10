@@ -2,7 +2,10 @@ import { createPlugin } from '@/utils';
 import { t } from '@/i18n';
 
 import backend from './back';
-import renderer, { CaptionsSelectorConfig, LanguageOptions } from './renderer';
+import renderer, {
+  type CaptionsSelectorConfig,
+  type LanguageOptions,
+} from './renderer';
 
 import type { YoutubePlayer } from '@/types/youtube-player';
 

@@ -18,7 +18,7 @@ jobs:
         os: [ macos-latest, ubuntu-latest, windows-latest ]
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Install pnpm
         uses: pnpm/action-setup@v4
@@ -28,14 +28,14 @@ jobs:
 
       - name: Setup NodeJS
         if: startsWith(matrix.os, 'macOS') != true
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'pnpm'
 
       - name: Setup NodeJS for macOS
         if: startsWith(matrix.os, 'macOS')
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: ${{ env.NODE_VERSION }}
 
@@ -91,7 +91,7 @@ jobs:
     if: github.repository == 'th-ch/youtube-music' && github.ref == 'refs/heads/master'
     needs: build
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           fetch-depth: 0
 
@@ -103,14 +103,14 @@ jobs:
 
       - name: Setup NodeJS
         if: startsWith(matrix.os, 'macOS') != true
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'pnpm'
 
       - name: Setup NodeJS for macOS
         if: startsWith(matrix.os, 'macOS')
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: ${{ env.NODE_VERSION }}
 

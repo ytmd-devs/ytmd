@@ -66,7 +66,7 @@ export const onPlayerApiReady = async (
     injectVolumeHud(noVid);
     if (!noVid) {
       setupVideoPlayerOnwheel();
-      if (!await window.mainConfig.plugins.isEnabled('video-toggle')) {
+      if (!(await window.mainConfig.plugins.isEnabled('video-toggle'))) {
         // Video-toggle handles hud positioning on its own
         const videoMode = () =>
           api.getPlayerResponse().videoDetails?.musicVideoType !==

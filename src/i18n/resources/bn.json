@@ -150,6 +150,13 @@
           "visual-tweaks": {
             "label": "দৃষ্টিনন্দন পরিবর্তন",
             "submenu": {
+              "custom-window-title": {
+                "label": "কাস্টম উইন্ডো টাইটেল",
+                "prompt": {
+                  "label": "নিজস্ব উইন্ডোর টাইটেল দিন (বন্ধ করতে ফাঁকা রাখুন)",
+                  "placeholder": "উদাহরণস্বরূপ: YouTube Music"
+                }
+              },
               "like-buttons": {
                 "default": "ডিফল্ট লাইক বাটন",
                 "force-show": "সবসময় লাইক বাটন দেখান",

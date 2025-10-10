@@ -1,7 +1,7 @@
 import { deepmerge } from 'deepmerge-ts';
 import { allPlugins } from 'virtual:plugins';
 
-import store from './store';
+import { store } from './store';
 
 import { restart } from '@/providers/app-controls';
 
@@ -68,13 +68,3 @@ export function enable(plugin: string) {
 export function disable(plugin: string) {
   setMenuOptions(plugin, { enabled: false }, []);
 }
-
-export default {
-  isEnabled,
-  getPlugins,
-  enable,
-  disable,
-  setOptions,
-  setMenuOptions,
-  getOptions,
-};

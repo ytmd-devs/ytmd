@@ -59,6 +59,7 @@
       },
       "unresponsive": {
         "buttons": {
+          "quit": "ഉപേക്ഷിക്കുക",
           "relaunch": "പുനരാരംഭിക്കുക",
           "wait": "കാത്തിരിക്കൂ"
         },
@@ -107,6 +108,23 @@
       },
       "plugins": {
         "enabled": "പ്രവർത്തനക്ഷമമാക്കി"
+      }
+    }
+  },
+  "plugins": {
+    "video-toggle": {
+      "menu": {
+        "align": {
+          "label": "ക്രമപ്പെടുത്തൽ",
+          "submenu": {
+            "left": "ഇടത്",
+            "middle": "മധ്യഭാഗം",
+            "right": "വലത്"
+          }
+        }
+      },
+      "templates": {
+        "button-video": "വീഡിയോ"
       }
     }
   }

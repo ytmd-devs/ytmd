@@ -1,11 +1,11 @@
 import is from 'electron-is';
 import {
   app,
-  BrowserWindow,
+  type BrowserWindow,
   clipboard,
   dialog,
   Menu,
-  MenuItem,
+  type MenuItem,
   shell,
 } from 'electron';
 import prompt from 'custom-electron-prompt';
@@ -15,7 +15,7 @@ import { allPlugins } from 'virtual:plugins';
 
 import { languageResources } from 'virtual:i18n';
 
-import config from './config';
+import * as config from './config';
 
 import { restart } from './providers/app-controls';
 import { startingPages } from './providers/extracted-data';

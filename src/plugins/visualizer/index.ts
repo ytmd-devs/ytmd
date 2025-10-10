@@ -1,6 +1,6 @@
 import emptyStyle from './empty-player.css?inline';
 import { createPlugin } from '@/utils';
-import { Visualizer } from './visualizers/visualizer';
+import { type Visualizer } from './visualizers/visualizer';
 import {
   ButterchurnVisualizer as butterchurn,
   VudioVisualizer as vudio,

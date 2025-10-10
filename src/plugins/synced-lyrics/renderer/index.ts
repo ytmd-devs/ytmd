@@ -3,8 +3,7 @@ import { waitForElement } from '@/utils/wait-for-element';
 
 import { selectors, tabStates } from './utils';
 import { setConfig, setCurrentTime } from './renderer';
-
-import { fetchLyrics } from '../providers';
+import { fetchLyrics } from './store';
 
 import type { RendererContext } from '@/types/contexts';
 import type { YoutubePlayer } from '@/types/youtube-player';

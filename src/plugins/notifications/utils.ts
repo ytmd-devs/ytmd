@@ -1,11 +1,11 @@
 import path from 'node:path';
 import fs from 'node:fs';
 
-import { app, NativeImage } from 'electron';
+import { app, type NativeImage } from 'electron';
 
 import youtubeMusicIcon from '@assets/youtube-music.png?asset&asarUnpack';
 
-import { SongInfo } from '@/providers/song-info';
+import { type SongInfo } from '@/providers/song-info';
 
 import type { NotificationsPluginConfig } from './index';
 

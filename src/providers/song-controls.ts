@@ -1,5 +1,7 @@
 // This is used for to control the songs
-import { BrowserWindow, ipcMain } from 'electron';
+import { type BrowserWindow, ipcMain } from 'electron';
+
+import { LikeType } from '@/types/datahost-get-state';
 
 // see protocol-handler.ts
 type ArgsType<T> = T | string[] | undefined;
@@ -34,7 +36,7 @@ const parseStringFromArgsType = (args: ArgsType<string>) => {
   }
 };
 
-export default (win: BrowserWindow) => {
+export const getSongControls = (win: BrowserWindow) => {
   return {
     // Playback
     previous: () => win.webContents.send('ytmd:previous-video'),
@@ -42,8 +44,8 @@ export default (win: BrowserWindow) => {
     play: () => win.webContents.send('ytmd:play'),
     pause: () => win.webContents.send('ytmd:pause'),
     playPause: () => win.webContents.send('ytmd:toggle-play'),
-    like: () => win.webContents.send('ytmd:update-like', 'LIKE'),
-    dislike: () => win.webContents.send('ytmd:update-like', 'DISLIKE'),
+    like: () => win.webContents.send('ytmd:update-like', LikeType.Like),
+    dislike: () => win.webContents.send('ytmd:update-like', LikeType.Dislike),
     seekTo: (seconds: ArgsType<number>) => {
       const secondsNumber = parseNumberFromArgsType(seconds);
       if (secondsNumber !== null) {

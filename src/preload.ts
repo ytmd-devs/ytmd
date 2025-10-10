@@ -1,12 +1,12 @@
 import {
   contextBridge,
   ipcRenderer,
-  IpcRendererEvent,
+  type IpcRendererEvent,
   webFrame,
 } from 'electron';
 import is from 'electron-is';
 
-import config from './config';
+import * as config from './config';
 
 import mduiStyleSheet from "@assets/mdui.css?inline"
 

@@ -150,6 +150,13 @@
           "visual-tweaks": {
             "label": "Візуальні налаштування",
             "submenu": {
+              "custom-window-title": {
+                "label": "Налаштування заголовка вікна",
+                "prompt": {
+                  "label": "Введіть власний заголовок вікна: (залиште порожнім, щоб вимкнути)",
+                  "placeholder": "Приклад: YouTube Music"
+                }
+              },
               "like-buttons": {
                 "default": "За замовчуванням",
                 "force-show": "Завжди показувати",
@@ -409,6 +416,19 @@
         }
       }
     },
+    "custom-output-device": {
+      "description": "Налаштування власного пристрою для відтворення пісень",
+      "menu": {
+        "device-selector": "Обрати пристрій"
+      },
+      "name": "Спеціальний пристрій виводу",
+      "prompt": {
+        "device-selector": {
+          "label": "Оберіть пристрій для виводу медіа",
+          "title": "Оберіть пристрій виводу"
+        }
+      }
+    },
     "disable-autoplay": {
       "description": "Запуск пісні в режимі \"пауза\"",
       "menu": {
@@ -432,7 +452,13 @@
         "hide-duration-left": "Приховати тривалість, яка залишилася",
         "hide-github-button": "Приховати посилання на GitHub",
         "play-on-youtube-music": "Слухати на YouTube Music",
-        "set-inactivity-timeout": "Встановити тайм-аут бездіяльності"
+        "set-inactivity-timeout": "Встановити тайм-аут бездіяльності",
+        "set-status-display-type": {
+          "label": "Статус",
+          "submenu": {
+            "youtube-music": "Відтворення з YouTube Music"
+          }
+        }
       },
       "name": "Активність Discord",
       "prompt": {

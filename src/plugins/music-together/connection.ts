@@ -1,4 +1,9 @@
-import { DataConnection, Peer, PeerError, PeerErrorType } from 'peerjs';
+import {
+  type DataConnection,
+  Peer,
+  type PeerError,
+  PeerErrorType,
+} from 'peerjs';
 import delay from 'delay';
 
 import type { Permission, Profile, VideoData } from './types';

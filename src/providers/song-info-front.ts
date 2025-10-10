@@ -1,7 +1,8 @@
 import { singleton } from './decorators';
 
+import { LikeType, type GetState } from '@/types/datahost-get-state';
+
 import type { YoutubePlayer } from '@/types/youtube-player';
-import type { GetState } from '@/types/datahost-get-state';
 import type {
   AlbumDetails,
   PlayerOverlays,
@@ -10,6 +11,8 @@ import type {
 
 import type { SongInfo } from './song-info';
 import type { VideoDataChanged } from '@/types/video-data-changed';
+
+const DATAUPDATED_FALLBACK_TIMEOUT_MS = 1500;
 
 let songInfo: SongInfo = {} as SongInfo;
 export const getSongInfo = () => songInfo;
@@ -79,12 +82,52 @@ export const setupRepeatChangedListener = singleton(() => {
   );
 });
 
+const mapLikeStatus = (status: string | null): LikeType =>
+  Object.values(LikeType).includes(status as LikeType)
+    ? (status as LikeType)
+    : LikeType.Indifferent;
+
+const LIKE_STATUS_ATTRIBUTE = 'like-status';
+
+export const setupLikeChangedListener = singleton(() => {
+  const likeDislikeObserver = new MutationObserver((mutations) => {
+    window.ipcRenderer.send(
+      'ytmd:like-changed',
+      mapLikeStatus(
+        (mutations[0].target as HTMLElement)?.getAttribute?.(
+          LIKE_STATUS_ATTRIBUTE,
+        ),
+      ),
+    );
+  });
+  const likeButtonRenderer = document.querySelector('#like-button-renderer');
+  if (likeButtonRenderer) {
+    likeDislikeObserver.observe(likeButtonRenderer, {
+      attributes: true,
+      attributeFilter: [LIKE_STATUS_ATTRIBUTE],
+    });
+
+    // Emit the initial value as well; as it's persistent between launches.
+    window.ipcRenderer.send(
+      'ytmd:like-changed',
+      mapLikeStatus(likeButtonRenderer.getAttribute?.(LIKE_STATUS_ATTRIBUTE)),
+    );
+  }
+});
+
 export const setupVolumeChangedListener = singleton((api: YoutubePlayer) => {
   document.querySelector('video')?.addEventListener('volumechange', () => {
-    window.ipcRenderer.send('ytmd:volume-changed', api.getVolume());
+    window.ipcRenderer.send('ytmd:volume-changed', {
+      state: api.getVolume(),
+      isMuted: api.isMuted(),
+    });
   });
+
   // Emit the initial value as well; as it's persistent between launches.
-  window.ipcRenderer.send('ytmd:volume-changed', api.getVolume());
+  window.ipcRenderer.send('ytmd:volume-changed', {
+    state: api.getVolume(),
+    isMuted: api.isMuted(),
+  });
 });
 
 export const setupShuffleChangedListener = singleton(() => {
@@ -104,6 +147,7 @@ export const setupShuffleChangedListener = singleton(() => {
 
   observer.observe(playerBar, {
     attributes: true,
+    attributeFilter: ['shuffle-on'],
     childList: false,
     subtree: false,
   });
@@ -127,6 +171,7 @@ export const setupFullScreenChangedListener = singleton(() => {
 
   observer.observe(playerBar, {
     attributes: true,
+    attributeFilter: ['player-fullscreened'],
     childList: false,
     subtree: false,
   });
@@ -148,9 +193,13 @@ export const setupAutoPlayChangedListener = singleton(() => {
   });
 });
 
-export default (api: YoutubePlayer) => {
+export const setupSongInfo = (api: YoutubePlayer) => {
   window.ipcRenderer.on('ytmd:setup-time-changed-listener', () => {
     setupTimeChangedListener();
+  });
+
+  window.ipcRenderer.on('ytmd:setup-like-changed-listener', () => {
+    setupLikeChangedListener();
   });
 
   window.ipcRenderer.on('ytmd:setup-repeat-changed-listener', () => {
@@ -206,12 +255,25 @@ export default (api: YoutubePlayer) => {
     );
 
   const waitingEvent = new Set<string>();
+  const waitingTimeouts = new Map<string, NodeJS.Timeout>();
+
+  const clearVideoTimeout = (videoId: string) => {
+    const timeoutId = waitingTimeouts.get(videoId);
+
+    if (timeoutId) {
+      clearTimeout(timeoutId);
+      waitingTimeouts.delete(videoId);
+    }
+  };
+
   // Name = "dataloaded" and abit later "dataupdated"
+  // Sometimes "dataupdated" is not fired, so we need to fallback to "dataloaded"
   api.addEventListener('videodatachange', (name, videoData) => {
     videoEventDispatcher(name, videoData);
 
     if (name === 'dataupdated' && waitingEvent.has(videoData.videoId)) {
       waitingEvent.delete(videoData.videoId);
+      clearVideoTimeout(videoData.videoId);
       sendSongInfo(videoData);
     } else if (name === 'dataloaded') {
       const video = document.querySelector<HTMLVideoElement>('video');
@@ -222,7 +284,18 @@ export default (api: YoutubePlayer) => {
         video?.addEventListener(status, playPausedHandlers[status]);
       }
 
+      clearVideoTimeout(videoData.videoId);
       waitingEvent.add(videoData.videoId);
+
+      const timeoutId = setTimeout(() => {
+        if (waitingEvent.has(videoData.videoId)) {
+          waitingEvent.delete(videoData.videoId);
+          waitingTimeouts.delete(videoData.videoId);
+          sendSongInfo(videoData);
+        }
+      }, DATAUPDATED_FALLBACK_TIMEOUT_MS);
+
+      waitingTimeouts.set(videoData.videoId, timeoutId);
     }
   });
 

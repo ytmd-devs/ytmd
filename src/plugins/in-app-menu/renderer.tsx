@@ -2,7 +2,7 @@ import { createSignal } from 'solid-js';
 import { render } from 'solid-js/web';
 
 import { TitleBar } from './renderer/TitleBar';
-import { defaultInAppMenuConfig, InAppMenuConfig } from './constants';
+import { defaultInAppMenuConfig, type InAppMenuConfig } from './constants';
 
 import type { RendererContext } from '@/types/contexts';
 
@@ -33,12 +33,12 @@ export const onRendererLoad = async ({
   render(
     () => (
       <TitleBar
-        ipc={ipc}
-        isMacOS={isMacOS}
         enableController={
           isNotWindowsOrMacOS && !config().hideDOMWindowControls
         }
         initialCollapsed={window.mainConfig.get('options.hideMenu')}
+        ipc={ipc}
+        isMacOS={isMacOS}
       />
     ),
     document.body,

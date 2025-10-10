@@ -1,4 +1,4 @@
-import { app, BrowserWindow } from 'electron';
+import { app, type BrowserWindow } from 'electron';
 import is from 'electron-is';
 
 export const getFolder = (customFolder?: string) =>

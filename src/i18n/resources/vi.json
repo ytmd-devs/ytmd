@@ -421,6 +421,19 @@
         }
       }
     },
+    "custom-output-device": {
+      "description": "Cài đặt cho thiết bị đầu ra tùy chỉnh cho bài hát",
+      "menu": {
+        "device-selector": "Chọn thiết bị"
+      },
+      "name": "Thiết bị đầu ra tùy chỉnh",
+      "prompt": {
+        "device-selector": {
+          "label": "Chọn thiết bị phát làm đầu ra để dùng",
+          "title": "Chọn thiết bị đầu ra"
+        }
+      }
+    },
     "disable-autoplay": {
       "description": "Làm nhạc bắt đầu ở chế độ \"tạm dừng\". Ngoài ra có thể dừng nhạc khi khởi động ứng dụng (nếu có bật tính năng \"Tiếp tục bài hát cuối cùng khi ứng dụng khởi động\")",
       "menu": {
@@ -444,9 +457,17 @@
         "hide-duration-left": "Ẩn thời lượng còn lại",
         "hide-github-button": "Ẩn nút liên kết GitHub",
         "play-on-youtube-music": "Phát trong Youtube Music",
-        "set-inactivity-timeout": "Đặt thời gian chờ không hoạt động"
+        "set-inactivity-timeout": "Đặt thời gian chờ không hoạt động",
+        "set-status-display-type": {
+          "label": "Văn bản trạng thái",
+          "submenu": {
+            "artist": "Đang nghe nhạc của {artist}",
+            "title": "Đang nghe nhạc {song title}",
+            "youtube-music": "Đang nghe Youtube Music"
+          }
+        }
       },
-      "name": "Discord Rich Presence",
+      "name": "Tích hợp trạng thái Discord",
       "prompt": {
         "set-inactivity-timeout": {
           "label": "Nhập thời gian chờ không hoạt động tính bằng giây:",
@@ -736,6 +757,7 @@
         "listenbrainz": {
           "token": "Nhập mã người dùng ListenBrainz"
         },
+        "scrobble-alternative-artist": "Dùng nghệ sĩ thay thế",
         "scrobble-alternative-title": "Dùng tiêu đề thay thế",
         "scrobble-other-media": "Scrobber nội dung khác"
       },
@@ -821,6 +843,14 @@
           "label": "Làm cho lời bài hát được đồng bộ hoàn hảo",
           "tooltip": "Tính toán chính xác đến mili giây thời gian hiển thị dòng tiếp theo (có thể có tác động nhỏ đến hiệu suất)"
         },
+        "preferred-provider": {
+          "label": "Nhà cung cấp ưa thích",
+          "none": {
+            "label": "Không có",
+            "tooltip": "Không có nhà cung cấp ưu thích"
+          },
+          "tooltip": "Chọn nhà cung cấp lời bài hát mặc định để sử dụng"
+        },
         "romanization": {
           "label": "Chuyển lời bài hát sang chữ Latin",
           "tooltip": "Nếu lời bài hát đang ở ngôn ngữ khác, thử hiển thị phiên bản bảng chữ cái La-tinh."
@@ -852,6 +882,27 @@
     "touchbar": {
       "description": "Thêm tiện ích TouchBar cho người dùng macOS",
       "name": "TouchBar"
+    },
+    "transparent-player": {
+      "description": "Làm cho cửa sổ ứng dụng có hiệu ứng trong suốt",
+      "menu": {
+        "opacity": {
+          "label": "Độ mờ",
+          "submenu": {
+            "percent": "{{opacity}}%"
+          }
+        },
+        "type": {
+          "label": "Kiểu nền",
+          "submenu": {
+            "acrylic": "Acrylic",
+            "mica": "Mica",
+            "none": "Không có",
+            "tabbed": "Tabbed"
+          }
+        }
+      },
+      "name": "Trình phát trong suốt"
     },
     "tuna-obs": {
       "description": "Tích hợp với plugin Tuna của OBS",

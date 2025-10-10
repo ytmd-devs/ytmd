@@ -15,7 +15,7 @@ import {
   type BrowserWindowConstructorOptions,
 } from 'electron';
 import enhanceWebRequest, {
-  BetterSession,
+  type BetterSession,
 } from '@jellybrick/electron-better-web-request';
 import is from 'electron-is';
 import unhandled from 'electron-unhandled';
@@ -29,7 +29,7 @@ import { allPlugins, mainPlugins } from 'virtual:plugins';
 
 import { languageResources } from 'virtual:i18n';
 
-import config from '@/config';
+import * as config from '@/config';
 
 import { refreshMenu, setApplicationMenu } from '@/menu';
 import { fileExists, injectCSS, injectCSSAsFile } from '@/plugins/utils/main';
@@ -60,13 +60,6 @@ import ErrorHtmlAsset from '@assets/error.html?asset';
 import { defaultAuthProxyConfig } from '@/plugins/auth-proxy-adapter/config';
 
 import type { PluginConfig } from '@/types/plugins';
-
-if (!is.macOS()) {
-  delete (await allPlugins())['touchbar'];
-}
-if (!is.windows()) {
-  delete (await allPlugins())['taskbar-mediacontrol'];
-}
 
 // Catch errors and log them
 unhandled({
@@ -356,10 +349,12 @@ async function createMainWindow() {
     delete decorations.titleBarStyle;
   }
 
-  const win = new BrowserWindow({
+  const electronWindowSettings: Electron.BrowserWindowConstructorOptions = {
     icon,
     width: windowSize.width,
     height: windowSize.height,
+    minWidth: 325,
+    minHeight: 425,
     backgroundColor: '#000',
     show: false,
     webPreferences: {
@@ -374,7 +369,10 @@ async function createMainWindow() {
           }),
     },
     ...decorations,
-  });
+  };
+
+  const win = new BrowserWindow(electronWindowSettings);
+
   await initHook(win);
   initTheme(win);
 

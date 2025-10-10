@@ -1,7 +1,60 @@
 {
+  "common": {
+    "console": {
+      "plugins": {
+        "execute-failed": "Error ao executar o plugin {{pluginName}}::{{contextName}}",
+        "executed-at-ms": "O plugin {{pluginName}}::{{contextName}} foi executado a {{ms}}milisegundos",
+        "initialize-failed": "Erro ao iniciar o plugin \"{{pluginName}}\"",
+        "load-all": "Cargando todos os plugins",
+        "load-failed": "Erro ao cargar o plugin \"{{pluginName}}\"",
+        "loaded": "Plugin \"{{pluginName}}\" cargado",
+        "unload-failed": "Erro descargando o plugin {{pluginName}}",
+        "unloaded": "Plugin {{pluginName}} decargado"
+      }
+    }
+  },
   "language": {
     "code": "gl",
     "local-name": "Galego",
-    "name": "Galician"
+    "name": "Galego"
+  },
+  "main": {
+    "console": {
+      "did-finish-load": {
+        "dev-tools": "Carga completada. DevTools aberto"
+      },
+      "i18n": {
+        "loaded": "i18n cargado"
+      },
+      "second-instance": {
+        "receive-command": "Recibido comando sobre protocolo \"{{command}}\""
+      },
+      "theme": {
+        "css-file-not-found": "O arquivo CSS \"{{cssFile}}\" non existe, ignorando"
+      },
+      "unresponsive": {
+        "details": "Error irresponsivo!\n{{error}}"
+      },
+      "when-ready": {
+        "clearing-cache-after-20s": "Limpando a caché da app"
+      },
+      "window": {
+        "tried-to-render-offscreen": "A ventana tentou de renderizarse fora da pantalla, windowSize={{windowSize}}, displaySize={{displaySize}}, position={{position}}"
+      }
+    },
+    "dialog": {
+      "hide-menu-enabled": {
+        "detail": "O menú está agochado, use 'Alt' para mostralo (ou 'Escape' se usa o menú dentro da app)",
+        "message": "Esconder Menú está deshabilitado",
+        "title": "Esconder Menú Habilitado"
+      },
+      "need-to-restart": {
+        "buttons": {
+          "later": "Despois",
+          "restart-now": "Reiniciar Agora"
+        },
+        "detail": "O plugin \"{{pluginName}}\" precisa dun reinicio para tomar efecto"
+      }
+    }
   }
 }

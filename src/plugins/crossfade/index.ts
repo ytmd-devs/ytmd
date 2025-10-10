@@ -1,6 +1,5 @@
 import { Innertube } from 'youtubei.js';
 
-import { BrowserWindow } from 'electron';
 import prompt from 'custom-electron-prompt';
 
 import { Howl } from 'howler';
@@ -12,6 +11,7 @@ import { VolumeFader } from './fader';
 
 import { t } from '@/i18n';
 
+import type { BrowserWindow } from 'electron';
 import type { RendererContext } from '@/types/contexts';
 
 export type CrossfadePluginConfig = {

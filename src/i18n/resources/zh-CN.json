@@ -421,6 +421,19 @@
         }
       }
     },
+    "custom-output-device": {
+      "description": "配置歌曲的自定义输出媒体设备",
+      "menu": {
+        "device-selector": "选择设备"
+      },
+      "name": "自定义输出设备",
+      "prompt": {
+        "device-selector": {
+          "label": "选择要使用的输出媒体设备",
+          "title": "选择输出设备"
+        }
+      }
+    },
     "disable-autoplay": {
       "description": "让曲目开始时处于 “暂停” 模式",
       "menu": {
@@ -444,7 +457,15 @@
         "hide-duration-left": "隐藏剩余时长",
         "hide-github-button": "隐藏 GitHub 链接按钮",
         "play-on-youtube-music": "转至 YouTube Music 播放",
-        "set-inactivity-timeout": "设置非活跃时长"
+        "set-inactivity-timeout": "设置非活跃时长",
+        "set-status-display-type": {
+          "label": "状态文本",
+          "submenu": {
+            "artist": "在听 {artist}",
+            "title": "在听 {song title}",
+            "youtube-music": "在听 YouTube Music"
+          }
+        }
       },
       "name": "Discord Rich Presence 状态显示",
       "prompt": {
@@ -736,6 +757,7 @@
         "listenbrainz": {
           "token": "输入 ListenBrainz 用户令牌"
         },
+        "scrobble-alternative-artist": "使用替代艺术家",
         "scrobble-alternative-title": "使用替代标题",
         "scrobble-other-media": "记录其他媒体文件"
       },
@@ -821,6 +843,14 @@
           "label": "让滚动歌词完全同步",
           "tooltip": "以毫秒精度估算下句歌词的显示时间（可能对性能有小幅影响）"
         },
+        "preferred-provider": {
+          "label": "首选歌词源",
+          "none": {
+            "label": "无",
+            "tooltip": "没有首选的歌词源"
+          },
+          "tooltip": "选择默认要用的源"
+        },
         "romanization": {
           "label": "将歌词罗马化",
           "tooltip": "如果歌词以不同语言显示，试着展示拉丁字母版本。"
@@ -852,6 +882,27 @@
     "touchbar": {
       "description": "为 macOS 用户启用 TouchBar 支持",
       "name": "TouchBar"
+    },
+    "transparent-player": {
+      "description": "把应用窗口变透明",
+      "menu": {
+        "opacity": {
+          "label": "不透明",
+          "submenu": {
+            "percent": "{{opacity}}%"
+          }
+        },
+        "type": {
+          "label": "类型",
+          "submenu": {
+            "acrylic": "亚克力",
+            "mica": "云母",
+            "none": "无",
+            "tabbed": "标签"
+          }
+        }
+      },
+      "name": "透明播放器"
     },
     "tuna-obs": {
       "description": "与 OBS 的 Tuna 插件集成",

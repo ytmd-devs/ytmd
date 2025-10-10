@@ -45,6 +45,11 @@ export enum LikeType {
   Like = 'LIKE',
 }
 
+export interface VolumeState {
+  state: number;
+  isMuted: boolean;
+}
+
 export interface MultiSelect {
   multiSelectedItems: Entities;
   latestMultiSelectIndex: number;

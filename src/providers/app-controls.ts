@@ -2,7 +2,7 @@ import path from 'node:path';
 
 import { app, BrowserWindow, ipcMain } from 'electron';
 
-import config from '@/config';
+import * as config from '@/config';
 
 export const restart = () => restartInternal();
 

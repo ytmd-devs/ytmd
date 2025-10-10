@@ -1,10 +1,9 @@
 import prompt from 'custom-electron-prompt';
 
-import { DataConnection } from 'peerjs';
-
 import { t } from '@/i18n';
 import { createPlugin } from '@/utils';
 import promptOptions from '@/providers/prompt-options';
+import { waitForElement } from '@/utils/wait-for-element';
 
 import {
   getDefaultProfile,
@@ -21,8 +20,7 @@ import { createSettingPopup } from './ui/setting';
 import settingHTML from './templates/setting.html?raw';
 import style from './style.css?inline';
 
-import { waitForElement } from '@/utils/wait-for-element';
-
+import type { DataConnection } from 'peerjs';
 import type { YoutubePlayer } from '@/types/youtube-player';
 import type { RendererContext } from '@/types/contexts';
 import type { VideoDataChanged } from '@/types/video-data-changed';

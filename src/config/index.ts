@@ -1,32 +1,38 @@
 import { deepmergeCustom } from 'deepmerge-ts';
 
-import defaultConfig, { DefaultConfig } from './defaults';
-
-import store, { IStore } from './store';
-import plugins from './plugins';
-
+import { store, type IStore } from './store';
 import { restart } from '@/providers/app-controls';
+
+import { defaultConfig, type DefaultConfig } from './defaults';
 
 const deepmerge = deepmergeCustom({
   mergeArrays: false,
 });
 
-const set = (key: string, value: unknown) => {
+export { defaultConfig } from './defaults';
+export * as plugins from './plugins';
+
+export const set = (key: string, value: unknown) => {
   store.set(key, value);
 };
-const setPartial = (key: string, value: object, defaultValue?: object) => {
+
+export const setPartial = (
+  key: string,
+  value: object,
+  defaultValue?: object,
+) => {
   const newValue = deepmerge(defaultValue ?? {}, store.get(key) ?? {}, value);
   store.set(key, newValue);
 };
 
-function setMenuOption(key: string, value: unknown) {
+export const setMenuOption = (key: string, value: unknown) => {
   set(key, value);
   if (store.get('options.restartOnConfigChanges')) {
     restart();
   }
-}
+};
 
-const getStore = () => store.store;
+export const getStore = () => store.store;
 
 // MAGIC OF TYPESCRIPT
 
@@ -77,19 +83,11 @@ export type PathValue<T, K extends string> =
     ? PathValue<T[A], B>
     : T;
 
-const get = <Key extends Paths<DefaultConfig>>(key: Key) =>
+export const get = <Key extends Paths<DefaultConfig>>(key: Key) =>
   store.get(key) as PathValue<DefaultConfig, typeof key>;
 
-export default {
-  defaultConfig,
-  get,
-  set,
-  setPartial,
-  setMenuOption,
-  getStore,
-  edit: () => store.openInEditor(),
-  watch(cb: Parameters<IStore['onDidAnyChange']>[0]) {
-    store.onDidAnyChange(cb);
-  },
-  plugins,
+export const edit = () => store.openInEditor();
+
+export const watch = (cb: Parameters<IStore['onDidAnyChange']>[0]) => {
+  store.onDidAnyChange(cb);
 };

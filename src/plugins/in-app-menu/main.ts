@@ -3,10 +3,10 @@ import { register } from 'electron-localshortcut';
 import {
   BrowserWindow,
   Menu,
-  MenuItem,
+  type MenuItem,
   ipcMain,
   nativeImage,
-  WebContents,
+  type WebContents,
 } from 'electron';
 
 import type { BackendContext } from '@/types/contexts';

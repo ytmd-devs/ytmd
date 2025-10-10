@@ -81,8 +81,13 @@ function createRequestBody(
       ? songInfo.alternativeTitle
       : songInfo.title;
 
+  const artist =
+    config.alternativeArtist && songInfo.tags?.at(0) !== undefined
+      ? songInfo.tags?.at(0)
+      : songInfo.artist;
+
   const trackMetadata = {
-    artist_name: songInfo.artist,
+    artist_name: artist,
     track_name: title,
     release_name: songInfo.album ?? undefined,
     additional_info: {

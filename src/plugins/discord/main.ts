@@ -1,6 +1,6 @@
 import { app } from 'electron';
 
-import registerCallback, { SongInfoEvent } from '@/providers/song-info';
+import { registerCallback, SongInfoEvent } from '@/providers/song-info';
 import { createBackend } from '@/utils';
 
 import { DiscordService } from './discord-service';

@@ -1,8 +1,15 @@
 import { createPlugin } from '@/utils';
 import { t } from '@/i18n';
-import { MenuContext } from '@/types/contexts';
-import { MenuTemplate } from '@/menu';
-import { defaultPresets, presetConfigs, Preset, FilterConfig } from './presets';
+
+import {
+  defaultPresets,
+  presetConfigs,
+  type Preset,
+  type FilterConfig,
+} from './presets';
+
+import type { MenuContext } from '@/types/contexts';
+import type { MenuTemplate } from '@/menu';
 
 export type EqualizerPluginConfig = {
   enabled: boolean;

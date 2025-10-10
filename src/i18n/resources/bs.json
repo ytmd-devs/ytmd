@@ -150,6 +150,13 @@
           "visual-tweaks": {
             "label": "Vizualne postavke",
             "submenu": {
+              "custom-window-title": {
+                "label": "Prilagođeni naslov prozora",
+                "prompt": {
+                  "label": "Unesite vlastiti naslov prozora: (ostavite prazno za isključenje)",
+                  "placeholder": "Primjer: YouTube Music"
+                }
+              },
               "like-buttons": {
                 "default": "Zadano",
                 "force-show": "Prinudno prikaži",
@@ -166,10 +173,28 @@
                   "remove-theme": "Jeste li sigurni da želite ukloniti prilagođenu temu?",
                   "remove-theme-message": "Ovo će ukloniti prilagođenu temu"
                 },
-                "label": "Tema"
+                "label": "Tema",
+                "submenu": {
+                  "import-css-file": "Uvoz prilagođene CSS datoteke",
+                  "no-theme": "Bez teme"
+                }
               }
             }
           }
+        }
+      },
+      "plugins": {
+        "enabled": "Omogući",
+        "label": "Dodaci",
+        "new": "Novo"
+      }
+    }
+  },
+  "plugins": {
+    "ambient-mode": {
+      "menu": {
+        "quality": {
+          "label": "Kvalitet"
         }
       }
     }
