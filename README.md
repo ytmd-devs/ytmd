@@ -2,12 +2,12 @@
 
 # :pear: Pear Desktop
 
-[![GitHub release](https://img.shields.io/github/release/pear-devs/pear-desktop.svg?style=for-the-badge&logo=youtube-music)](https://github.com/pear-devs/pear-desktop/releases/)
+[![GitHub release](https://img.shields.io/github/release/pear-devs/pear-desktop.svg?style=for-the-badge)](https://github.com/pear-devs/pear-desktop/releases/)
 [![GitHub license](https://img.shields.io/github/license/pear-devs/pear-desktop.svg?style=for-the-badge)](https://github.com/pear-devs/pear-desktop/blob/master/license)
 [![eslint code style](https://img.shields.io/badge/code_style-eslint-5ed9c7.svg?style=for-the-badge)](https://github.com/pear-devs/pear-desktop/blob/master/eslint.config.mjs)
-[![Build status](https://img.shields.io/github/actions/workflow/status/pear-devs/pear-desktop/build.yml?branch=master&style=for-the-badge&logo=youtube-music)](https://GitHub.com/pear-devs/pear-desktop/releases/)
-[![GitHub All Releases](https://img.shields.io/github/downloads/pear-devs/pear-desktop/total?style=for-the-badge&logo=youtube-music)](https://GitHub.com/pear-devs/pear-desktop/releases/)
-[![AUR](https://img.shields.io/aur/version/youtube-music-bin?color=blueviolet&style=for-the-badge&logo=youtube-music)](https://aur.archlinux.org/packages/youtube-music-bin)
+[![Build status](https://img.shields.io/github/actions/workflow/status/pear-devs/pear-desktop/build.yml?branch=master&style=for-the-badge)](https://GitHub.com/pear-devs/pear-desktop/releases/)
+[![GitHub All Releases](https://img.shields.io/github/downloads/pear-devs/pear-desktop/total?style=for-the-badge)](https://GitHub.com/pear-devs/pear-desktop/releases/)
+<!--[![AUR](https://img.shields.io/aur/version/youtube-music-bin?color=blueviolet&style=for-the-badge)](https://aur.archlinux.org/packages/youtube-music-bin)-->
 [![Known Vulnerabilities](https://snyk.io/test/github/pear-devs/pear-desktop/badge.svg)](https://snyk.io/test/github/pear-devs/pear-desktop)
 
 </div>
@@ -67,12 +67,12 @@ latest version.
 
 ### Arch Linux
 
-Install the [`youtube-music-bin`](https://aur.archlinux.org/packages/youtube-music-bin) package from the AUR. For AUR installation instructions, take a look at
+Install the [`pear-desktop`](https://aur.archlinux.org/packages/pear-desktop) package from the AUR. For AUR installation instructions, take a look at
 this [wiki page](https://wiki.archlinux.org/index.php/Arch_User_Repository#Installing_packages).
 
 ### macOS
 
-You can install the app using Homebrew (see the [cask definition](https://github.com/th-ch/homebrew-youtube-music)):
+You can install the app using Homebrew (see the [cask definition](https://github.com/pear-devs/pear-desktop-homebrew)):
 
 ```bash
 brew install pear-devs/pear-desktop
@@ -86,23 +86,23 @@ If you install the app manually and get an error "is damaged and can’t be open
 
 ### Windows
 
-You can use the [Scoop package manager](https://scoop.sh) to install the `youtube-music` package from
+You can use the [Scoop package manager](https://scoop.sh) to install the `pear-desktop` package from
 the [`extras` bucket](https://github.com/ScoopInstaller/Extras).
 
 ```bash
 scoop bucket add extras
-scoop install extras/youtube-music
+scoop install extras/pear-desktop
 ```
 
 Alternately you can use [Winget](https://learn.microsoft.com/en-us/windows/package-manager/winget/), Windows 11s
-official CLI package manager to install the `th-ch.YouTubeMusic` package.
+official CLI package manager to install the `pear-devs.pear-desktop` package.
 
 *Note: Microsoft Defender SmartScreen might block the installation since it is from an "unknown publisher". This is also
 true for the manual installation when trying to run the executable(.exe) after a manual download here on github (same
 file).*
 
 ```bash
-winget install th-ch.YouTubeMusic
+winget install pear-devs.pear-desktop
 ```
 
 #### How to install without a network connection? (in Windows)
@@ -190,7 +190,7 @@ export default createPlugin({
       console.log(await context.ipc.invoke('some-event'));
     },
     // Only renderer available hook
-    onPlayerApiReady(api: YoutubePlayer, context: RendererContext) {
+    onPlayerApiReady(api, context) {
       // set plugin config easily
       context.setConfig({ myConfig: api.getVolume() });
     },
