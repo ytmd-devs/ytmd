@@ -1,5 +1,4 @@
 import { render } from 'solid-js/web';
-
 import { createSignal, Show } from 'solid-js';
 
 import forceHideStyle from './force-hide.css?inline';
@@ -108,6 +107,7 @@ export default createPlugin({
 
   renderer: {
     config: null as VideoTogglePluginConfig | null,
+    setVideoVisible: null as ((visible: boolean) => void) | null,
     applyStyleClass: (config: VideoTogglePluginConfig) => {
       if (config.forceHide) {
         document.body.classList.add('video-toggle-force-hide');
@@ -119,6 +119,7 @@ export default createPlugin({
     },
     async start({ getConfig }) {
       const config = await getConfig();
+      this.config = config;
       this.applyStyleClass(config);
 
       if (config.forceHide) {
@@ -155,9 +156,14 @@ export default createPlugin({
     },
     async onPlayerApiReady(api, { getConfig }) {
       const [showButton, setShowButton] = createSignal(true);
+      const [videoVisible, setVideoVisible] = createSignal(true);
 
       const config = await getConfig();
       this.config = config;
+
+      setVideoVisible(!config.hideVideo);
+
+      this.setVideoVisible = setVideoVisible;
 
       const moveVolumeHud = (await window.mainConfig.plugins.isEnabled(
         'precise-volume',
@@ -177,14 +183,11 @@ export default createPlugin({
         () => (
           <Show when={showButton()}>
             <VideoSwitchButton
-              onChange={(e) => {
-                const target = e.target as HTMLInputElement;
-
-                setVideoState(target.checked);
+              initialVideoVisible={videoVisible()}
+              onVideoToggle={(showVideo) => {
+                setVideoVisible(showVideo);
+                setVideoState(showVideo);
               }}
-              onClick={(e) => e.stopPropagation()}
-              songButtonText={t('plugins.video-toggle.templates.button-song')}
-              videoButtonText={t('plugins.video-toggle.templates.button-video')}
             />
           </Show>
         ),
@@ -206,28 +209,35 @@ export default createPlugin({
         }
         window.mainConfig.plugins.setOptions('video-toggle', this.config);
 
-        const checkbox = document.querySelector<HTMLInputElement>(
-          '.video-switch-button-checkbox',
-        ); // custom mode
-        if (checkbox) checkbox.checked = !this.config?.hideVideo;
-
         if (player) {
-          player.style.margin = showVideo ? '' : 'auto 0px';
           player.setAttribute(
             'playback-mode',
             showVideo ? 'OMV_PREFERRED' : 'ATV_PREFERRED',
           );
 
-          document.querySelector<HTMLElement>(
+          const videoElement = document.querySelector<HTMLElement>(
             '#song-video.ytmusic-player',
-          )!.style.display = showVideo ? 'block' : 'none';
-          document.querySelector<HTMLElement>('#song-image')!.style.display =
-            showVideo ? 'none' : 'block';
+          );
+          const imageElement =
+            document.querySelector<HTMLElement>('#song-image');
 
-          if (showVideo && video && !video.style.top) {
-            video.style.top = `${
-              (player.clientHeight - video.clientHeight) / 2
-            }px`;
+          if (videoElement && imageElement) {
+            if (showVideo) {
+              videoElement.style.display = 'block';
+              imageElement.style.display = 'none';
+
+              if (video && !video.style.top) {
+                video.style.top = `${(player.clientHeight - video.clientHeight) / 2}px`;
+              }
+            } else {
+              videoElement.style.display = 'none';
+              imageElement.style.display = 'block';
+
+              imageElement.style.position = 'relative';
+              imageElement.style.width = '100%';
+              imageElement.style.height = '100%';
+              imageElement.style.margin = 'auto';
+            }
           }
 
           moveVolumeHud(showVideo);
@@ -314,42 +324,70 @@ export default createPlugin({
       };
 
       if (config.mode !== 'native' && config.mode != 'disabled') {
-        setTimeout(() => {
-          const playerSelector =
-            document.querySelector<HTMLVideoElement>('#player');
-          if (!playerSelector) return;
+        const playerSelector =
+          document.querySelector<HTMLVideoElement>('#player');
+        if (!playerSelector) return;
 
-          playerSelector.prepend(switchButtonContainer);
-          setVideoState(!config.hideVideo);
-          forcePlaybackMode();
-          if (video) {
-            video.style.height = 'auto';
+        const initializeConsistentStyling = () => {
+          const videoElement = document.querySelector<HTMLElement>(
+            '#song-video.ytmusic-player',
+          );
+          const imageElement =
+            document.querySelector<HTMLElement>('#song-image');
+
+          if (videoElement && imageElement) {
+            videoElement.style.position = 'relative';
+            videoElement.style.margin = 'auto';
+            imageElement.style.position = 'relative';
+            imageElement.style.margin = 'auto';
           }
-          video?.addEventListener('ytmd:src-changed', videoStarted);
-          observeThumbnail();
-          videoStarted();
-          switch (config.align) {
-            case 'right': {
-              switchButtonContainer.style.justifyContent = 'flex-end';
-              return;
-            }
+        };
 
-            case 'middle': {
-              switchButtonContainer.style.justifyContent = 'center';
-              return;
-            }
+        playerSelector.prepend(switchButtonContainer);
+        initializeConsistentStyling();
+        setVideoState(!config.hideVideo);
+        forcePlaybackMode();
+        if (video) {
+          video.style.height = 'auto';
+        }
+        video?.addEventListener('ytmd:src-changed', videoStarted);
+        observeThumbnail();
+        videoStarted();
 
-            default:
-            case 'left': {
-              switchButtonContainer.style.justifyContent = 'flex-start';
-            }
+        if (this.config) {
+          const container = document.getElementById(
+            'ytmd-video-toggle-switch-button-container',
+          );
+          if (container) {
+            const alignmentMap = {
+              right: 'flex-end',
+              middle: 'center',
+              left: 'flex-start',
+            };
+            container.style.justifyContent = alignmentMap[this.config.align];
           }
-        }, 0);
+        }
       }
     },
     onConfigChange(newConfig) {
       this.config = newConfig;
       this.applyStyleClass(newConfig);
+
+      const container = document.getElementById(
+        'ytmd-video-toggle-switch-button-container',
+      );
+      if (container) {
+        const alignmentMap = {
+          right: 'flex-end',
+          middle: 'center',
+          left: 'flex-start',
+        };
+        container.style.justifyContent = alignmentMap[newConfig.align];
+      }
+
+      if (this.setVideoVisible) {
+        this.setVideoVisible(!newConfig.hideVideo);
+      }
     },
   },
 });
