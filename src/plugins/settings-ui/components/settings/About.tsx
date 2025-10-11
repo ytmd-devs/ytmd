@@ -1,4 +1,5 @@
 import { For, lazy, Show } from 'solid-js';
+
 import { getAppVersion, getPlatform, getVersions } from '../../renderer';
 
 interface ImplProps {

@@ -1,5 +1,6 @@
-import { createEffect, createSignal, lazy, Setter, Show } from 'solid-js';
+import { createEffect, createSignal, lazy, type Setter, Show } from 'solid-js';
 import { languageResources } from 'virtual:i18n';
+
 import { t } from '@/i18n';
 
 import * as data from '@/providers/extracted-data';
@@ -99,56 +100,56 @@ const Impl = (props: {
         }
       >
         <Toggle
-          label={t$('start-at-login')}
           description="Start youtube-music on login"
-          value={startOnLogin().value}
+          label={t$('start-at-login')}
           toggle={() =>
             setStartOnLogin(({ value }) => ({ dirty: true, value: !value }))
           }
+          value={startOnLogin().value}
         />
       </Show>
 
       <Select
-        label={t$('language.label') + ' (Language)'}
         description="Select the language for the application"
-        value={language().value}
-        options={props.languages}
+        label={t$('language.label') + ' (Language)'}
         onSelect={(value) => setLanguage({ dirty: true, value })}
+        options={props.languages}
+        value={language().value}
       />
 
       <Select
-        label={t$('starting-page.label')}
         description="Select which page to show when the application starts"
-        value={startingPage().value}
-        options={startingPages}
+        label={t$('starting-page.label')}
         onSelect={(value) => setStartingPage({ dirty: true, value })}
+        options={startingPages}
+        value={startingPage().value}
       />
 
       <Toggle
-        label={t$('auto-update')}
         description="Automatically get notified about new versions"
-        value={autoUpdates().value}
+        label={t$('auto-update')}
         toggle={() =>
           setAutoUpdates(({ value }) => ({ dirty: true, value: !value }))
         }
+        value={autoUpdates().value}
       />
 
       <Toggle
-        label={t$('resume-on-start')}
         description="Resume last song when app starts"
-        value={autoResume().value}
+        label={t$('resume-on-start')}
         toggle={() =>
           setAutoResume(({ value }) => ({ dirty: true, value: !value }))
         }
+        value={autoResume().value}
       />
 
       <Toggle
-        label={t$('always-on-top')}
         description="Keep the application window on top of other windows"
-        value={alwaysOnTop().value}
+        label={t$('always-on-top')}
         toggle={() =>
           setAlwaysOnTop(({ value }) => ({ dirty: true, value: !value }))
         }
+        value={alwaysOnTop().value}
       />
 
       <Show
@@ -158,12 +159,12 @@ const Impl = (props: {
         }
       >
         <Toggle
-          label={t$('hide-menu.label')}
           description="Hide the menu bar"
-          value={hideMenu().value}
+          label={t$('hide-menu.label')}
           toggle={() =>
             setHideMenu(({ value }) => ({ dirty: true, value: !value }))
           }
+          value={hideMenu().value}
         />
       </Show>
     </div>
@@ -196,6 +197,6 @@ export default lazy(async () => {
   const platform = await getPlatform();
 
   return {
-    default: () => <Impl platform={platform} languages={languages} />,
+    default: () => <Impl languages={languages} platform={platform} />,
   };
 });

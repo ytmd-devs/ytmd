@@ -1,8 +1,10 @@
-import config from '@/config';
-import Plugins from '@/config/plugins';
-import { createBackend } from '@/utils';
 import is from 'electron-is';
-import { app } from 'electron/main';
+import { app } from 'electron';
+
+import * as config from '@/config';
+import * as Plugins from '@/config/plugins';
+
+import { createBackend } from '@/utils';
 
 const getVersion = () => app.getVersion();
 

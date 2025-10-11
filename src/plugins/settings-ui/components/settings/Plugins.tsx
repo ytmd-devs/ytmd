@@ -7,9 +7,12 @@ import {
   Switch,
 } from 'solid-js';
 import { allPlugins } from 'virtual:plugins';
-import { plugins, Config } from '../../renderer';
+
 import { jaroWinkler } from '@skyra/jaro-winkler';
+
 import { debounce } from '@/providers/decorators';
+
+import { plugins, Config } from '../../renderer';
 
 interface PluginCardProps {
   id: string;
@@ -49,7 +52,6 @@ const PluginCard = (props: PluginCardProps) => {
       <div class="ytmd-sui-plg-right">
         <div
           class={`ytmd-sui-toggle ${conf().enabled ? 'active' : ''}`}
-          tabIndex={1}
           onClick={toggle}
           onKeyUp={(e) => {
             e.preventDefault();
@@ -57,12 +59,12 @@ const PluginCard = (props: PluginCardProps) => {
               toggle();
             }
           }}
+          tabIndex={1}
         >
-          <div class="ytmd-sui-toggleHandle"></div>
+          <div class="ytmd-sui-toggleHandle" />
         </div>
         <div
           class="ytmd-sui-plg-options"
-          tabIndex={1}
           onClick={plgOptions}
           onKeyUp={(e) => {
             e.preventDefault();
@@ -70,13 +72,14 @@ const PluginCard = (props: PluginCardProps) => {
               plgOptions();
             }
           }}
+          tabIndex={1}
         >
           <Switch fallback={<tp-yt-paper-icon-button icon="yt-icons:info" />}>
             <Match when={hasSettings()}>
               <tp-yt-paper-icon-button
                 icon="yt-icons:tune"
                 style={{ padding: '0.5rem', cursor: 'pointer' }}
-              ></tp-yt-paper-icon-button>
+              />
             </Match>
           </Switch>
         </div>
@@ -149,10 +152,10 @@ export default () => {
       <div class="ytmd-sui-pluginsFilters">
         <div class="ytmd-sui-pluginsSearch">
           <input
-            type="text"
             class="ytmd-sui-input"
             onInput={(e) => setQuery(e.currentTarget.value)}
             placeholder="Search plugins..."
+            type="text"
           />
         </div>
         <div class="ytmd-sui-settingText">
@@ -161,9 +164,9 @@ export default () => {
           </div>
           <select
             class="ytmd-sui-select"
+            onChange={(e) => setFilter(e.target.value as any)}
             tabIndex={1}
             value="all"
-            onChange={(e) => setFilter(e.target.value as any)}
           >
             <option value="all">All</option>
             <option value="enabled">Enabled</option>
@@ -177,10 +180,10 @@ export default () => {
             const plugin = allPlugins[pluginId];
             return (
               <PluginCard
+                authors={plugin.authors}
+                description={plugin.description?.() ?? 'N/A'}
                 id={pluginId}
                 label={plugin.name()}
-                description={plugin.description?.() ?? 'N/A'}
-                authors={plugin.authors}
               />
             );
           }}

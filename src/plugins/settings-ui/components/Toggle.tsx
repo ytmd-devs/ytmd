@@ -15,15 +15,15 @@ export const Toggle = (props: ToggleProps) => {
         </div>
         <div
           class={`ytmd-sui-toggle ${props.value ? 'active' : ''}`}
-          tabIndex={1}
           onClick={props.toggle}
           onKeyUp={(e) => {
             if (e.key === 'Enter' || e.key === ' ') {
               props.toggle();
             }
           }}
+          tabIndex={1}
         >
-          <div class="ytmd-sui-toggleHandle"></div>
+          <div class="ytmd-sui-toggleHandle" />
         </div>
       </div>
     </div>

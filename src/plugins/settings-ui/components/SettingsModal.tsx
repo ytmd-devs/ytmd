@@ -13,7 +13,7 @@ import Appearance from './settings/Appearance';
 import Plugins from './settings/Plugins';
 import Advanced from './settings/Advanced';
 import About from './settings/About';
-import { Icons } from '@/types/icons';
+import { type Icons } from '@/types/icons';
 import { t } from '@/i18n';
 
 interface SidebarItem {

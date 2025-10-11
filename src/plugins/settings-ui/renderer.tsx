@@ -2,13 +2,14 @@
 
 import { createSignal, Show } from 'solid-js';
 import { render, Portal } from 'solid-js/web';
+
 import { t } from '@/i18n';
 
 import { createRenderer } from '@/utils';
 import { waitForElement } from '@/utils/wait-for-element';
 import SettingsModal from './components/SettingsModal';
-import { DefaultConfig } from '@/config/defaults';
-import { Paths, PathValue } from '@/config';
+import { type DefaultConfig } from '@/config/defaults';
+import { type Paths, type PathValue } from '@/config';
 
 const SettingsButton = () => {
   const [showModal, setShowModal] = createSignal(false);
@@ -49,19 +50,19 @@ const dispose = () => {
 // prettier-ignore
 const injectButton = (guide: HTMLElement) => {
   const items = guide.querySelector(
-    "ytmusic-guide-section-renderer[is-primary] > #items",
+    'ytmusic-guide-section-renderer[is-primary] > #items',
   );
   if (!items) return;
 
   // dispose of the previous button
   cleanup[guide.id]?.();
 
-  const entry = document.createElement("div");
+  const entry = document.createElement('div');
   {
-    const isMini = guide.id.startsWith("mini-");
+    const isMini = guide.id.startsWith('mini-');
 
-    entry.classList.add("ytmd-settings-ui-btn");
-    entry.classList.add(isMini ? "mini" : "normal");
+    entry.classList.add('ytmd-settings-ui-btn');
+    entry.classList.add(isMini ? 'mini' : 'normal');
 
     items.appendChild(entry);
   }
@@ -69,7 +70,7 @@ const injectButton = (guide: HTMLElement) => {
   const dispose = render(SettingsButton, entry);
   cleanup[guide.id] = () => {
     dispose();
-    entry.remove()
+    entry.remove();
   };
 };
 
@@ -78,18 +79,18 @@ export let getPlatform = () => Promise.resolve('');
 export let getVersions = () => Promise.resolve({});
 
 // stubs
-export let plugins = {
+export const plugins = {
   enable: (_id: string) => {},
   disable: (_id: string) => {},
 };
 
-const [_config, setConfig] = createSignal<DefaultConfig>({} as any);
+const [_config, setConfig] = createSignal<DefaultConfig>({} as DefaultConfig);
 
 // prettier-ignore
-export let Config = {
+export const Config = {
   signal: _config,
-  get: <Key extends Paths<DefaultConfig>>(key: Key) => void 0 as any as Promise<PathValue<DefaultConfig, typeof key>>,
-  set: <Key extends Paths<DefaultConfig>>(key: Key, _value: PathValue<DefaultConfig, typeof key>) => Promise.resolve(),
+  get: <Key extends Paths<DefaultConfig>>(_key: Key) => undefined as unknown as Promise<PathValue<DefaultConfig, typeof _key>>,
+  set: <Key extends Paths<DefaultConfig>>(_key: Key, _value: PathValue<DefaultConfig, typeof _key>) => Promise.resolve(),
 };
 
 export const renderer = createRenderer({

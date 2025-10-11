@@ -19,9 +19,9 @@ export const Select = (props: SelectProps) => {
         </div>
         <select
           class="ytmd-sui-select"
+          onChange={(e) => props.onSelect(e.currentTarget.value)}
           tabIndex={1}
           value={props.value}
-          onChange={(e) => props.onSelect(e.currentTarget.value)}
         >
           <For each={props.options}>
             {({ label, value }) => <option value={value}>{label}</option>}

@@ -1,7 +1,9 @@
 import { createSignal } from 'solid-js';
+
+import { t } from '@/i18n';
+
 import { Toggle } from '../Toggle';
 import { Select } from '../Select';
-import { t } from '@/i18n';
 
 export default () => {
   const [removeUpgradeButton, setRemoveUpgradeButton] = createSignal(false);
@@ -13,22 +15,22 @@ export default () => {
   return (
     <div class="ytmd-sui-settingsContent">
       <Toggle
-        label={t$('remove-upgrade-button')}
         description="Remove the upgrade button from the sidebar"
-        value={removeUpgradeButton()}
+        label={t$('remove-upgrade-button')}
         toggle={() => setRemoveUpgradeButton((old) => !old)}
+        value={removeUpgradeButton()}
       />
 
       <Select
-        label={t$('like-buttons.label')}
         description="todo!()"
-        value={likeButtons()}
+        label={t$('like-buttons.label')}
+        onSelect={(value) => setLikeButtons(value)}
         options={[
           { label: t$('like-buttons.default'), value: '' },
           { label: t$('like-buttons.force-show'), value: 'force' },
           { label: t$('like-buttons.hide'), value: 'hide' },
         ]}
-        onSelect={(value) => setLikeButtons(value)}
+        value={likeButtons()}
       />
     </div>
   );
