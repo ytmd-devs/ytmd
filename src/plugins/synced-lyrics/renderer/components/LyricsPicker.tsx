@@ -15,6 +15,14 @@ import {
 
 import * as z from 'zod';
 
+import { IconChevronLeft } from '@mdui/icons/chevron-left.js';
+import { IconChevronRight } from '@mdui/icons/chevron-right.js';
+import { IconCheckCircle } from '@mdui/icons/check-circle.js';
+import { IconWarning } from '@mdui/icons/warning.js';
+import { IconError } from '@mdui/icons/error.js';
+import { IconStar } from '@mdui/icons/star.js';
+import { IconStarBorder } from '@mdui/icons/star-border.js';
+
 import {
   type ProviderName,
   ProviderNames,
@@ -25,14 +33,6 @@ import {
 import { currentLyrics, lyricsStore, setLyricsStore } from '../store';
 import { _ytAPI } from '../index';
 import { config } from '../renderer';
-
-import '@mdui/icons/chevron-left.js';
-import '@mdui/icons/chevron-right.js';
-import '@mdui/icons/check-circle.js';
-import '@mdui/icons/warning.js';
-import '@mdui/icons/error.js';
-import '@mdui/icons/star.js';
-import '@mdui/icons/star-border.js';
 
 import type { PlayerAPIEvents } from '@/types/player-api-events';
 
@@ -82,6 +82,17 @@ const [hasManuallySwitchedProvider, setHasManuallySwitchedProvider] =
 export const LyricsPicker = (props: {
   setStickRef: Setter<HTMLElement | null>;
 }) => {
+  const doNotTreeShake = [
+    IconChevronLeft,
+    IconChevronRight,
+    IconCheckCircle,
+    IconWarning,
+    IconError,
+    IconStar,
+    IconStarBorder,
+  ];
+  ((a) => {})(doNotTreeShake);
+
   const [videoId, setVideoId] = createSignal<string | null>(null);
   const [starredProvider, setStarredProvider] =
     createSignal<ProviderName | null>(null);

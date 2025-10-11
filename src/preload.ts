@@ -8,18 +8,18 @@ import is from 'electron-is';
 
 import * as config from './config';
 
-import mduiStyleSheet from '@assets/mdui.css?inline';
+import {
+  forceLoadPreloadPlugin,
+  forceUnloadPreloadPlugin,
+  loadAllPreloadPlugins,
+} from './loader/preload';
+import { loadI18n, setLanguage } from '@/i18n';
 
-contextBridge.exposeInMainWorld(
-  'litIssuedWarnings',
-  new Set([
-    'Lit is in dev mode. Not recommended for production! See https://lit.dev/msg/dev-mode for more information.',
-    'Shadow DOM is being polyfilled via `ShadyDOM` but the `polyfill-support` module has not been loaded. See https://lit.dev/msg/polyfill-support-missing for more information.',
-  ]),
-);
+// @ts-expect-error dummy
+globalThis.customElements = { define() {} };
 
 new MutationObserver((mutations, observer) => {
-  outer: for (const mutation of mutations) {
+  for (const mutation of mutations) {
     for (const node of mutation.addedNodes) {
       const elem = node as HTMLElement;
       if (elem.tagName !== 'SCRIPT') continue;
@@ -32,22 +32,11 @@ new MutationObserver((mutations, observer) => {
 
       script.remove();
 
-      const styleSheet = new CSSStyleSheet();
-      styleSheet.replaceSync(mduiStyleSheet);
-      document.adoptedStyleSheets.push(styleSheet);
-
       observer.disconnect();
-      break outer;
+      return;
     }
   }
 }).observe(document, { subtree: true, childList: true });
-
-import {
-  forceLoadPreloadPlugin,
-  forceUnloadPreloadPlugin,
-  loadAllPreloadPlugins,
-} from './loader/preload';
-import { loadI18n, setLanguage } from '@/i18n';
 
 loadI18n().then(async () => {
   await setLanguage(config.get('options.language') ?? 'en');

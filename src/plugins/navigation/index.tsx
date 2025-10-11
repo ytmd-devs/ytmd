@@ -1,12 +1,11 @@
 import { render } from 'solid-js/web';
 
-import style from './style.css?inline';
+import { IconChevronLeft } from '@mdui/icons/chevron-left.js';
+import { IconChevronRight } from '@mdui/icons/chevron-right.js';
+
 import { createPlugin } from '@/utils';
 
 import { t } from '@/i18n';
-
-import '@mdui/icons/chevron-left.js';
-import '@mdui/icons/chevron-right.js';
 
 export default createPlugin({
   name: () => t('plugins.navigation.name'),
@@ -18,6 +17,9 @@ export default createPlugin({
   renderer: {
     buttonContainer: document.createElement('div'),
     start() {
+      const doNotTreeShake = [IconChevronLeft, IconChevronRight];
+      ((a) => {})(doNotTreeShake);
+
       if (!this.buttonContainer) {
         this.buttonContainer = document.createElement('div');
       }
