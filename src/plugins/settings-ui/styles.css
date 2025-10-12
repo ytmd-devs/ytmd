@@ -2,6 +2,16 @@
   --ytmd-sui-border-radius: 0.5rem;
 }
 
+.pear-settings-dialog::part(panel) {
+  padding: 0.5rem;
+  width: 80vw;
+  min-width: 80vw;
+  max-width: 80vw;
+  height: 600px;
+  overflow-y: hidden;
+  background-color: rgb(var(--mdui-color-surface));
+}
+
 .ytmd-settings-ui-btn {
   --ytmusic-guide-entry-background-color: rgba(0, 0, 0, 0);
 
