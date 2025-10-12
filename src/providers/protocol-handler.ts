@@ -4,7 +4,7 @@ import { app, type BrowserWindow } from 'electron';
 
 import { getSongControls } from './song-controls';
 
-export const APP_PROTOCOL = 'youtubemusic';
+export const APP_PROTOCOL = 'peardesktop';
 
 let protocolHandler: ((cmd: string, ...args: string[]) => void) | undefined;
 

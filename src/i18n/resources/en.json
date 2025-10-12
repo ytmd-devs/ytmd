@@ -160,7 +160,7 @@
                 "label": "Custom window title",
                 "prompt": {
                   "label": "Enter custom window title: (leave empty to disable)",
-                  "placeholder": "Example: YouTube Music"
+                  "placeholder": "Example: Pear Desktop"
                 }
               },
               "remove-upgrade-button": "Remove upgrade button",
@@ -208,8 +208,8 @@
       "restart": "Restart App",
       "show": "Show window",
       "tooltip": {
-        "default": "YouTube Music",
-        "with-song-info": "YouTube Music: {{artist}} - {{title}}"
+        "default": "Pear Desktop",
+        "with-song-info": "Pear Desktop: {{artist}} - {{title}}"
       }
     }
   },
@@ -287,7 +287,7 @@
       "name": "Ambient Mode"
     },
     "amuse": {
-      "description": "Adds YouTube Music support for the Amuse now playing widget by 6K Labs",
+      "description": "Adds Pear Desktop support for the Amuse now playing widget by 6K Labs",
       "name": "Amuse",
       "response": {
         "query": "Amuse API server is running. GET /query to get song info."
@@ -369,11 +369,11 @@
       "name": "Blur Navigation Bar"
     },
     "bypass-age-restrictions": {
-      "description": "Bypass YouTube's age verification",
+      "description": "Bypass Music Player's age verification",
       "name": "Bypass Age Restrictions"
     },
     "captions-selector": {
-      "description": "Caption selector for YouTube Music audio tracks",
+      "description": "Caption selector for Pear Desktop audio tracks",
       "menu": {
         "autoload": "Automatically select last used caption",
         "disable-captions": "No captions by default"
@@ -456,12 +456,12 @@
         "disconnected": "Disconnected",
         "hide-duration-left": "Hide duration left",
         "hide-github-button": "Hide GitHub link Button",
-        "play-on-youtube-music": "Play on YouTube Music",
+        "play-on-pear-desktop": "Play on Pear Desktop",
         "set-inactivity-timeout": "Set inactivity timeout",
         "set-status-display-type": {
           "label": "Status text",
           "submenu": {
-            "youtube-music": "Listening to YouTube Music",
+            "pear-desktop": "Listening to Pear Desktop",
             "artist": "Listening to {artist}",
             "title": "Listening to {song title}"
           }

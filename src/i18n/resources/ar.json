@@ -153,7 +153,7 @@
               "custom-window-title": {
                 "label": "عنوان نافذة مخصص",
                 "prompt": {
-                  "placeholder": "مثال: YouTube Music"
+                  "placeholder": "مثال: Pear Desktop"
                 }
               },
               "like-buttons": {
@@ -286,7 +286,7 @@
       "name": "الوضع المحيطي"
     },
     "amuse": {
-      "description": "تكامل دعم YouTube Music مع ويدجت Amuse لعرض الأغنية قيد التشغيل، من إنتاج 6K Labs",
+      "description": "تكامل دعم Pear Desktop مع ويدجت Amuse لعرض الأغنية قيد التشغيل، من إنتاج 6K Labs",
       "name": "تلسيه",
       "response": {
         "query": "خادم Amuse API قيد التشغيل. استخدم GET /query للحصول على معلومات الأغنية."
@@ -372,7 +372,7 @@
       "name": "تجاوز التحقق من السن"
     },
     "captions-selector": {
-      "description": "محدد ترجمات المقاطع الصوتية لYoutube Music",
+      "description": "محدد ترجمات المقاطع الصوتية لPear Desktop",
       "menu": {
         "autoload": "اختار اخر ترجمة مستخدمة تلقائيا",
         "disable-captions": "لا توجد ترجمات بشكل افتراضي"
@@ -447,7 +447,7 @@
         "disconnected": "قطع الاتصال",
         "hide-duration-left": "إخفاء المدة المتبقية",
         "hide-github-button": "إخفاء زر رابط GitHub",
-        "play-on-youtube-music": "شغل في YouTube Music",
+        "play-on-pear-desktop": "شغل في Pear Desktop",
         "set-inactivity-timeout": "ضبط مهلة عدم النشاط"
       },
       "name": "حالة ديسكورد",

@@ -91,8 +91,8 @@ function createRequestBody(
     track_name: title,
     release_name: songInfo.album ?? undefined,
     additional_info: {
-      media_player: 'YouTube Music Desktop App',
-      submission_client: 'YouTube Music Desktop App - Scrobbler Plugin',
+      media_player: 'Pear Desktop App',
+      submission_client: 'Pear Desktop App - Scrobbler Plugin',
       origin_url: songInfo.url,
       duration: songInfo.songDuration,
     },

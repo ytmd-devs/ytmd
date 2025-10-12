@@ -29,7 +29,7 @@ import type { SongInfo } from '@/providers/song-info';
 import type { BackendContext } from '@/types/contexts';
 import type { APIServerConfig } from '../../config';
 import type { HonoApp } from '../types';
-import type { QueueResponse } from '@/types/youtube-music-desktop-internal';
+import type { QueueResponse } from '@/types/music-player-desktop-internal';
 import type { Context } from 'hono';
 
 const routes = {
@@ -630,7 +630,7 @@ export const register = (
   app.openapi(routes.getShuffleState, async (ctx) => {
     const stateResponsePromise = new Promise<boolean>((resolve) => {
       ipcMain.once(
-        'ytmd:get-shuffle-response',
+        'peard:get-shuffle-response',
         (_, isShuffled: boolean | undefined) => {
           return resolve(!!isShuffled);
         },
@@ -693,7 +693,7 @@ export const register = (
   app.openapi(routes.getFullscreenState, async (ctx) => {
     const stateResponsePromise = new Promise<boolean>((resolve) => {
       ipcMain.once(
-        'ytmd:set-fullscreen',
+        'peard:set-fullscreen',
         (_, isFullscreen: boolean | undefined) => {
           return resolve(!!isFullscreen);
         },
@@ -728,7 +728,7 @@ export const register = (
   // Queue
   const queueInfo = async (ctx: Context) => {
     const queueResponsePromise = new Promise<QueueResponse>((resolve) => {
-      ipcMain.once('ytmd:get-queue-response', (_, queue: QueueResponse) => {
+      ipcMain.once('peard:get-queue-response', (_, queue: QueueResponse) => {
         return resolve(queue);
       });
 

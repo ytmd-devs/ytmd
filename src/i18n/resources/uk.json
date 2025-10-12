@@ -154,7 +154,7 @@
                 "label": "Налаштування заголовка вікна",
                 "prompt": {
                   "label": "Введіть власний заголовок вікна: (залиште порожнім, щоб вимкнути)",
-                  "placeholder": "Приклад: YouTube Music"
+                  "placeholder": "Приклад: Pear Desktop"
                 }
               },
               "like-buttons": {
@@ -208,8 +208,8 @@
       "restart": "Перезапустити програму",
       "show": "Показати вікно",
       "tooltip": {
-        "default": "YouTube Music",
-        "with-song-info": "YouTube Music: {{artist}} - {{title}}"
+        "default": "Pear Desktop",
+        "with-song-info": "Pear Desktop: {{artist}} - {{title}}"
       }
     }
   },
@@ -287,7 +287,7 @@
       "name": "Режим навколишнього середовища"
     },
     "amuse": {
-      "description": "Додає підтримку YouTube Music для віджета Amuse now playing від 6K Labs",
+      "description": "Додає підтримку Pear Desktop для віджета Amuse now playing від 6K Labs",
       "name": "Amuse",
       "response": {
         "query": "Сервер Amuse API запущено. Запит GET /query для отримання інформації про пісню."
@@ -369,11 +369,11 @@
       "name": "Розмиття панелі навігації"
     },
     "bypass-age-restrictions": {
-      "description": "Обхід перевірки віку на YouTube",
+      "description": "Обхід перевірки віку на Music Player",
       "name": "Обхід вікових обмежень"
     },
     "captions-selector": {
-      "description": "Вибір субтитрів для аудіодоріжок YouTube Music",
+      "description": "Вибір субтитрів для аудіодоріжок Pear Desktop",
       "menu": {
         "autoload": "Автоматичний вибір останніх використаних субтитрів",
         "disable-captions": "За замовчуванням субтитри відсутні"
@@ -451,12 +451,12 @@
         "disconnected": "Від'єднано",
         "hide-duration-left": "Приховати тривалість, яка залишилася",
         "hide-github-button": "Приховати посилання на GitHub",
-        "play-on-youtube-music": "Слухати на YouTube Music",
+        "play-on-pear-desktop": "Слухати на Pear Desktop",
         "set-inactivity-timeout": "Встановити тайм-аут бездіяльності",
         "set-status-display-type": {
           "label": "Статус",
           "submenu": {
-            "youtube-music": "Відтворення з YouTube Music"
+            "pear-desktop": "Відтворення з Pear Desktop"
           }
         }
       },

@@ -154,7 +154,7 @@
                 "label": "Benutzerdefinierter Fenstertitel",
                 "prompt": {
                   "label": "Benutzerdefinierten Fenstertitel eingeben: (zum Deaktivieren leer lassen)",
-                  "placeholder": "Beispiel: YouTube Music"
+                  "placeholder": "Beispiel: Pear Desktop"
                 }
               },
               "like-buttons": {
@@ -208,8 +208,8 @@
       "restart": "Anwendung neu starten",
       "show": "Fenster anzeigen",
       "tooltip": {
-        "default": "YouTube Musik",
-        "with-song-info": "YouTube Musik: {{artist}} - {{title}}"
+        "default": "Pear Desktop",
+        "with-song-info": "Pear Desktop: {{artist}} - {{title}}"
       }
     }
   },
@@ -369,11 +369,11 @@
       "name": "Verschwommene Navigationsleiste"
     },
     "bypass-age-restrictions": {
-      "description": "Youtubes Altersbestätigung umgehen",
+      "description": "Music Player Altersbestätigung umgehen",
       "name": "Altersbeschränkungen umgehen"
     },
     "captions-selector": {
-      "description": "Untertitelwähler für YouTube Music-Audio-Lieder",
+      "description": "Untertitelwähler für Pear Desktop-Audio-Lieder",
       "menu": {
         "autoload": "Wähle automatisch den zuletzt verwendeten Untertitel",
         "disable-captions": "Standardmäßig keine Untertitel"
@@ -456,14 +456,14 @@
         "disconnected": "Getrennt",
         "hide-duration-left": "Verbleibende Zeit verstecken",
         "hide-github-button": "Knopf mit Link zu GitHub ausblenden",
-        "play-on-youtube-music": "Auf YouTube Music abspielen",
+        "play-on-pear-desktop": "Auf Pear Desktop abspielen",
         "set-inactivity-timeout": "Inaktivitätstimeout setzen",
         "set-status-display-type": {
           "label": "Status Text",
           "submenu": {
             "artist": "Hört {artist} zu",
             "title": "Du hörst {song title}",
-            "youtube-music": "Hört YouTube Music"
+            "pear-desktop": "Hört Pear Desktop"
           }
         }
       },

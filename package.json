@@ -1,17 +1,17 @@
 {
-  "name": "youtube-music",
-  "desktopName": "com.github.th_ch.youtube_music",
-  "productName": "YouTube Music",
+  "name": "pear-music",
+  "desktopName": "com.github.th_ch.pear_music",
+  "productName": "Pear Desktop",
   "version": "3.11.0",
-  "description": "YouTube Music Desktop App - including custom plugins",
+  "description": "Pear Desktop App - including custom plugins",
   "main": "./dist/main/index.js",
   "type": "module",
   "license": "MIT",
-  "repository": "th-ch/youtube-music",
+  "repository": "pear-devs/pear-desktop",
   "author": {
     "name": "th-ch",
     "email": "th-ch@users.noreply.github.com",
-    "url": "https://github.com/th-ch/youtube-music"
+    "url": "https://github.com/pear-devs/pear-desktop"
   },
   "scripts": {
     "test": "pnpm playwright test",
@@ -123,7 +123,6 @@
     "peerjs": "1.5.5",
     "semver": "7.7.2",
     "serve": "14.2.5",
-    "simple-youtube-age-restriction-bypass": "github:organization/Simple-YouTube-Age-Restriction-Bypass#v2.5.9",
     "socks": "2.8.7",
     "solid-element": "1.9.1",
     "solid-floating-ui": "0.3.1",

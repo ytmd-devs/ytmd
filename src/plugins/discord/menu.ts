@@ -18,7 +18,7 @@ const registerRefreshOnce = singleton((refreshMenu: () => void) => {
 
 const DiscordStatusDisplayTypeLabels: Record<StatusDisplayType, string> = {
   [StatusDisplayType.Name]:
-    'plugins.discord.menu.set-status-display-type.submenu.youtube-music',
+    'plugins.discord.menu.set-status-display-type.submenu.pear-desktop',
   [StatusDisplayType.State]:
     'plugins.discord.menu.set-status-display-type.submenu.artist',
   [StatusDisplayType.Details]:
@@ -67,12 +67,12 @@ export const onMenu = async ({
       },
     },
     {
-      label: t('plugins.discord.menu.play-on-youtube-music'),
+      label: t('plugins.discord.menu.play-on-pear-desktop'),
       type: 'checkbox',
-      checked: config.playOnYouTubeMusic,
+      checked: config.playOnPearDesktop,
       click(item: Electron.MenuItem) {
         setConfig({
-          playOnYouTubeMusic: item.checked,
+          playOnPearDesktop: item.checked,
         });
       },
     },

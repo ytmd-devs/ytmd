@@ -7,7 +7,7 @@
 [![eslint code style](https://img.shields.io/badge/code_style-eslint-5ed9c7.svg?style=for-the-badge)](https://github.com/pear-devs/pear-desktop/blob/master/eslint.config.mjs)
 [![Build status](https://img.shields.io/github/actions/workflow/status/pear-devs/pear-desktop/build.yml?branch=master&style=for-the-badge)](https://GitHub.com/pear-devs/pear-desktop/releases/)
 [![GitHub All Releases](https://img.shields.io/github/downloads/pear-devs/pear-desktop/total?style=for-the-badge)](https://GitHub.com/pear-devs/pear-desktop/releases/)
-<!--[![AUR](https://img.shields.io/aur/version/youtube-music-bin?color=blueviolet&style=for-the-badge)](https://aur.archlinux.org/packages/youtube-music-bin)-->
+<!--[![AUR](https://img.shields.io/aur/version/pear-desktop-bin?color=blueviolet&style=for-the-badge)](https://aur.archlinux.org/packages/pear-desktop-bin)-->
 [![Known Vulnerabilities](https://snyk.io/test/github/pear-devs/pear-desktop/badge.svg)](https://snyk.io/test/github/pear-devs/pear-desktop)
 
 </div>
@@ -16,19 +16,19 @@
 
 - Native look & feel extension
 
-> [!IMPORTANT] 
+> [!IMPORTANT]
 > ⚠️ Disclaimer
 >
 > **No Affiliation**
-> 
+>
 > This project, and its contributors, are not affiliated with, authorized by, endorsed by, or in any way officially connected with Google LLC, YouTube, or any of their subsidiaries or affiliates. **This is an independent, non-profit, and unofficial extension developed by a team of volunteers with the goal of providing a desktop experience.**
 >
 > **Trademarks**
-> 
+>
 > The names "Google" and "YouTube Music", as well as related names, marks, emblems, and images, are registered trademarks of their respective owners. Any use of these trademarks is for identification and reference purposes only and does not imply any association with the trademark holder. We have no intention of infringing upon these trademarks or causing harm to the trademark holders.
 >
 > **Limitation of Liability**
-> 
+>
 > This application (extension) is provided "AS IS", and you use it at your own risk. In no event shall the developers or contributors be liable for any claim, damages, or other liability, including any legal consequences, arising from, out of, or in connection with the software or the use or other dealings in the software. The responsibility for any and all outcomes of using this software rests entirely with the user.
 
 ## Content
@@ -53,11 +53,11 @@
 
 ## Translation
 
-You can help with translation on [Hosted Weblate](https://hosted.weblate.org/projects/youtube-music/).
+You can help with translation on [Hosted Weblate](https://bit.ly/48n5YF7).
 
-<a href="https://hosted.weblate.org/engage/youtube-music/">
-  <img src="https://hosted.weblate.org/widget/youtube-music/i18n/multi-auto.svg" alt="translation status" />
-  <img src="https://hosted.weblate.org/widget/youtube-music/i18n/287x66-black.png" alt="translation status 2" />
+<a href="https://bit.ly/48n5YF7/">
+  <img src="https://bit.ly/4q83L6S" alt="translation status" />
+  <img src="https://bit.ly/4h3zBxo" alt="translation status 2" />
 </a>
 
 ## Download
