@@ -10,6 +10,7 @@ env:
 
 jobs:
   build:
+    if: github.event.pull_request.draft == false
     name: Build YouTube Music
     runs-on: ${{ matrix.os }}
     strategy:
