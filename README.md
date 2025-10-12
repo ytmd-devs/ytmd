@@ -67,7 +67,7 @@ latest version.
 
 ### Arch Linux
 
-Install the [`pear-desktop`](https://aur.archlinux.org/packages/pear-desktop) package from the AUR. For AUR installation instructions, take a look at
+Install the [`youtube-music`](https://aur.archlinux.org/packages/youtube-music) package from the AUR. For AUR installation instructions, take a look at
 this [wiki page](https://wiki.archlinux.org/index.php/Arch_User_Repository#Installing_packages).
 
 ### macOS
