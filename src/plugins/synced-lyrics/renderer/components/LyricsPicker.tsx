@@ -23,6 +23,8 @@ import { IconError } from '@mdui/icons/error.js';
 import { IconStar } from '@mdui/icons/star.js';
 import { IconStarBorder } from '@mdui/icons/star-border.js';
 
+import { LitElementWrapper } from '@/solit';
+
 import {
   type ProviderName,
   ProviderNames,
@@ -58,7 +60,9 @@ const providerBias = (p: ProviderName) =>
   (lyricsStore.lyrics[p].state === 'done' ? 1 : -1) +
   (lyricsStore.lyrics[p].data?.lines?.length ? 2 : -1) +
   // eslint-disable-next-line prettier/prettier
-  (lyricsStore.lyrics[p].data?.lines?.length && p === ProviderNames.YTMusic ? 1 : 0) +
+  (lyricsStore.lyrics[p].data?.lines?.length && p === ProviderNames.YTMusic
+    ? 1
+    : 0) +
   (lyricsStore.lyrics[p].data?.lyrics ? 1 : -1);
 
 const pickBestProvider = () => {
@@ -82,17 +86,6 @@ const [hasManuallySwitchedProvider, setHasManuallySwitchedProvider] =
 export const LyricsPicker = (props: {
   setStickRef: Setter<HTMLElement | null>;
 }) => {
-  const doNotTreeShake = [
-    IconChevronLeft,
-    IconChevronRight,
-    IconCheckCircle,
-    IconWarning,
-    IconError,
-    IconStar,
-    IconStarBorder,
-  ];
-  ((a) => {})(doNotTreeShake);
-
   const [videoId, setVideoId] = createSignal<string | null>(null);
   const [starredProvider, setStarredProvider] =
     createSignal<ProviderName | null>(null);
@@ -200,10 +193,13 @@ export const LyricsPicker = (props: {
     <div class="lyrics-picker" ref={props.setStickRef}>
       <div class="lyrics-picker-left">
         <mdui-button-icon>
-          <mdui-icon-chevron-left
-            onClick={previous}
-            role="button"
-            style={{ padding: '5px' }}
+          <LitElementWrapper
+            elementClass={IconChevronLeft}
+            props={{
+              onClick: previous,
+              role: 'button',
+              style: { padding: '5px' },
+            }}
           />
         </mdui-button-icon>
       </div>
@@ -234,9 +230,9 @@ export const LyricsPicker = (props: {
                     />
                   </Match>
                   <Match when={currentLyrics().state === 'error'}>
-                    <mdui-icon-error
-                      style={{ padding: '5px', scale: '0.8' }}
-                      tabindex="-1"
+                    <LitElementWrapper
+                      elementClass={IconError}
+                      props={{ style: { padding: '5px', scale: '0.8' } }}
                     />
                   </Match>
                   <Match
@@ -246,9 +242,9 @@ export const LyricsPicker = (props: {
                         currentLyrics().data?.lyrics)
                     }
                   >
-                    <mdui-icon-check-circle
-                      style={{ padding: '5px', scale: '0.8' }}
-                      tabindex="-1"
+                    <LitElementWrapper
+                      elementClass={IconCheckCircle}
+                      props={{ style: { padding: '5px', scale: '0.8' } }}
                     />
                   </Match>
                   <Match
@@ -258,9 +254,9 @@ export const LyricsPicker = (props: {
                       !currentLyrics().data?.lyrics
                     }
                   >
-                    <mdui-icon-warning
-                      style={{ padding: '5px', scale: '0.8' }}
-                      tabindex="-1"
+                    <LitElementWrapper
+                      elementClass={IconWarning}
+                      props={{ style: { padding: '5px', scale: '0.8' } }}
                     />
                   </Match>
                 </Switch>
@@ -270,10 +266,12 @@ export const LyricsPicker = (props: {
                 />
                 <mdui-button-icon onClick={toggleStar} tabindex={-1}>
                   <Show
-                    fallback={<mdui-icon-star-border />}
+                    fallback={
+                      <LitElementWrapper elementClass={IconStarBorder} />
+                    }
                     when={starredProvider() === provider()}
                   >
-                    <mdui-icon-star />
+                    <LitElementWrapper elementClass={IconStar} />
                   </Show>
                 </mdui-button-icon>
               </div>
@@ -298,10 +296,13 @@ export const LyricsPicker = (props: {
 
       <div class="lyrics-picker-left">
         <mdui-button-icon>
-          <mdui-icon-chevron-right
-            onClick={next}
-            role="button"
-            style={{ padding: '5px' }}
+          <LitElementWrapper
+            elementClass={IconChevronRight}
+            props={{
+              onClick: next,
+              role: 'button',
+              style: { padding: '5px' },
+            }}
           />
         </mdui-button-icon>
       </div>

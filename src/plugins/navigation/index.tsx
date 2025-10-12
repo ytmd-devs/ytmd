@@ -6,6 +6,7 @@ import { IconChevronRight } from '@mdui/icons/chevron-right.js';
 import { createPlugin } from '@/utils';
 
 import { t } from '@/i18n';
+import { LitElementWrapper } from '@/solit';
 
 export default createPlugin({
   name: () => t('plugins.navigation.name'),
@@ -17,9 +18,6 @@ export default createPlugin({
   renderer: {
     buttonContainer: document.createElement('div'),
     start() {
-      const doNotTreeShake = [IconChevronLeft, IconChevronRight];
-      ((a) => {})(doNotTreeShake);
-
       if (!this.buttonContainer) {
         this.buttonContainer = document.createElement('div');
       }
@@ -31,8 +29,9 @@ export default createPlugin({
               content={t('plugins.navigation.templates.back.title')}
             >
               <mdui-button-icon onClick={() => history.back()}>
-                <mdui-icon-chevron-left
-                  style={{ padding: '5px', scale: '1.5' }}
+                <LitElementWrapper
+                  elementClass={IconChevronLeft}
+                  props={{ style: { padding: '5px', scale: '1.5' } }}
                 />
               </mdui-button-icon>
             </mdui-tooltip>
@@ -40,8 +39,9 @@ export default createPlugin({
               content={t('plugins.navigation.templates.forward.title')}
             >
               <mdui-button-icon onClick={() => history.forward()}>
-                <mdui-icon-chevron-right
-                  style={{ padding: '5px', scale: '1.5' }}
+                <LitElementWrapper
+                  elementClass={IconChevronRight}
+                  props={{ style: { padding: '5px', scale: '1.5' } }}
                 />
               </mdui-button-icon>
             </mdui-tooltip>

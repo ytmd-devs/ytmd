@@ -40,16 +40,7 @@ declare module 'solid-js' {
       key?: string;
     }
 
-    type MduiIcons = Extract<
-      keyof HTMLElementTagNameMap,
-      `mdui-icon-${string}`
-    >;
-
-    type MduiIconElements = {
-      [k in MduiIcons]: ComponentProps<'div'>;
-    };
-
-    interface IntrinsicElements extends MDUIElements, MduiIconElements {
+    interface IntrinsicElements extends MDUIElements {
       'center': ComponentProps<'div'>;
       'yt-formatted-string': ComponentProps<'span'> & YtFormattedStringProps;
       'yt-button-renderer': ComponentProps<'button'> & YtButtonRendererProps;
