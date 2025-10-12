@@ -25,7 +25,7 @@
     "dev:debug": "pnpm cross-env ELECTRON_ENABLE_LOGGING=1 pnpm dev",
     "clean": "pnpm del-cli dist && pnpm del-cli pack && pnpm del-cli .vite-inspect",
     "dist": "pnpm clean && pnpm build && pnpm electron-builder --win --mac --linux -p never",
-    "dist:linux": "pnpm clean && pnpm build && pnpm electron-builder --linux -p never",
+    "dist:linux": "pnpm clean && pnpm build && pnpm electron-builder --linux deb --x64 -p never",
     "dist:linux:deb-arm64": "pnpm clean && pnpm build && pnpm electron-builder --linux deb:arm64 -p never",
     "dist:linux:rpm-arm64": "pnpm clean && pnpm build && pnpm electron-builder --linux rpm:arm64 -p never",
     "dist:mac": "pnpm clean && pnpm build && pnpm electron-builder --mac dmg:x64 -p never",
