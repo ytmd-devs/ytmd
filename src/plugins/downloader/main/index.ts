@@ -482,7 +482,20 @@ async function downloadChunks(
   for await (const chunk of stream) {
     downloaded += chunk.length;
     chunks.push(chunk);
-    const ratio = downloaded / contentLength;
+    
+    let ratio = 0;
+
+    if (contentLength > 0) {
+      ratio = downloaded / contentLength;
+    } else {
+      sendFeedback(
+        t('plugins.downloader.backend.feedback.downloading'),
+        2, // Use 2 for indeterminate progress bar
+      );
+      increasePlaylistProgress(0.075); // Still increase playlist progress by a small, fixed amount
+      continue;
+    }
+
     const progress = Math.floor(ratio * 100);
     sendFeedback(
       t('plugins.downloader.backend.feedback.download-progress', {
