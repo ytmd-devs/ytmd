@@ -548,7 +548,29 @@
         "button": "Memuat turun"
       }
     },
+    "equalizer": {
+      "description": "Menambahkan penyamaan kepada pemain",
+      "menu": {
+        "presets": {
+          "label": "Pratetap",
+          "list": {
+            "bass-booster": "Penggalak bass"
+          }
+        }
+      }
+    },
+    "exponential-volume": {
+      "description": "Menjadikan gelangsar kelantangan eksponen supaya lebih mudah memilih kelantangan yang lebih rendah."
+    },
+    "in-app-menu": {
+      "description": "Memberi bar menu rupa yang mewah, gelap atau warna album",
+      "menu": {
+        "hide-dom-window-controls": "Sembunyikan kawalan tetingkap DOM"
+      },
+      "name": "Menu Dalam Apl"
+    },
     "lumiastream": {
+      "description": "Menambah sokongan Lumia Stream",
       "name": "Lumia Stream [Beta]"
     },
     "lyrics-genius": {
@@ -563,12 +585,41 @@
     },
     "music-together": {
       "description": "Kongsi senarai main dengan orang lain. Apabila hos memainkan lagu, semua orang akan mendengar lagu yang sama",
+      "dialog": {
+        "enter-host": "Masukkan ID Hos"
+      },
       "internal": {
         "save": "Simpan",
         "unknown-user": "Pengguna tidak diketahui"
       },
       "menu": {
-        "close": "Tutup Music Together"
+        "click-to-copy-id": "Salin ID Hos",
+        "close": "Tutup Music Together",
+        "connected-users": "Pengguna yang telah berhubung",
+        "disconnect": "Putuskan Sambungan Music Together",
+        "empty-user": "Tiada pengguna yang disambungkan",
+        "host": "Hos Music Together",
+        "join": "Sertai Music Together",
+        "permission": {
+          "all": "Benarkan tetamu mengawal senarai main dan pemain",
+          "host-only": "Hanya hos boleh mengawal senarai main dan pemain",
+          "playlist": "Benarkan tetamu mengawal senarai main"
+        },
+        "set-permission": "Tukar Kebenaran Kawalan",
+        "status": {
+          "disconnected": "Terputus",
+          "guest": "Disambungkan sebagai Tetamu",
+          "host": "Disambungkan sebagai Hos"
+        }
+      },
+      "name": "Music Together [Beta]",
+      "toast": {
+        "add-song-failed": "Gagal menambah lagu",
+        "closed": "Music Together ditutup",
+        "disconnected": "Music Together terputus",
+        "host-failed": "Gagal untuk menjadi hos Music Together",
+        "id-copied": "ID hos disalin ke papan keratan",
+        "id-copy-failed": "Gagal menyalin ID Hos ke papan keratan"
       }
     },
     "synced-lyrics": {
