@@ -161,7 +161,7 @@ export default createPlugin({
       }
 
       document.addEventListener(
-        'ytmd:audio-can-play',
+        'peard:audio-can-play',
         (e) => {
           const video = document.querySelector<
             HTMLVideoElement & { captureStream(): MediaStream }

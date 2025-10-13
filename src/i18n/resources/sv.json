@@ -154,7 +154,7 @@
                 "label": "Anpassad titel på fönstret",
                 "prompt": {
                   "label": "Ange anpassad fönstertitel: (lämna tomt för att inaktivera)",
-                  "placeholder": "Exempelvis: YouTube Music"
+                  "placeholder": "Exempelvis: Pear Desktop"
                 }
               },
               "like-buttons": {
@@ -208,8 +208,8 @@
       "restart": "Starta om appen",
       "show": "Visa fönster",
       "tooltip": {
-        "default": "YouTube Music",
-        "with-song-info": "YouTube Music: {{artist}} – {{title}}"
+        "default": "Pear Desktop",
+        "with-song-info": "Pear Desktop: {{artist}} – {{title}}"
       }
     }
   },
@@ -287,7 +287,7 @@
       "name": "Ambiensläge"
     },
     "amuse": {
-      "description": "Lägger till stöd för YouTube Music i Amuse ‘Now Playing’-widgeten av 6K Labs",
+      "description": "Lägger till stöd för Pear Desktop i Amuse ‘Now Playing’-widgeten av 6K Labs",
       "name": "Amuse",
       "response": {
         "query": "Amuse API-servern körs. Använd GET /query för att hämta information om låt."
@@ -369,11 +369,11 @@
       "name": "Suddigt Navigeringsfält"
     },
     "bypass-age-restrictions": {
-      "description": "Hoppa över YouTubes åldersverifiering",
+      "description": "Hoppa över Music Player åldersverifiering",
       "name": "Hoppa Över Åldersbegränsningar"
     },
     "captions-selector": {
-      "description": "Välj textning för YouTube Music-ljudspår",
+      "description": "Välj textning för Pear Desktop-ljudspår",
       "menu": {
         "autoload": "Välj automatiskt senast använda textning",
         "disable-captions": "Ingen textning som standard"
@@ -456,14 +456,14 @@
         "disconnected": "Frånkopplad",
         "hide-duration-left": "Dölj återstående tid",
         "hide-github-button": "Dölj knapp för GitHub-länk",
-        "play-on-youtube-music": "Spela på YouTube Music",
+        "play-on-pear-desktop": "Spela på Pear Desktop",
         "set-inactivity-timeout": "Ställ in inaktivitetstid",
         "set-status-display-type": {
           "label": "Statusmeddelande",
           "submenu": {
             "artist": "Lyssnar på {artist}",
             "title": "Lyssnar på {song title}",
-            "youtube-music": "Lyssnar på YouTube Music"
+            "pear-desktop": "Lyssnar på Pear Desktop"
           }
         }
       },

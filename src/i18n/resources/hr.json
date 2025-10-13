@@ -201,8 +201,8 @@
       "restart": "Ponovo Pokreni Aplikaciju",
       "show": "Prikaži prozor",
       "tooltip": {
-        "default": "YouTube Glazba",
-        "with-song-info": "YouTube Glazba: {{artist}} - {{title}}"
+        "default": "Pear Desktop",
+        "with-song-info": "Pear Desktop: {{artist}} - {{title}}"
       }
     }
   },
@@ -280,7 +280,7 @@
       "name": "Ambijentalni Način"
     },
     "amuse": {
-      "description": "Dodaje podršku za YouTube Glazbu za widget \"sada reproducira\" od Amuse od strane 6K Labs",
+      "description": "Dodaje podršku za Pear Desktop za widget \"sada reproducira\" od Amuse od strane 6K Labs",
       "name": "Amuse",
       "response": {
         "query": "Amuse API poslužitelj je pokrenut. Koristi GET /query za dohvat informacija o pjesmi."
@@ -362,11 +362,11 @@
       "name": "Zamagli Navigacijsku Traku"
     },
     "bypass-age-restrictions": {
-      "description": "Zaobiđi YouTubeovu provjeru dobi",
+      "description": "Zaobiđi Music Player provjeru dobi",
       "name": "Zaobiđi dobna ograničenja"
     },
     "captions-selector": {
-      "description": "Izbornik titlova za audiozapise od YouTube Musica",
+      "description": "Izbornik titlova za audiozapise od Pear Desktopa",
       "menu": {
         "autoload": "Automatski izaberi posljednje korištene titlove",
         "disable-captions": "Bez titlova"
@@ -436,7 +436,7 @@
         "disconnected": "Odspojen",
         "hide-duration-left": "Sakrij preostalo vrijeme",
         "hide-github-button": "Sakrij gumb sa GitHub poveznicom",
-        "play-on-youtube-music": "Reproduciraj na YouTube Musicu",
+        "play-on-pear-desktop": "Reproduciraj na Pear Desktopu",
         "set-inactivity-timeout": "Postavi vremensko ograničenje neaktivnosti (inactivity timeout)"
       },
       "name": "Discord Rich Presence",

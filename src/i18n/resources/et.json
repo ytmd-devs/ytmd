@@ -125,8 +125,8 @@
       "restart": "Käivita rakendus uuesti",
       "show": "Näita akent",
       "tooltip": {
-        "default": "YouTube Music",
-        "with-song-info": "YouTube Music: {{artist}} - {{title}}"
+        "default": "Pear Desktop",
+        "with-song-info": "Pear Desktop: {{artist}} - {{title}}"
       }
     }
   },
