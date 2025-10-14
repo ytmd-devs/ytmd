@@ -279,7 +279,7 @@
       "name": "מצב אווירה"
     },
     "amuse": {
-      "description": "מוסיף תמיכה ב-YouTube Music עבור הווידג'ט של Amuse המתנגן כעת על ידי 6K Labs",
+      "description": "מוסיף תמיכה ב-Pear Desktop עבור הווידג'ט של Amuse המתנגן כעת על ידי 6K Labs",
       "name": "משעשע",
       "response": {
         "query": "שרת ה-API של Amuse פועל. קבל מידע על השיר באמצעות GET /query."
@@ -365,7 +365,7 @@
       "name": "עקוף את ההחמרות של הגיל"
     },
     "captions-selector": {
-      "description": "בורר כתוביות עבור רצועות אודיו של YouTube Music",
+      "description": "בורר כתוביות עבור רצועות אודיו של Pear Desktop",
       "menu": {
         "autoload": "בחר אוטומטי את הכתובית האחרונה שנבחרה",
         "disable-captions": "ברירת מחד ללא כתוביות"
@@ -419,7 +419,7 @@
         "connected": "מחובר",
         "disconnected": "מנותק",
         "hide-github-button": "הסתר את לחצן הקישור של GitHub",
-        "play-on-youtube-music": "הפעל ביוטיוב מיוזיק",
+        "play-on-pear-desktop": "הפעל ביוטיוב מיוזיק",
         "set-inactivity-timeout": "הגדר פסק זמן לחוסר פעילות"
       }
     },

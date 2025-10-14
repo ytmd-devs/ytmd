@@ -154,7 +154,7 @@
                 "label": "Vlastný názov okna",
                 "prompt": {
                   "label": "Napíšte vlastný názov okna: (nechajte prázdne pre vypnutie)",
-                  "placeholder": "Napríklad: YouTube Music"
+                  "placeholder": "Napríklad: Pear Desktop"
                 }
               },
               "like-buttons": {
@@ -206,8 +206,8 @@
       "restart": "Reštartovať aplikáciu",
       "show": "Zobraziť okno",
       "tooltip": {
-        "default": "YouTube Hudba",
-        "with-song-info": "Youtube Hudba: {{artist}} - {{title}}"
+        "default": "Pear Desktop",
+        "with-song-info": "Pear Desktop: {{artist}} - {{title}}"
       }
     }
   }

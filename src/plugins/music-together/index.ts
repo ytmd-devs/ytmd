@@ -21,7 +21,7 @@ import settingHTML from './templates/setting.html?raw';
 import style from './style.css?inline';
 
 import type { DataConnection } from 'peerjs';
-import type { YoutubePlayer } from '@/types/youtube-player';
+import type { MusicPlayer } from '@/types/music-player';
 import type { RendererContext } from '@/types/contexts';
 import type { VideoDataChanged } from '@/types/video-data-changed';
 import type { AppElement } from '@/types/queue';
@@ -49,7 +49,7 @@ export default createPlugin<
     ipc?: RendererContext<never>['ipc'];
     api: AppElement | null;
     queue?: Queue;
-    playerApi?: YoutubePlayer;
+    playerApi?: MusicPlayer;
     showPrompt: (title: string, label: string) => Promise<string>;
     popups: {
       host: ReturnType<typeof createHostPopup>;

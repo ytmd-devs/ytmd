@@ -9,6 +9,7 @@ env:
 
 jobs:
   check-permissions:
+    if: github.event.pull_request.draft == false
     name: Check if user has write access
     runs-on: ubuntu-latest
     outputs:

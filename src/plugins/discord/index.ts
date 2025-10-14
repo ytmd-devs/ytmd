@@ -24,9 +24,9 @@ export type DiscordPluginConfig = {
    */
   activityTimeoutTime: number;
   /**
-   * Add a "Play on YouTube Music" button to rich presence
+   * Add a "Play on Pear Desktop" button to rich presence
    */
-  playOnYouTubeMusic: boolean;
+  playOnPearDesktop: boolean;
   /**
    * Hide the "View App On GitHub" button in the rich presence
    */
@@ -50,7 +50,7 @@ export default createPlugin({
     autoReconnect: true,
     activityTimeoutEnabled: true,
     activityTimeoutTime: 10 * 60 * 1000,
-    playOnYouTubeMusic: true,
+    playOnPearDesktop: true,
     hideGitHubButton: false,
     hideDurationLeft: false,
     statusDisplayType: StatusDisplayType.Details,

@@ -154,7 +154,7 @@
                 "label": "Títol personalitzat de la finestra",
                 "prompt": {
                   "label": "Introdueix un títol personalitzat per a la finestra (deixa-ho buit per deshabilitar-ho)",
-                  "placeholder": "Exemple: YouTube Music"
+                  "placeholder": "Exemple: Pear Desktop"
                 }
               },
               "like-buttons": {
@@ -208,8 +208,8 @@
       "restart": "Reinicia l'aplicació",
       "show": "Mostra la finestra",
       "tooltip": {
-        "default": "YouTube Music",
-        "with-song-info": "YouTube Music: {{artist}} - {{title}}"
+        "default": "Pear Desktop",
+        "with-song-info": "Pear Desktop: {{artist}} - {{title}}"
       }
     }
   },
@@ -287,7 +287,7 @@
       "name": "Mode ambient"
     },
     "amuse": {
-      "description": "Afegeix suport a Youtube Music per el widget \"now playing\" d'Amuse per 6K Labs",
+      "description": "Afegeix suport a Pear Desktop per el widget \"now playing\" d'Amuse per 6K Labs",
       "name": "Amuse",
       "response": {
         "query": "L'API del servidor de Amuse està funcionant. GET /query per tenir informació de la cançó."
@@ -369,11 +369,11 @@
       "name": "Desenfoca la barra de navegació"
     },
     "bypass-age-restrictions": {
-      "description": "Esquiva la verificació d'edat de YouTube",
+      "description": "Esquiva la verificació d'edat de Music Player",
       "name": "Esquiva les restriccions d'edat"
     },
     "captions-selector": {
-      "description": "Selector de subtítols per les pistes d'àudio de YouTube Music",
+      "description": "Selector de subtítols per les pistes d'àudio de Pear Desktop",
       "menu": {
         "autoload": "Selecciona automàticament l'últim subtítol emprat",
         "disable-captions": "Sense subtítols per defecte"
@@ -456,14 +456,14 @@
         "disconnected": "Desconnectat",
         "hide-duration-left": "Amaga la durada restant",
         "hide-github-button": "Amaga el botó de l'enllaç a GitHub",
-        "play-on-youtube-music": "Reprodueix a YouTube Music",
+        "play-on-pear-desktop": "Reprodueix a Pear Desktop",
         "set-inactivity-timeout": "Estableix temps d'espera d'inactivitat",
         "set-status-display-type": {
           "label": "Text d'estat",
           "submenu": {
             "artist": "Escoltant {artist}",
             "title": "Escoltant {song title}",
-            "youtube-music": "Escoltant YouTube Music"
+            "pear-desktop": "Escoltant Pear Desktop"
           }
         }
       },

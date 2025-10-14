@@ -25,7 +25,7 @@ export const onRendererLoad = async ({
 }: RendererContext<InAppMenuConfig>) => {
   setConfig(await getConfig());
 
-  document.title = 'YouTube Music';
+  document.title = 'Pear Desktop';
   const stylesheet = new CSSStyleSheet();
   stylesheet.replaceSync(scrollStyle);
   document.adoptedStyleSheets = [...document.adoptedStyleSheets, stylesheet];

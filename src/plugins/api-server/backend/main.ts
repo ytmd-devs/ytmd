@@ -29,22 +29,22 @@ export const backend = createBackend<BackendType, APIServerConfig>({
       this.songInfo = songInfo;
     });
 
-    ctx.ipc.on('ytmd:player-api-loaded', () => {
-      ctx.ipc.send('ytmd:setup-seeked-listener');
-      ctx.ipc.send('ytmd:setup-time-changed-listener');
-      ctx.ipc.send('ytmd:setup-repeat-changed-listener');
-      ctx.ipc.send('ytmd:setup-like-changed-listener');
-      ctx.ipc.send('ytmd:setup-volume-changed-listener');
-      ctx.ipc.send('ytmd:setup-shuffle-changed-listener');
+    ctx.ipc.on('peard:player-api-loaded', () => {
+      ctx.ipc.send('peard:setup-seeked-listener');
+      ctx.ipc.send('peard:setup-time-changed-listener');
+      ctx.ipc.send('peard:setup-repeat-changed-listener');
+      ctx.ipc.send('peard:setup-like-changed-listener');
+      ctx.ipc.send('peard:setup-volume-changed-listener');
+      ctx.ipc.send('peard:setup-shuffle-changed-listener');
     });
 
     ctx.ipc.on(
-      'ytmd:repeat-changed',
+      'peard:repeat-changed',
       (mode: RepeatMode) => (this.currentRepeatMode = mode),
     );
 
     ctx.ipc.on(
-      'ytmd:volume-changed',
+      'peard:volume-changed',
       (newVolumeState: VolumeState) => (this.volumeState = newVolumeState),
     );
 
@@ -138,7 +138,7 @@ export const backend = createBackend<BackendType, APIServerConfig>({
       openapi: '3.1.0',
       info: {
         version: '1.0.0',
-        title: 'Youtube Music API Server',
+        title: 'Pear Desktop API Server',
         description:
           'Note: You need to get an access token using the `/auth/{id}` endpoint first to call any API endpoints under `/api`.',
       },

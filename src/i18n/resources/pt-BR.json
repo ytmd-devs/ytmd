@@ -154,7 +154,7 @@
                 "label": "Título da janela customizado",
                 "prompt": {
                   "label": "Insira título customizado para a janela: (deixe em branco para desabilitar)",
-                  "placeholder": "Exemplo: Youtube Music"
+                  "placeholder": "Exemplo: Pear Desktop"
                 }
               },
               "like-buttons": {
@@ -208,8 +208,8 @@
       "restart": "Reiniciar aplicativo",
       "show": "Mostrar janela",
       "tooltip": {
-        "default": "YouTube Music",
-        "with-song-info": "YouTube Music: {{artist}} - {{title}}"
+        "default": "Pear Desktop",
+        "with-song-info": "Pear Desktop: {{artist}} - {{title}}"
       }
     }
   },
@@ -287,7 +287,7 @@
       "name": "Modo ambiente"
     },
     "amuse": {
-      "description": "Adiciona suporte ao YouTube Music ao widget 'Reproduzindo agora' do Amuse da 6K Labs",
+      "description": "Adiciona suporte ao Pear Desktop ao widget 'Reproduzindo agora' do Amuse da 6K Labs",
       "name": "Amuse",
       "response": {
         "query": "Servidor API do Amuse em execução. GET /query para obter informações da música."
@@ -369,11 +369,11 @@
       "name": "Desfocar barra de navegação"
     },
     "bypass-age-restrictions": {
-      "description": "Pular a verificação de idade do YouTube",
+      "description": "Pular a verificação de idade do Music Player",
       "name": "Ignorar restrições de idade"
     },
     "captions-selector": {
-      "description": "Seletor de legendas para faixas de áudio do YouTube Music",
+      "description": "Seletor de legendas para faixas de áudio do Pear Desktop",
       "menu": {
         "autoload": "Selecionar automaticamente a última legenda usada",
         "disable-captions": "Sem legendas por padrão"
@@ -456,14 +456,14 @@
         "disconnected": "Desconectado",
         "hide-duration-left": "Ocultar duração restante",
         "hide-github-button": "Ocultar botão do GitHub",
-        "play-on-youtube-music": "Reproduzir no YouTube Music",
+        "play-on-pear-desktop": "Reproduzir no Pear Desktop",
         "set-inactivity-timeout": "Definir tempo limite de inatividade",
         "set-status-display-type": {
           "label": "Texto de status",
           "submenu": {
             "artist": "Ouvindo {artist}",
             "title": "Ouvindo {song title}",
-            "youtube-music": "Ouvindo YouTube Music"
+            "pear-desktop": "Ouvindo Pear Desktop"
           }
         }
       },

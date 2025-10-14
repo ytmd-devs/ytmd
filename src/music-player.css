@@ -1,5 +1,5 @@
 /**
- * Overriding YouTube Music style
+ * Overriding default style
  */
 
 /* Allow window dragging */
@@ -49,7 +49,7 @@ ytmusic-cast-button {
   display: none !important;
 }
 
-/* Make youtube-music logo un-draggable */
+/* Make the logo un-draggable */
 ytmusic-nav-bar > div.left-content > a,
 ytmusic-nav-bar > div.left-content > a > picture > img {
   -webkit-user-drag: none;

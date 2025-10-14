@@ -473,7 +473,7 @@ export const mainMenuTemplate = async (
               ),
               type: 'normal',
               click() {
-                const url = 'https://hosted.weblate.org/engage/youtube-music/';
+                const url = 'https://bit.ly/48n5YF7';
                 shell.openExternal(url);
               },
             } as Electron.MenuItemConstructorOptions,

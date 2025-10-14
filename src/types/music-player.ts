@@ -1,11 +1,11 @@
-// TODO: fully type definitions for youtube-player
+// TODO: fully type definitions for music-player
 
 import type { VideoDetails } from './video-details';
 import type { GetPlayerResponse } from './get-player-response';
 import type { PlayerAPIEvents } from './player-api-events';
-import type { WatchNextResponse } from '@/types/youtube-music-desktop-internal';
+import type { WatchNextResponse } from '@/types/music-player-desktop-internal';
 
-export interface YoutubePlayer {
+export interface MusicPlayer {
   getInternalApiInterface: <Parameters extends unknown[], Return>(
     ...params: Parameters
   ) => Return;
