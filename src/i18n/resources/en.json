@@ -214,21 +214,21 @@
     }
   },
   "plugins": {
-    "ad-speedup": {
-      "description": "If an ad play it mutes the audio and sets playback speed to 16x",
-      "name": "Ad Speedup"
-    },
-    "adblocker": {
-      "description": "Block all ads and tracking out of the box",
+
+  "adblocker": {
+      "name": "Ad Blocker",
+      "description": "Automatically blocks ads and trackers using community-powered filter lists that stay up-to-date. Includes advanced blocking for YouTube.",
       "menu": {
-        "blocker": "Blocker"
-      },
-      "name": "Ad Blocker"
+        "enableYoutubeSpecificBlocking": "Enable Aggressive YouTube Blocking"
+      }
     },
+
     "album-actions": {
       "description": "Adds Undislike, Dislike, Like, and Unlike buttons to apply this to all songs in a playlist or album",
       "name": "Album Actions"
     },
+
+     
     "album-color-theme": {
       "description": "Applies a dynamic theme and visual effects based on the album color palette",
       "menu": {

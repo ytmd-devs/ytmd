@@ -1,148 +1,110 @@
 import { contextBridge, webFrame } from 'electron';
-
-import { blockers } from './types';
 import { createPlugin } from '@/utils';
-import {
-  isBlockerEnabled,
-  loadAdBlockerEngine,
-  unloadAdBlockerEngine,
-} from './blocker';
-
+import { AdBlockerService } from './adblocker.service';
 import { inject, isInjected } from './injectors/inject';
-import { loadAdSpeedup } from './adSpeedup';
-
 import { t } from '@/i18n';
 
-import type { BrowserWindow } from 'electron';
-
 interface AdblockerConfig {
-  /**
-   * Whether to enable the adblocker.
-   * @default true
-   */
   enabled: boolean;
-  /**
-   * When enabled, the adblocker will cache the blocklists.
-   * @default true
-   */
   cache: boolean;
-  /**
-   * Which adblocker to use.
-   * @default blockers.InPlayer
-   */
-  blocker: (typeof blockers)[keyof typeof blockers];
-  /**
-   * Additional list of filters to use.
-   * @example ["https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/filters.txt"]
-   * @default []
-   */
+  enableYoutubeSpecificBlocking: boolean;
   additionalBlockLists: string[];
-  /**
-   * Disable the default blocklists.
-   * @default false
-   */
   disableDefaultLists: boolean;
 }
+
+// Global instance of our service
+let adblockerService: AdBlockerService | null = null;
 
 export default createPlugin({
   name: () => t('plugins.adblocker.name'),
   description: () => t('plugins.adblocker.description'),
-  restartNeeded: false,
+  restartNeeded: true, // Recommended to set to true after these changes
   config: {
     enabled: true,
     cache: true,
-    blocker: blockers.InPlayer,
+    enableYoutubeSpecificBlocking: true, // Default to the strongest blocking
     additionalBlockLists: [],
     disableDefaultLists: false,
   } as AdblockerConfig,
-  menu: async ({ getConfig, setConfig }) => {
+    menu: async ({ getConfig, setConfig }) => {
     const config = await getConfig();
 
     return [
       {
-        label: t('plugins.adblocker.menu.blocker'),
-        submenu: Object.values(blockers).map((blocker) => ({
-          label: blocker,
-          type: 'radio',
-          checked: (config.blocker || blockers.WithBlocklists) === blocker,
-          click() {
-            setConfig({ blocker });
-          },
-        })),
+        label: t('plugins.adblocker.menu.enableYoutubeSpecificBlocking'), // New string key
+        type: 'checkbox',
+        checked: config.enableYoutubeSpecificBlocking,
+        click(item) {
+          setConfig({ enableYoutubeSpecificBlocking: item.checked });
+        },
       },
+      // You could add future options here, like a button to clear the adblocker cache
     ];
   },
-  renderer: {
-    async onPlayerApiReady(_, { getConfig }) {
-      const config = await getConfig();
-      if (config.blocker === blockers.AdSpeedup) {
-        loadAdSpeedup();
-      }
-    },
-  },
+  
+  // No longer needed - speedup is a less effective fallback
+  // renderer: { ... }
+
   backend: {
-    mainWindow: null as BrowserWindow | null,
     async start({ getConfig, window }) {
       const config = await getConfig();
-      this.mainWindow = window;
-
-      if (config.blocker === blockers.WithBlocklists) {
-        await loadAdBlockerEngine(
-          window.webContents.session,
-          config.cache,
-          config.additionalBlockLists,
-          config.disableDefaultLists,
-        );
+      if (config.enabled) {
+        if (!adblockerService) {
+          adblockerService = new AdBlockerService(window.webContents.session);
+        }
+        await adblockerService.start(config);
       }
     },
-    stop({ window }) {
-      if (isBlockerEnabled(window.webContents.session)) {
-        unloadAdBlockerEngine(window.webContents.session);
+    async stop() {
+      if (adblockerService) {
+        await adblockerService.stop();
+        adblockerService = null;
       }
     },
     async onConfigChange(newConfig) {
-      if (this.mainWindow) {
-        if (
-          newConfig.blocker === blockers.WithBlocklists &&
-          !isBlockerEnabled(this.mainWindow.webContents.session)
-        ) {
-          await loadAdBlockerEngine(
-            this.mainWindow.webContents.session,
-            newConfig.cache,
-            newConfig.additionalBlockLists,
-            newConfig.disableDefaultLists,
-          );
-        }
+      if (!adblockerService) return;
+
+      if (newConfig.enabled) {
+        // The service's start method handles re-configuration
+        await adblockerService.start(newConfig);
+      } else {
+        await adblockerService.stop();
       }
     },
   },
+
   preload: {
-    // see #1478
-    script: `const _prunerFn = window._pruner;
-    window._pruner = undefined;
-    JSON.parse = new Proxy(JSON.parse, {
-      apply() {
-        return _prunerFn(Reflect.apply(...arguments));
-      },
-    });
-    Response.prototype.json = new Proxy(Response.prototype.json, {
-      apply() {
-        return Reflect.apply(...arguments).then((o) => _prunerFn(o));
-      },
-    }); 0`,
+    // This script now handles both Ghostery's advanced features and our YT injection
+    script: `
+      // Inject the YouTube-specific ad pruner
+      const _prunerFn = window._pruner;
+      if (typeof _prunerFn === 'function') {
+        window._pruner = undefined;
+        JSON.parse = new Proxy(JSON.parse, {
+          apply(target, thisArg, args) {
+            return _prunerFn(Reflect.apply(target, thisArg, args));
+          },
+        });
+        Response.prototype.json = new Proxy(Response.prototype.json, {
+          apply(target, thisArg, args) {
+            return Reflect.apply(target, thisArg, args).then(o => _prunerFn(o));
+          },
+        });
+      }
+    `,
     async start({ getConfig }) {
       const config = await getConfig();
-
-      if (config.blocker === blockers.InPlayer && !isInjected()) {
+      if (!config.enabled) return;
+      
+      // ALWAYS enable Ghostery's preload for cosmetic filtering
+      await import('@ghostery/adblocker-electron-preload');
+      
+      // Conditionally enable our powerful YouTube-specific injection
+      if (config.enableYoutubeSpecificBlocking && !isInjected()) {
         inject(contextBridge);
         await webFrame.executeJavaScript(this.script);
       }
     },
-    async onConfigChange(newConfig) {
-      if (newConfig.blocker === blockers.InPlayer && !isInjected()) {
-        inject(contextBridge);
-        await webFrame.executeJavaScript(this.script);
-      }
-    },
+    // The main plugin restart handles config changes for preload scripts
   },
 });
