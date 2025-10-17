@@ -34,7 +34,7 @@ import {
 } from '../../providers';
 import { currentLyrics, lyricsStore, setLyricsStore } from '../store';
 import { _ytAPI } from '../index';
-import { config } from '../renderer';
+import { config, requestFastScroll } from '../renderer';
 
 import type { PlayerAPIEvents } from '@/types/player-api-events';
 
@@ -45,6 +45,8 @@ const LocalStorageSchema = z.object({
 export const providerIdx = createMemo(() =>
   providerNames.indexOf(lyricsStore.provider),
 );
+
+const FAST_SWITCH_MS = 2500;
 
 const shouldSwitchProvider = (providerData: ProviderState) => {
   if (providerData.state === 'error') return true;
@@ -59,7 +61,6 @@ const shouldSwitchProvider = (providerData: ProviderState) => {
 const providerBias = (p: ProviderName) =>
   (lyricsStore.lyrics[p].state === 'done' ? 1 : -1) +
   (lyricsStore.lyrics[p].data?.lines?.length ? 2 : -1) +
-  // eslint-disable-next-line prettier/prettier
   (lyricsStore.lyrics[p].data?.lines?.length && p === ProviderNames.YTMusic
     ? 1
     : 0) +
@@ -90,6 +91,12 @@ export const LyricsPicker = (props: {
   const [starredProvider, setStarredProvider] =
     createSignal<ProviderName | null>(null);
 
+  const favoriteProviderKey = (id: string) => `ytmd-sl-starred-${id}`;
+  const switchProvider = (provider: ProviderName, fastMs = FAST_SWITCH_MS) => {
+    requestFastScroll(fastMs);
+    setLyricsStore('provider', provider);
+  };
+
   createEffect(() => {
     const id = videoId();
     if (id === null) {
@@ -97,14 +104,20 @@ export const LyricsPicker = (props: {
       return;
     }
 
-    const key = `ytmd-sl-starred-${id}`;
+    const key = favoriteProviderKey(id);
     const value = localStorage.getItem(key);
     if (!value) {
       setStarredProvider(null);
       return;
     }
 
-    const parseResult = LocalStorageSchema.safeParse(JSON.parse(value));
+    let parsed: unknown = null;
+    try {
+      parsed = JSON.parse(value);
+    } catch {
+      parsed = null;
+    }
+    const parseResult = LocalStorageSchema.safeParse(parsed);
     if (parseResult.success) {
       setLyricsStore('provider', parseResult.data.provider);
       setStarredProvider(parseResult.data.provider);
@@ -117,7 +130,7 @@ export const LyricsPicker = (props: {
     const id = videoId();
     if (id === null) return;
 
-    const key = `ytmd-sl-starred-${id}`;
+    const key = favoriteProviderKey(id);
 
     setStarredProvider((starredProvider) => {
       if (lyricsStore.provider === starredProvider) {
@@ -152,7 +165,7 @@ export const LyricsPicker = (props: {
     if (!hasManuallySwitchedProvider()) {
       const starred = starredProvider();
       if (starred !== null) {
-        setLyricsStore('provider', starred);
+        switchProvider(starred);
         return;
       }
 
@@ -166,28 +179,33 @@ export const LyricsPicker = (props: {
         force ||
         providerBias(lyricsStore.provider) < providerBias(provider)
       ) {
-        setLyricsStore('provider', provider);
+        switchProvider(provider);
       }
     }
   });
 
   const next = () => {
     setHasManuallySwitchedProvider(true);
-    setLyricsStore('provider', (prevProvider) => {
-      const idx = providerNames.indexOf(prevProvider);
-      return providerNames[(idx + 1) % providerNames.length];
-    });
+    const nextProvider =
+      providerNames[(providerIdx() + 1) % providerNames.length];
+    switchProvider(nextProvider);
   };
 
   const previous = () => {
     setHasManuallySwitchedProvider(true);
-    setLyricsStore('provider', (prevProvider) => {
-      const idx = providerNames.indexOf(prevProvider);
-      return providerNames[
-        (idx + providerNames.length - 1) % providerNames.length
+    const prev =
+      providerNames[
+        (providerIdx() + providerNames.length - 1) % providerNames.length
       ];
-    });
+    switchProvider(prev);
   };
+
+  const chevronLeft: YtIcons = 'yt-icons:chevron_left';
+  const chevronRight: YtIcons = 'yt-icons:chevron_right';
+
+  const successIcon: YtIcons = 'yt-icons:check-circle';
+  const errorIcon: YtIcons = 'yt-icons:error';
+  const notFoundIcon: YtIcons = 'yt-icons:warning';
 
   return (
     <div class="lyrics-picker" ref={props.setStickRef}>
@@ -211,7 +229,7 @@ export const LyricsPicker = (props: {
               <div
                 class="lyrics-picker-item"
                 style={{
-                  transform: `translateX(${providerIdx() * -100 - 5}%)`,
+                  transform: `translateX(calc(${providerIdx()} * -100% - 5%))`,
                 }}
                 tabindex="-1"
               >
@@ -284,7 +302,10 @@ export const LyricsPicker = (props: {
             {(_, idx) => (
               <li
                 class="lyrics-picker-dot"
-                onClick={() => setLyricsStore('provider', providerNames[idx()])}
+                onClick={() => {
+                  setHasManuallySwitchedProvider(true);
+                  switchProvider(providerNames[idx()]);
+                }}
                 style={{
                   background: idx() === providerIdx() ? 'white' : 'black',
                 }}
