@@ -118,6 +118,7 @@
     "kuroshiro-analyzer-kuromoji": "1.1.0",
     "lazy-var": "2.2.2",
     "mdui": "2.1.4",
+    "node-abort-controller": "^3.1.1",
     "node-html-parser": "7.0.1",
     "node-id3": "0.2.9",
     "peerjs": "1.5.5",
@@ -134,7 +135,8 @@
     "virtua": "0.45.3",
     "vudio": "2.1.1",
     "x11": "2.3.0",
-    "youtubei.js": "16.0.0",
+    "youtubei.js": "16.0.1",
+    "yt-dlp-exec": "^1.0.2",
     "zod": "4.1.12"
   },
   "devDependencies": {
