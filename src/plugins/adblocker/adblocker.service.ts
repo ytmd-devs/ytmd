@@ -92,7 +92,6 @@ export class AdBlockerService {
       return;
     }
 
-    // --- Smart Caching ---
     // Generate a unique cache key based on the list URLs.
     // This makes the cache far more reliable.
     const cacheDirectory = path.join(app.getPath('userData'), 'adblock_cache');

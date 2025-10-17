@@ -12,17 +12,16 @@ interface AdblockerConfig {
   disableDefaultLists: boolean;
 }
 
-// Global instance of our service
 let adblockerService: AdBlockerService | null = null;
 
 export default createPlugin({
   name: () => t('plugins.adblocker.name'),
   description: () => t('plugins.adblocker.description'),
-  restartNeeded: true, // Recommended to set to true after these changes
+  restartNeeded: true,
   config: {
     enabled: true,
     cache: true,
-    enableYoutubeSpecificBlocking: true, // Default to the strongest blocking
+    enableYoutubeSpecificBlocking: true, // Defaults to strongest blocking
     additionalBlockLists: [],
     disableDefaultLists: false,
   } as AdblockerConfig,
@@ -38,12 +37,9 @@ export default createPlugin({
           setConfig({ enableYoutubeSpecificBlocking: item.checked });
         },
       },
-      // You could add future options here, like a button to clear the adblocker cache
     ];
   },
-  
-  // No longer needed - speedup is a less effective fallback
-  // renderer: { ... }
+
 
   backend: {
     async start({ getConfig, window }) {
@@ -74,7 +70,6 @@ export default createPlugin({
   },
 
   preload: {
-    // This script now handles both Ghostery's advanced features and our YT injection
     script: `
       // Inject the YouTube-specific ad pruner
       const _prunerFn = window._pruner;
@@ -96,15 +91,12 @@ export default createPlugin({
       const config = await getConfig();
       if (!config.enabled) return;
       
-      // ALWAYS enable Ghostery's preload for cosmetic filtering
       await import('@ghostery/adblocker-electron-preload');
       
-      // Conditionally enable our powerful YouTube-specific injection
       if (config.enableYoutubeSpecificBlocking && !isInjected()) {
         inject(contextBridge);
         await webFrame.executeJavaScript(this.script);
       }
     },
-    // The main plugin restart handles config changes for preload scripts
   },
 });
